@@ -290,6 +290,55 @@ footer b{color:var(--ink2)}
 .guide p,.guide li{max-width:40em}
 .adminbtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:6;font-size:1.05rem;min-height:52px;box-shadow:0 8px 24px rgba(23,32,48,.25)}
 .copybox{width:100%;min-height:200px;border:1px solid var(--line2);border-radius:10px;padding:12px;background:#fff;font-size:.95rem}
+/* 화면 나누기 */
+.page{display:none}.page.on{display:block}
+.sign nav a[aria-current="page"]{color:var(--brand);box-shadow:inset 0 -2px 0 var(--brand)}
+section.tight{padding:36px 0 0}
+section.tight-top{padding-top:8px}
+.pagehead{padding:48px 0 28px}
+.pagehead h1{font-size:clamp(1.8rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.04em}
+.pagehead p{color:var(--ink2);margin-top:10px;max-width:40em}
+/* 첫 화면 큰 사진 */
+.banner{position:relative;margin-top:24px;border-radius:22px;overflow:hidden;min-height:440px;display:flex;align-items:center;background:linear-gradient(115deg,#eef3fb 0%,#e3ebf7 55%,#d6e2f4 100%)}
+.banner-img{position:absolute;inset:0}
+.banner-img img{width:100%;height:100%;object-fit:cover;display:block}
+.banner-img .art{position:absolute;right:4%;bottom:6%;width:min(520px,48%);color:#a3b6d6}
+.banner-img .art svg{width:100%;height:auto;display:block}
+.banner-text{position:relative;padding:48px 56px;max-width:620px}
+.banner h1{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:800;letter-spacing:-.045em;line-height:1.22}
+.banner-text p{margin-top:16px;font-size:1.12rem;color:var(--ink2)}
+.banner .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.banner.has-photo .banner-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,18,32,.72) 0%,rgba(10,18,32,.45) 45%,rgba(10,18,32,0) 80%)}
+.banner.has-photo h1{color:#fff}
+.banner.has-photo .banner-text p{color:rgba(255,255,255,.88)}
+.banner.has-photo .btn.ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.55)}
+@media (max-width:760px){
+  .banner{min-height:0;flex-direction:column;align-items:stretch;border-radius:16px;margin-top:14px}
+  .banner-img .art{width:70%;right:-4%;bottom:4%;opacity:.6}
+  .banner-text{padding:30px 22px 190px}
+  .banner.has-photo{min-height:480px;justify-content:flex-end}
+  .banner.has-photo .banner-text{padding:28px 22px}
+  .banner.has-photo .banner-img::after{background:linear-gradient(0deg,rgba(10,18,32,.82) 0%,rgba(10,18,32,.35) 55%,rgba(10,18,32,0) 100%)}
+}
+.facts{margin:22px 4px 0}
+/* 종류 바로가기 */
+.cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.cats a{display:grid;grid-template-columns:64px 1fr;align-items:center;gap:14px;text-decoration:none;background:var(--sec);border-radius:16px;padding:18px 20px}
+.cats a:hover{background:var(--brand-soft)}
+.cats svg{width:64px;height:64px;color:var(--brand)}
+.cats b{display:block;font-size:1.08rem}
+.cats span{font-size:.88rem;color:var(--muted)}
+@media (max-width:860px){.cats{grid-template-columns:1fr 1fr;gap:10px}.cats a{grid-template-columns:44px 1fr;padding:14px;gap:10px}.cats svg{width:44px;height:44px}}
+.more{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:var(--ink2);text-decoration:none;white-space:nowrap}
+.more:hover{color:var(--brand)}
+section.contact{padding:52px 0}
+.contact .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.contact h2{font-size:1.5rem;font-weight:800}
+.contact p{color:var(--ink2);margin-top:6px}
+.contact .big-phone{text-decoration:none;color:var(--brand)}
+.bannerprev{width:100%;max-width:420px;aspect-ratio:16/7;border-radius:12px;overflow:hidden;background:var(--tile);display:grid;place-items:center;color:var(--muted);font-size:.9rem}
+.bannerprev img{width:100%;height:100%;object-fit:cover}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -297,153 +346,197 @@ footer b{color:var(--ink2)}
 
 <header class="sign">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="맨 위로">
+    <a class="logo" href="#/" aria-label="첫 화면으로">
       <span class="mark"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3" width="15" height="10" rx="1.5"/><path d="M7 17h6M10 13v4"/></svg></span>
       <b id="shopName">○○중고컴퓨터</b>
     </a>
     <nav aria-label="메뉴">
-      <a href="#stock" data-navcat="all">전체 상품</a>
-      <a href="#stock" data-navcat="office">사무용PC</a>
-      <a href="#stock" data-navcat="gaming">게이밍PC</a>
-      <a href="#stock" data-navcat="laptop">노트북</a>
-      <a href="#stock" data-navcat="monitor">모니터</a>
-      <a href="#games">게임 사양</a>
-      <a href="#shop">가게 안내</a>
+      <a href="#/list/all" data-nav="list/all">전체 상품</a>
+      <a href="#/list/office" data-nav="list/office">사무용PC</a>
+      <a href="#/list/gaming" data-nav="list/gaming">게이밍PC</a>
+      <a href="#/list/laptop" data-nav="list/laptop">노트북</a>
+      <a href="#/list/monitor" data-nav="list/monitor">모니터</a>
+      <a href="#/who" data-nav="who">용도별 추천</a>
+      <a href="#/games" data-nav="games">게임 사양</a>
+      <a href="#/shop" data-nav="shop">가게 안내</a>
     </nav>
     <a class="btn callbtn num" id="callTop" href="tel:">전화 문의</a>
   </div>
 </header>
 
-<main id="top">
-<div class="hero">
+<main>
+<!-- 첫 화면 -->
+<div class="page" data-page="home">
   <div class="wrap">
-    <div>
-      <h1>집에 가져가서<br>바로 켜서 쓰는 중고컴퓨터</h1>
-      <p class="lead">쓰실 분과 용도만 말씀해 주세요. 맞는 사양으로 골라 청소·점검하고, 쓰실 프로그램까지 깔아서 드립니다.</p>
-      <div class="row">
-        <a class="btn" href="#stock">지금 있는 컴퓨터 보기</a>
-        <a class="btn ghost" id="callHero" href="tel:">전화로 물어보기</a>
-      </div>
-      <ul class="facts" id="promise"></ul>
-    </div>
-    <div class="pick">
-      <h2>누가 쓰시나요?</h2>
-      <p>누르시면 그 용도에 맞는 컴퓨터만 골라 보여 드립니다.</p>
-      <ul id="heroWho"></ul>
-    </div>
-  </div>
-</div>
-
-<section id="stock">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><h2>지금 있는 컴퓨터</h2><p id="stockNote">매물은 수시로 바뀝니다. 찾는 게 없으면 전화 주세요. 맞춰서 준비해 드립니다.</p></div>
-    </div>
-    <div class="tabs-row" id="kindChips" role="group" aria-label="종류"></div>
-    <div class="toolbar">
-      <span class="count" id="stockCount"></span>
-      <select id="tierFilter" aria-label="성능으로 고르기">
-        <option value="-1">모든 성능</option>
-        <option value="0">인터넷·문서 이상</option>
-        <option value="1">가벼운 게임 이상</option>
-        <option value="2">인기 게임 이상</option>
-        <option value="3">고사양 게임</option>
-      </select>
-      <select id="sortSel" aria-label="정렬">
-        <option value="new">추천·최근 순</option>
-        <option value="low">낮은 가격순</option>
-        <option value="high">높은 가격순</option>
-      </select>
-      <label><input type="checkbox" id="hideSold" checked> 팔린 것 숨기기</label>
-    </div>
-    <div class="filternote" id="filterNote" hidden></div>
-    <div class="grid" id="grid"></div>
-  </div>
-</section>
-
-<section id="games" class="band">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><h2>이 게임 되나요?</h2><p>보통 화질(FHD)에서 끊김 없이 돌아가는 기준입니다. 게임을 누르면 그 게임이 되는 컴퓨터만 보여 드립니다.</p></div>
-    </div>
-    <div class="gtable" id="gameList"></div>
-    <div class="tierbox" id="tiers">
-      <h3>성능 단계별 부품 기준</h3>
-      <p>가게의 모든 컴퓨터에 이 네 단계 중 하나를 표시합니다. 막대가 많을수록 아래 단계 일도 다 됩니다.</p>
-      <div class="tiers"><table>
-        <thead><tr><th>단계</th><th>CPU</th><th>메모리</th><th>저장장치</th><th>그래픽카드</th><th>이런 일에</th></tr></thead>
-        <tbody id="tierRows"></tbody>
-      </table></div>
-    </div>
-  </div>
-</section>
-
-<section id="who">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><h2>쓰실 분에 맞춰 세팅해 드립니다</h2><p>같은 컴퓨터라도 누가 쓰느냐에 따라 미리 해 두는 일이 다릅니다.</p></div>
-    </div>
-    <div class="seg" id="whoList" role="group" aria-label="쓰실 분"></div>
-    <div class="detail" id="whoDetail" aria-live="polite"></div>
-  </div>
-</section>
-
-<section id="care" class="band">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><h2>이렇게 손봐서 드립니다</h2><p>한 대 한 대 사장님이 직접 뜯어 보고 손봅니다.</p></div>
-    </div>
-    <ol class="steps">
-      <li><b>들여오기</b><span>상태 좋은 컴퓨터만 골라 들여옵니다</span></li>
-      <li><b>분해·청소</b><span>뜯어서 먼지를 털고 CPU 그리스를 새로 바릅니다</span></li>
-      <li><b>점검</b><span>부품을 하나씩 검사하고 몇 시간 켜 둡니다</span></li>
-      <li><b>윈도우·프로그램</b><span>새로 깔고 쓰실 프로그램까지 넣습니다</span></li>
-      <li><b>전달</b><span>가게에서 직접 드리거나 꼼꼼히 포장해 보냅니다</span></li>
-    </ol>
-    
-  </div>
-</section>
-
-<section id="reviews" hidden>
-  <div class="wrap">
-    <div class="sec-head"><div><h2>손님 후기</h2><p>당근·중고나라·가게에서 실제로 받은 후기입니다.</p></div></div>
-    <div class="reviews" id="reviewList"></div>
-  </div>
-</section>
-
-<section id="shop">
-  <div class="wrap">
-    <div class="sec-head"><div><h2>가게 안내</h2></div></div>
-    <div class="info">
-      <div>
-        <h3>전화·문자</h3>
-        <p class="big-phone" id="phoneText">010-0000-0000</p>
-        <div class="links">
-          <a class="btn small" id="callLink" href="tel:">전화 걸기</a>
-          <button class="btn small ghost" id="copyPhone" type="button">번호 복사</button>
+    <div class="banner" id="banner">
+      <div class="banner-img" id="bannerImg"></div>
+      <div class="banner-text">
+        <h1>집에 가져가서<br>바로 켜서 쓰는 중고컴퓨터</h1>
+        <p>청소·점검하고, 쓰실 프로그램까지 깔아서 드립니다.</p>
+        <div class="row">
+          <a class="btn" href="#/list/all">전체 상품 보기</a>
+          <a class="btn ghost" id="callHero" href="tel:">전화로 물어보기</a>
         </div>
       </div>
-      <div>
-        <h3>찾아오시는 길</h3>
-        <dl class="kv">
-          <dt>주소</dt><dd id="addrText">주소를 넣어 주세요</dd>
-          <dt>영업시간</dt><dd id="hoursText">평일 10:00–19:00</dd>
-        </dl>
-        <div class="links"><a class="btn small ghost" id="mapLink" href="https://map.naver.com" target="_blank" rel="noopener">네이버 지도에서 보기</a></div>
+    </div>
+    <ul class="facts" id="promise"></ul>
+  </div>
+
+  <section class="tight">
+    <div class="wrap">
+      <div class="cats" id="catTiles"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><h2>잘 나가는 제품</h2><p id="bestNote">요즘 손님들이 많이 찾는 컴퓨터입니다.</p></div>
+        <a class="more" href="#/list/all">전체 상품 보기 <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a>
       </div>
-      <div>
-        <h3>사업자 정보</h3>
-        <dl class="kv">
-          <dt>상호</dt><dd id="bizName">○○중고컴퓨터</dd>
-          <dt>대표</dt><dd id="ownerText">-</dd>
-          <dt>사업자번호</dt><dd id="bizNo" class="num">등록 예정</dd>
-          <dt>무상 수리</dt><dd id="warrantyText">구입 후 1개월</dd>
-        </dl>
-        <div class="links" id="marketLinks"></div>
+      <div class="grid" id="bestGrid"></div>
+    </div>
+  </section>
+
+  <section class="band contact">
+    <div class="wrap">
+      <div><h2>찾는 컴퓨터가 없으세요?</h2><p>쓰실 분과 용도만 말씀해 주시면 맞춰서 준비해 드립니다.</p></div>
+      <a class="big-phone" id="phoneHome" href="tel:">010-0000-0000</a>
+    </div>
+  </section>
+</div>
+
+<!-- 상품 목록 -->
+<div class="page" data-page="list">
+  <section class="pagehead">
+    <div class="wrap">
+      <h1 id="listTitle">전체 상품</h1>
+      <p id="stockNote">매물은 수시로 바뀝니다. 찾는 게 없으면 전화 주세요. 맞춰서 준비해 드립니다.</p>
+    </div>
+  </section>
+  <section class="tight-top">
+    <div class="wrap">
+      <div class="tabs-row" id="kindChips" role="group" aria-label="종류"></div>
+      <div class="toolbar">
+        <span class="count" id="stockCount"></span>
+        <select id="tierFilter" aria-label="성능으로 고르기">
+          <option value="-1">모든 성능</option>
+          <option value="0">인터넷·문서 이상</option>
+          <option value="1">가벼운 게임 이상</option>
+          <option value="2">인기 게임 이상</option>
+          <option value="3">고사양 게임</option>
+        </select>
+        <select id="sortSel" aria-label="정렬">
+          <option value="new">인기·최근 순</option>
+          <option value="low">낮은 가격순</option>
+          <option value="high">높은 가격순</option>
+        </select>
+        <label><input type="checkbox" id="hideSold" checked> 팔린 것 숨기기</label>
+      </div>
+      <div class="filternote" id="filterNote" hidden></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- 용도별 추천 -->
+<div class="page" data-page="who">
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>용도별 추천</h1>
+      <p>같은 컴퓨터라도 누가 쓰느냐에 따라 필요한 사양과 미리 해 두는 세팅이 다릅니다.</p>
+    </div>
+  </section>
+  <section class="tight-top">
+    <div class="wrap">
+      <div class="seg" id="whoList" role="group" aria-label="쓰실 분"></div>
+      <div class="detail" id="whoDetail" aria-live="polite"></div>
+    </div>
+  </section>
+</div>
+
+<!-- 게임 사양 -->
+<div class="page" data-page="games">
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>이 게임 되나요?</h1>
+      <p>보통 화질(FHD)에서 끊김 없이 돌아가는 기준입니다. 게임을 누르면 그 게임이 되는 컴퓨터만 보여 드립니다.</p>
+    </div>
+  </section>
+  <section class="tight-top">
+    <div class="wrap">
+      <div class="gtable" id="gameList"></div>
+      <div class="tierbox">
+        <h3>성능 단계별 부품 기준</h3>
+        <p>가게의 모든 컴퓨터에 이 네 단계 중 하나를 표시합니다. 막대가 많을수록 아래 단계 일도 다 됩니다.</p>
+        <div class="tiers"><table>
+          <thead><tr><th>단계</th><th>CPU</th><th>메모리</th><th>저장장치</th><th>그래픽카드</th><th>이런 일에</th></tr></thead>
+          <tbody id="tierRows"></tbody>
+        </table></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
+
+<!-- 가게 안내 -->
+<div class="page" data-page="shop">
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>가게 안내</h1>
+      <p>한 대 한 대 사장님이 직접 뜯어 보고 손봐서 드립니다.</p>
+    </div>
+  </section>
+  <section class="tight-top">
+    <div class="wrap">
+      <div class="info">
+        <div>
+          <h3>전화·문자</h3>
+          <p class="big-phone" id="phoneText">010-0000-0000</p>
+          <div class="links">
+            <a class="btn small" id="callLink" href="tel:">전화 걸기</a>
+            <button class="btn small ghost" id="copyPhone" type="button">번호 복사</button>
+          </div>
+        </div>
+        <div>
+          <h3>찾아오시는 길</h3>
+          <dl class="kv">
+            <dt>주소</dt><dd id="addrText">주소를 넣어 주세요</dd>
+            <dt>영업시간</dt><dd id="hoursText">평일 10:00–19:00</dd>
+          </dl>
+          <div class="links"><a class="btn small ghost" id="mapLink" href="https://map.naver.com" target="_blank" rel="noopener">네이버 지도에서 보기</a></div>
+        </div>
+        <div>
+          <h3>사업자 정보</h3>
+          <dl class="kv">
+            <dt>상호</dt><dd id="bizName">○○중고컴퓨터</dd>
+            <dt>대표</dt><dd id="ownerText">-</dd>
+            <dt>사업자번호</dt><dd id="bizNo" class="num">등록 예정</dd>
+            <dt>무상 수리</dt><dd id="warrantyText">구입 후 1개월</dd>
+          </dl>
+          <div class="links" id="marketLinks"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>이렇게 손봐서 드립니다</h2></div></div>
+      <ol class="steps">
+        <li><b>들여오기</b><span>상태 좋은 컴퓨터만 골라 들여옵니다</span></li>
+        <li><b>분해·청소</b><span>뜯어서 먼지를 털고 CPU 그리스를 새로 바릅니다</span></li>
+        <li><b>점검</b><span>부품을 하나씩 검사하고 몇 시간 켜 둡니다</span></li>
+        <li><b>윈도우·프로그램</b><span>새로 깔고 쓰실 프로그램까지 넣습니다</span></li>
+        <li><b>전달</b><span>가게에서 직접 드리거나 꼼꼼히 포장해 보냅니다</span></li>
+      </ol>
+    </div>
+  </section>
+  <section id="reviews" hidden>
+    <div class="wrap">
+      <div class="sec-head"><div><h2>손님 후기</h2><p>당근·중고나라·가게에서 실제로 받은 후기입니다.</p></div></div>
+      <div class="reviews" id="reviewList"></div>
+    </div>
+  </section>
+</div>
 </main>
 
 <footer>
@@ -537,7 +630,6 @@ function lvHtml(t,label){t=Number(t);if(!(t>=0))return "";
   return `<span class="lv" title="성능 ${t+1}단계 / 4"><span class="bars" aria-hidden="true">${[0,1,2,3].map(i=>`<i class="${i<=t?"on":""}"></i>`).join("")}</span>${esc(label===undefined?TIERS[t].name:label)}</span>`;}
 const GO=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>`;
 function renderWho(){
-  $("#heroWho").innerHTML=WHO.map(w=>`<li><button type="button" data-pick="${w.id}"><b>${esc(w.title)}</b><small>${esc(w.sub)}</small><span class="go">${GO}</span></button></li>`).join("");
   $("#whoList").innerHTML=WHO.map(w=>`<button type="button" data-who="${w.id}" aria-pressed="${w.id===whoSel}">${esc(w.title)}</button>`).join("");
   const w=WHO.find(x=>x.id===whoSel);
   $("#whoDetail").innerHTML=`<div><h3>이 정도 사양이면 됩니다</h3><ul class="checks">${w.need.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
@@ -598,7 +690,7 @@ function specLine(it){
 function cardHtml(it,isSample){
   const ph=it.photos&&it.photos[0]?`<img src="${photoUrl(esc(it.photos[0]))}" alt="" loading="lazy">`:noImg(it.kind);
   const tags=[];
-  if(it.featured&&it.status!=="sold")tags.push(`<span class="tag pick-tag">사장님 추천</span>`);
+  if(it.featured&&it.status!=="sold")tags.push(`<span class="tag pick-tag">인기</span>`);
   if(it.status!=="sale")tags.push(`<span class="tag ${it.status}">${STATUS[it.status]}</span>`);
   const minis=[it.win11&&hasSpecs(it)?"윈도우11":"",it.gift?"키보드·마우스 증정":"",it.grade?it.grade+"급":""].filter(Boolean).map(x=>`<span class="mini">${esc(x)}</span>`).join("");
   const sl=specLine(it);
@@ -615,7 +707,8 @@ function renderChips(){
 }
 function renderGrid(){
   const isSample=items===null||items.length===0;
-  renderChips();
+  renderChips();renderHome();
+  const cat=CATS.find(c=>c[0]===filt.kind);$("#listTitle").textContent=!cat||cat[0]==="all"?"전체 상품":cat[1];
   const list=visibleItems();
   $("#stockCount").innerHTML=`<b class="num">${list.length}</b>대${isSample?" · 지금은 예시 매물입니다":""}`;
   const fn=$("#filterNote");
@@ -640,7 +733,7 @@ function renderShop(){
   ["#shopName","#bizName","#footName"].forEach(k=>$(k).textContent=s.name);
   $("#phoneText").textContent=s.phone;
   const tel="tel:"+String(s.phone).replace(/[^0-9+]/g,"");
-  $("#callLink").href=tel;$("#callTop").href=tel;$("#callHero").href=tel;$("#callTop").textContent=s.phone||"전화 문의";
+  $("#callLink").href=tel;$("#callTop").href=tel;$("#callHero").href=tel;$("#phoneHome").href=tel;$("#phoneHome").textContent=s.phone;renderBanner();$("#callTop").textContent=s.phone||"전화 문의";
   $("#addrText").textContent=s.addr;$("#hoursText").textContent=s.hours;
   $("#ownerText").textContent=s.owner||"-";
   $("#bizNo").textContent=s.bizNo||"등록 예정";
@@ -656,6 +749,45 @@ function renderShop(){
 }
 function safeUrl(u){u=String(u||"").trim();return /^https?:\/\//i.test(u)?u:"#";}
 function renderAll(){renderShop();renderGrid();}
+
+function renderHome(){
+  const isSample=items===null||items.length===0;
+  const live=allItems().filter(it=>it.status!=="sold");
+  let best=live.filter(it=>it.featured);
+  if(!best.length)best=live.slice(0,8);
+  $("#bestGrid").innerHTML=best.length?best.slice(0,8).map(it=>cardHtml(it,isSample)).join(""):`<div class="empty" style="grid-column:1/-1"><b>지금 준비 중입니다</b>전화 주시면 맞춰서 준비해 드립니다.</div>`;
+  const tiles=[["office","사무용PC","desktop"],["gaming","게이밍PC","desktop"],["laptop","노트북","laptop"],["monitor","모니터","monitor"]];
+  $("#catTiles").innerHTML=tiles.map(([k,l,a])=>`<a href="#/list/${k}">${ART[a]}<div><b>${l}</b><span>${live.filter(it=>inCat(it,k)).length}대 있음</span></div></a>`).join("");
+}
+function renderBanner(){
+  const b=$("#banner"),im=$("#bannerImg");if(!b)return;
+  if(shop.banner){b.classList.add("has-photo");im.innerHTML=`<img src="${photoUrl(esc(shop.banner))}" alt="">`;}
+  else{b.classList.remove("has-photo");im.innerHTML=`<div class="art"><svg viewBox="0 0 560 360" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><rect x="40" y="40" width="300" height="190" rx="10"/><rect x="56" y="56" width="268" height="158" rx="3" stroke-width="2"/><path d="M175 230l-12 60M205 230l12 60M140 290h100"/><rect x="380" y="70" width="120" height="250" rx="10"/><path d="M400 100h80M400 116h80"/><circle cx="440" cy="150" r="9"/><path d="M405 220h70M405 236h70M405 252h70M405 268h70" stroke-width="2"/><path d="M60 330h300l-14 18H74z"/></svg></div>`;}
+}
+/* 화면 나누기: 주소 뒤 #/... 로 화면을 바꿈 (뒤로 가기도 됨) */
+const PAGES=["home","list","who","games","shop"];
+function route(){
+  const h=decodeURIComponent(location.hash.replace(/^#\/?/,""));
+  const [path,q]=h.split("?");const seg=(path||"").split("/");
+  let page=seg[0]||"home";
+  if(page==="stock")page="list";
+  if(!PAGES.includes(page))page="home";
+  if(page==="list"){
+    const kind=CATS.some(c=>c[0]===seg[1])?seg[1]:"all";
+    const ps=new URLSearchParams(q||"");const g=ps.has("game")?+ps.get("game"):null;
+    const okG=g!==null&&GAMES[g];
+    filt={...filt,kind,use:ps.get("use")||null,game:okG?g:null,tier:okG?GAMES[g].t:-1};
+    $("#tierFilter").value=String(filt.tier);renderGrid();
+  }
+  document.querySelectorAll(".page").forEach(el=>el.classList.toggle("on",el.dataset.page===page));
+  const key=page==="list"?"list/"+filt.kind:page;
+  document.querySelectorAll(".sign nav a").forEach(a=>a.removeAttribute("aria-current"));
+  const cur=document.querySelector(`.sign nav a[data-nav="${key}"]`);if(cur)cur.setAttribute("aria-current","page");
+  const names={home:"",list:$("#listTitle").textContent,who:"용도별 추천",games:"게임 사양",shop:"가게 안내"};
+  document.title=(names[page]?names[page]+" - ":"")+(shop.name||"중고컴퓨터");
+  scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
 
 /* ---------- 매물 자세히 ---------- */
 function openItem(id){
@@ -740,7 +872,7 @@ function formHtml(){
   <div class="field"><span class="lbl">⑤ 누구에게 추천 (여러 개 가능)</span><div class="choices">${Object.entries(USES).map(([k,l])=>`<label><input type="checkbox" name="uses" value="${k}" ${(it.uses||[]).includes(k)?"checked":""}>${l}</label>`).join("")}</div></div>
   <div class="field"><span class="lbl">덤·표시</span><div class="choices">
     <label><input type="checkbox" id="fGift" ${it.gift?"checked":""}>키보드·마우스 같이 드림</label>
-    <label><input type="checkbox" id="fFeat" ${it.featured?"checked":""}>'사장님 추천'에 올리기</label></div></div>
+    <label><input type="checkbox" id="fFeat" ${it.featured?"checked":""}>첫 화면 '잘 나가는 제품'에 올리기</label></div></div>
   <div class="field"><label for="fTitle">⑥ 제목</label>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="text" id="fTitle" value="${esc(it.title)}" placeholder="아래 버튼을 누르면 자동으로 만들어져요" style="flex:1 1 260px"><button class="btn small" type="button" data-autotitle>제목 자동으로 만들기</button></div>
     <span class="hint">위에 적은 내용으로 "[중고] 모델 CPU 메모리 저장장치 그래픽 윈도우11 용도" 모양으로 만들어 드려요. 손님들이 이렇게 검색합니다.</span></div>
@@ -832,7 +964,13 @@ function autoTitle(){
 function shopFormHtml(){
   const s=shop;
   const f=(id,label,v,ph,hint)=>`<div class="field"><label for="${id}">${label}</label><input type="text" id="${id}" value="${esc(v)}" placeholder="${esc(ph||"")}">${hint?`<span class="hint">${hint}</span>`:""}</div>`;
+  const bd=bannerDraft!==undefined?bannerDraft:(s.banner?{id:s.banner,url:photoUrl(s.banner)}:null);
   return `<form id="shopForm" style="display:grid;gap:14px">
+    <div class="field"><span class="lbl">첫 화면 큰 사진</span>
+      <div class="bannerprev">${bd?`<img src="${esc(bd.url)}" alt="첫 화면 큰 사진">`:"아직 사진이 없어요"}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn small" for="bannerIn">${bd?"사진 바꾸기":"사진 넣기"}</label>${bd?`<button class="btn small ghost" type="button" data-delbanner>사진 빼기</button>`:""}</div>
+      <input type="file" id="bannerIn" accept="image/*" hidden>
+      <span class="hint">가게 안이나 진열된 컴퓨터를 넓게 찍은 가로 사진이 좋아요. 넣은 뒤 아래 '가게 정보 저장'을 눌러야 바뀝니다.</span></div>
     ${f("sName","가게 이름",s.name,"예) ○○컴퓨터")}
     ${f("sPhone","전화번호",s.phone,"010-0000-0000")}
     ${f("sAddr","주소",s.addr,"예) ○○시 ○○구 ○○로 12")}
@@ -920,29 +1058,32 @@ async function delItem(id){
     confirmDel=null;toast("지웠어요.");renderAdmin();
   }catch(e){toast("지우지 못했어요. 다시 해 주세요.");}
 }
+let bannerDraft;
+/* 큰 사진을 바꿀 때 가게 정보 칸에 적던 글이 지워지지 않게 */
+let shopFormKeep=null;
+function keepShopForm(){const F=$("#shopForm");shopFormKeep=F?[...F.querySelectorAll("input[type=text]")].map(i=>[i.id,i.value]):null;}
+function restoreShopForm(){if(!shopFormKeep)return;shopFormKeep.forEach(([id,v])=>{const el=$("#"+id);if(el)el.value=v;});shopFormKeep=null;}
 async function saveShop(){
   const g=id=>($("#"+id).value||"").trim();
-  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),promise:g("sPromise")};
+  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),promise:g("sPromise"),banner:bannerDraft!==undefined?(bannerDraft?bannerDraft.id:""):(shop.banner||"")};
   if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
-  try{await db.doc("shop/info").set(next);shop={...DEFAULT_SHOP,...next};renderShop();toast("가게 정보를 저장했어요.");}catch(e){toast("저장하지 못했어요. 다시 눌러 주세요.");}
+  try{await db.doc("shop/info").set(next);shop={...DEFAULT_SHOP,...next};bannerDraft=undefined;renderShop();toast("가게 정보를 저장했어요.");}catch(e){toast("저장하지 못했어요. 다시 눌러 주세요.");}
 }
 
 /* ---------- 이벤트 ---------- */
 document.addEventListener("click",e=>{
-  const t=e.target.closest("button,a[data-navcat],[data-close-bg]");if(!t)return;
+  const t=e.target.closest("button,[data-close-bg]");if(!t)return;
   if(t.matches("[data-close-bg]")&&e.target!==t)return;
-  if(t.dataset.navcat){e.preventDefault();filt={...filt,kind:t.dataset.navcat,tier:-1,game:null,use:null};$("#tierFilter").value="-1";renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
   if(t.matches("[data-autotitle]")){autoTitle();return;}
   if(t.dataset.copypost){const it=items.find(x=>x.id===t.dataset.copypost);if(it){copyItem=it;copyNote="";adminTab="copy";renderAdmin();}return;}
   if(t.matches("[data-docopy]")){const ta=$("#copyText");navigator.clipboard.writeText(ta.value).then(()=>toast("복사했어요. 당근 글쓰기에 붙여 넣으세요.")).catch(()=>{ta.focus();ta.select();toast("글을 선택했어요. 길게 눌러 복사하세요.");});return;}
   if(t.dataset.delrv){(async()=>{try{await db.collection("reviews").doc(t.dataset.delrv).delete();confirmDel=null;toast("지웠어요.");renderAdmin();}catch(err){toast("지우지 못했어요.");}})();return;}
   if(t.matches("[data-close],[data-close-bg]")){closeModal();return;}
   if(t.dataset.who){whoSel=t.dataset.who;renderWho();return;}
-  if(t.dataset.pick){filt={...filt,kind:"all",tier:-1,use:t.dataset.pick,game:null};$("#tierFilter").value="-1";renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
-  if(t.dataset.showtier!==undefined){filt={...filt,tier:-1,use:t.dataset.whoUse,game:null};$("#tierFilter").value="-1";renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
-  if(t.dataset.game!==undefined){const g=GAMES[+t.dataset.game];filt={...filt,tier:g.t,game:+t.dataset.game,use:null};$("#tierFilter").value=String(g.t);renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
-  if(t.id==="clearFilt"){filt={...filt,tier:-1,game:null,use:null};$("#tierFilter").value="-1";renderGrid();return;}
-  if(t.dataset.kind){filt.kind=t.dataset.kind;document.querySelectorAll(".chip[data-kind]").forEach(c=>c.setAttribute("aria-pressed",c===t));renderGrid();return;}
+  if(t.dataset.pick){location.hash="#/list/all?use="+t.dataset.pick;return;}
+  if(t.dataset.game!==undefined){location.hash="#/list/all?game="+t.dataset.game;return;}
+  if(t.id==="clearFilt"){location.hash="#/list/"+filt.kind;return;}
+  if(t.dataset.kind){location.hash="#/list/"+t.dataset.kind;return;}
   if(t.dataset.item){openItem(t.dataset.item);return;}
   if(t.dataset.thumb){const m=$("#gMain img");if(m)m.src=photoUrl(t.dataset.thumb);document.querySelectorAll("[data-thumb]").forEach(b=>b.setAttribute("aria-current",b===t));return;}
   if(t.id==="copyPhone"){navigator.clipboard.writeText(shop.phone).then(()=>toast("번호를 복사했어요.")).catch(()=>{const r=document.createRange();r.selectNodeContents($("#phoneText"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("번호를 선택했어요. 길게 눌러 복사하세요.");});return;}
@@ -955,6 +1096,7 @@ document.addEventListener("click",e=>{
   if(t.dataset.askdel){confirmDel=t.dataset.askdel;renderAdmin();return;}
   if(t.matches("[data-nodel]")){confirmDel=null;renderAdmin();return;}
   if(t.dataset.del){delItem(t.dataset.del);return;}
+  if(t.matches("[data-delbanner]")){keepShopForm();bannerDraft=null;renderAdmin();restoreShopForm();return;}
 });
 document.addEventListener("change",e=>{
   if(e.target.id==="tierFilter"){filt.tier=+e.target.value;filt.game=null;renderGrid();}
@@ -962,12 +1104,14 @@ document.addEventListener("change",e=>{
   if(e.target.id==="sortSel"){filt.sort=e.target.value;renderGrid();}
   if(e.target.id==="fAsk"){$("#fPrice").disabled=e.target.checked;if(!e.target.checked)$("#fPrice").focus();}
   if(e.target.id==="photoIn"&&e.target.files.length){addPhotos([...e.target.files]);}
+  if(e.target.id==="bannerIn"&&e.target.files.length){const file=e.target.files[0];(async()=>{if(!assets){toast("사진 올리기는 열쇠를 넣은 기기에서만 됩니다.");return;}
+    keepShopForm();try{toast("사진 올리는 중…");const b=await shrink(file);const r=await assets.upload(b,{type:"image/jpeg"});bannerDraft={id:r.id,url:r.url};renderAdmin();restoreShopForm();toast("사진을 넣었어요. '가게 정보 저장'을 눌러 주세요.");}catch(err){restoreShopForm();toast("사진을 올리지 못했어요. 다시 해 주세요.");}})();}
 });
 document.addEventListener("submit",e=>{e.preventDefault();if(e.target.id==="itemForm")saveItem();if(e.target.id==="shopForm")saveShop();if(e.target.id==="reviewForm")saveReview();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modalRoot").innerHTML)closeModal();});
 
 /* ---------- 시작 ---------- */
-renderWho();renderTiers();renderGames();renderAll();
+renderWho();renderTiers();renderGames();renderAll();route();
 
 /* ---------- 깃허브 저장소에 매물·사진 저장 ----------
    손님: data/*.json 과 photos/ 를 그냥 읽음.
