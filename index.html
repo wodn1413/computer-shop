@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="집에 가져가서 바로 켜서 쓰는 중고컴퓨터. 용도별·게임별 추천 사양과 지금 있는 매물.">
+<title>○○중고컴퓨터</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* 레이아웃: 국내 컴퓨터 쇼핑몰처럼 — 흰 바탕, 믿음 주는 파랑 하나, 가격은 굵은 검정 */
+:root{
+  --bg:#ffffff; --surface:#ffffff; --ink:#111418; --muted:#6b7280; --line:#e3e6ea;
+  --brand:#1557d6; --brand-ink:#ffffff; --tag:#1557d6; --tag-ink:#ffffff;
+  --navy:#0f1d3a; --sec:#f4f6f9;
+  --ok:#11845b; --warn:#c26a00; --bad:#d6283a; --soft:#eef3fd;
+  --f-display:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color-scheme:light;
+}
+/* 어두운 화면 설정이어도 항상 흰 바탕으로 보이게 함 (한 가지 모습만 씀) */
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;text-wrap:balance;margin:0;line-height:1.3}
+h1{font-weight:900}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--tag);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* 간판 */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.sign{background:var(--surface);color:var(--ink);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;border-bottom:1px solid var(--line)}
+.sign .wrap{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.sign .name{font-weight:900;font-size:1.55rem;margin-right:auto;white-space:nowrap;color:var(--brand);letter-spacing:-.04em}
+.sign nav{display:flex;gap:2px;flex-wrap:wrap}
+.sign nav a{text-decoration:none;padding:7px 12px;border-radius:4px;font-weight:500;font-size:.98rem}
+.sign nav a:hover{color:var(--brand)}
+.callbtn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:4px;padding:9px 16px;font-weight:700;text-decoration:none;white-space:nowrap}
+.sign nav a.allcat{background:var(--tag);color:var(--tag-ink)}
+@media (max-width:900px){.sign nav{order:3;width:100%;flex-wrap:nowrap;overflow-x:auto}.sign nav a{white-space:nowrap}.sign .name{font-size:1.3rem}}
+
+/* 첫 화면 */
+.hero{padding-block:48px;background:var(--soft);color:var(--ink)}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem)}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero .lead{margin-top:14px;color:var(--muted);font-size:1.08rem;max-width:34em}
+.hero .btn.ghost{background:var(--surface)}
+.hero .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:12px 20px;font-weight:700;border:2px solid var(--brand);background:var(--brand);color:var(--brand-ink);cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.small{padding:8px 12px;font-size:.92rem;border-width:1.5px}
+.btn.warn{background:var(--bad);border-color:var(--bad);color:#fff}
+.checkcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px}
+.checkcard h3{font-size:1.2rem;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.checkcard h3 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:500}
+.checkcard ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.checkcard li{display:flex;gap:10px;align-items:flex-start}
+.checkcard li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:5px;background:var(--soft);color:var(--ok);font-weight:700;display:grid;place-items:center;font-size:.85rem;margin-top:2px}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}}
+
+section{padding-block:36px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head h2{font-size:clamp(1.4rem,3vw,1.85rem)}
+section{padding-block:44px}
+.sec-head p{color:var(--muted);max-width:36em}
+.band{background:var(--sec)}
+
+/* 누가 쓰시나요 */
+.who{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.who button{all:unset;cursor:pointer;background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:6px;align-content:start}
+.who button:hover,.who button[aria-pressed="true"]{border-color:var(--brand)}
+.who button[aria-pressed="true"]{background:var(--soft)}
+.who b{font-size:1.15rem}
+.who span{color:var(--muted);font-size:.95rem}
+.who .lvl{font-family:var(--f-mono);font-size:.78rem;color:var(--brand);font-weight:600;letter-spacing:.04em}
+:root[data-theme="dark"] .who .lvl{color:var(--tag)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .who .lvl{color:var(--tag)}}
+.detail{margin-top:16px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.detail h3{font-size:1.25rem;margin-bottom:8px}
+.detail ul{margin:0;padding-left:1.2em}
+@media (max-width:720px){.detail{grid-template-columns:1fr}}
+
+/* 사양표 */
+.tiers{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.tiers table{border-collapse:collapse;width:100%;min-width:720px}
+.tiers th,.tiers td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tiers thead th{font-size:.85rem;color:var(--muted);font-weight:600;background:var(--bg)}
+.tiers tbody th{font-weight:700;font-size:1.1rem;white-space:nowrap}
+.tiers td{font-family:var(--f-mono);font-size:.9rem}
+.tiers tr:last-child th,.tiers tr:last-child td{border-bottom:0}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* 게임 */
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.game{all:unset;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:4px}
+.game:hover{border-color:var(--brand)}
+.game b{font-size:1.05rem}
+.game .need{font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.pill{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:999px;justify-self:start}
+.t0{background:#dfe7e4;color:#2d3d39}.t1{background:#d6f0e1;color:#155c37}.t2{background:#ffe9c2;color:#6b4100}.t3{background:#ffd9d9;color:#7a1e1e}
+
+/* 매물 */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:.95rem}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.filters select{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:600}
+.note{font-size:.9rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-align:left;padding:0}
+.card:hover{border-color:var(--brand)}
+.card .ph{aspect-ratio:4/3;background:var(--soft);position:relative;max-width:100%}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph .noimg{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted)}
+.card .status{position:absolute;top:10px;left:10px;font-weight:700;font-size:.82rem;padding:3px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.card .status.reserved{color:var(--warn)}.card .status.sold{color:var(--bad)}
+.card.is-sold .ph{opacity:.5}
+.card .ex{position:absolute;top:10px;right:10px;font-size:.75rem;font-weight:700;background:var(--ink);color:var(--bg);padding:2px 8px;border-radius:6px}
+.card .body{padding:14px 16px 16px;display:grid;gap:8px;flex:1}
+.card h3{font-family:var(--f-body);font-weight:700;font-size:1.08rem;line-height:1.4}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:.88rem;margin:0}
+.specs dt{color:var(--muted)}
+.specs dd{margin:0;font-family:var(--f-mono);min-width:0;overflow-wrap:anywhere}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;flex-wrap:wrap}
+.price{color:var(--ink);font-weight:900;font-size:1.2rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.badges{display:flex;gap:4px;flex-wrap:wrap}
+.win{font-size:.75rem;font-weight:700;color:var(--ok);border:1px solid currentColor;border-radius:4px;padding:0 6px}
+.empty{background:var(--surface);border:2px dashed var(--line);border-radius:8px;padding:28px;text-align:center;color:var(--muted)}
+
+/* 가게 정보 */
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.info .box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:8px;align-content:start}
+.info .box h3{font-size:1.2rem}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px}
+.kv dt{color:var(--muted)}.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.big-phone{font-family:var(--f-mono);font-size:1.6rem;font-weight:600;letter-spacing:.02em}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+footer{padding-block:28px 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* 창 */
+.overlay{position:fixed;inset:0;background:rgba(5,12,10,.6);z-index:20;display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;padding:max(16px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);color:var(--ink);border-radius:10px;width:min(760px,100%);padding:22px;display:grid;gap:16px;margin-block:20px}
+.sheet .top{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.sheet .top h2{font-size:1.6rem}
+.x{border:0;background:var(--soft);border-radius:10px;width:44px;height:44px;font-size:1.4rem;cursor:pointer;flex:none}
+.gallery{display:grid;gap:8px}
+.gallery .main{aspect-ratio:4/3;background:var(--soft);border-radius:8px;overflow:hidden;max-width:100%}
+.gallery .main img{width:100%;height:100%;object-fit:contain}
+.thumbs{display:flex;gap:6px;overflow-x:auto}
+.thumbs button{border:2px solid transparent;padding:0;border-radius:8px;overflow:hidden;width:72px;height:54px;flex:none;cursor:pointer;background:var(--soft)}
+.thumbs button[aria-current="true"]{border-color:var(--brand)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+
+/* 사장님 화면: 크고 단순하게 */
+.admin{font-size:19px}
+.admin .tabs{display:flex;gap:6px;flex-wrap:wrap}
+.admin .tabs button{border:2px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}
+.admin .tabs button[aria-selected="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.field{display:grid;gap:6px}
+.field label,.field .lbl{font-weight:700}
+.field .hint{font-size:.85em;color:var(--muted)}
+.field input[type=text],.field input[type=number],.field input[type=url],.field select,.field textarea{border:2px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg);width:100%;min-width:0}
+.field textarea{min-height:110px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:620px){.two{grid-template-columns:1fr}}
+.choices{display:flex;gap:8px;flex-wrap:wrap}
+.choices label{display:flex;gap:8px;align-items:center;border:2px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600;background:var(--bg)}
+.choices input{width:22px;height:22px;accent-color:var(--brand)}
+.choices label:has(input:checked){border-color:var(--brand);background:var(--soft)}
+.photos{display:flex;gap:8px;flex-wrap:wrap}
+.photos .p{position:relative;width:110px;height:84px;border-radius:10px;overflow:hidden;background:var(--soft)}
+.photos .p img{width:100%;height:100%;object-fit:cover}
+.photos .p button{position:absolute;top:4px;right:4px;border:0;border-radius:6px;background:rgba(0,0,0,.65);color:#fff;font-weight:700;padding:2px 8px;cursor:pointer}
+.photos .p.first::after{content:"대표";position:absolute;left:4px;bottom:4px;background:var(--tag);color:var(--tag-ink);font-size:.7rem;font-weight:700;padding:0 6px;border-radius:4px}
+.upl{display:grid;place-items:center;width:110px;height:84px;border:2px dashed var(--brand);border-radius:10px;cursor:pointer;font-weight:700;color:var(--brand);text-align:center;font-size:.9rem;line-height:1.3}
+:root[data-theme="dark"] .upl{color:var(--tag);border-color:var(--tag)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .upl{color:var(--tag);border-color:var(--tag)}}
+.mylist{display:grid;gap:8px}
+.myrow{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg)}
+.myrow img,.myrow .noimg{width:72px;height:54px;object-fit:cover;border-radius:8px;background:var(--soft);display:grid;place-items:center;font-size:.7rem;color:var(--muted)}
+.myrow .acts{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:8px;font-weight:700;z-index:30;max-width:calc(100% - 32px)}
+.guide ol{padding-left:1.3em;display:grid;gap:8px;margin:0}
+.guide h3{font-size:1.25rem;margin-top:8px}
+.guide p,.guide li{max-width:40em}
+.adminbtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:6;font-size:1.05rem;padding:14px 20px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+/* 약속 띠 */
+.promise{background:var(--sec);color:var(--muted);font-size:.88rem;font-weight:500;border-bottom:1px solid var(--line)}
+.promise .wrap{padding-block:7px;display:flex;gap:6px 14px;flex-wrap:wrap}
+.promise span{white-space:nowrap}
+.promise span+span::before{content:"·";margin-right:14px;opacity:.5}
+/* 사장님 추천 */
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:26px}
+.feat .card .ph{aspect-ratio:1/1}
+.rank{position:absolute;left:0;top:0;background:var(--navy);color:#fff;font-family:var(--f-mono);font-weight:600;padding:2px 9px;border-radius:0 0 8px 0;font-size:.9rem}
+.feat .card .status{top:34px}
+.sub-title{font-family:var(--f-display);font-size:1.3rem;margin-bottom:10px}
+.gift{font-size:.75rem;font-weight:700;color:var(--brand);border:1px solid currentColor;border-radius:4px;padding:0 6px}
+:root[data-theme="dark"] .gift{color:var(--tag)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gift{color:var(--tag)}}
+.chip .n{font-family:var(--f-mono);font-size:.8em;opacity:.7;margin-left:4px}
+/* 후기 */
+.reviews{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.rv{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;align-content:start}
+.rv .stars{color:#e0a000;letter-spacing:2px}
+.rv .what{font-weight:700;font-size:.95rem}
+.rv .meta{font-size:.85rem;color:var(--muted);font-family:var(--f-mono)}
+/* 사양 그림표 */
+.sicons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sicon{background:var(--soft);border-radius:8px;padding:12px 8px;display:grid;justify-items:center;gap:4px;text-align:center}
+.sicon svg{width:34px;height:34px;color:var(--brand)}
+:root[data-theme="dark"] .sicon svg{color:var(--tag)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sicon svg{color:var(--tag)}}
+.sicon small{color:var(--muted);font-size:.78rem}
+.sicon b{font-family:var(--f-mono);font-size:.9rem;overflow-wrap:anywhere}
+@media (max-width:480px){.sicons{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* 출고 과정 */
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:4px;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;width:28px;height:28px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center}
+.steps b{font-size:1.05rem}.steps span{color:var(--muted);font-size:.9rem}
+@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+.policy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.policy div{padding:14px;display:grid;gap:4px;border-right:1px solid var(--line)}
+.policy div:last-child{border-right:0}
+.policy b{font-size:1rem}.policy span{color:var(--muted);font-size:.92rem}
+@media (max-width:620px){.policy{grid-template-columns:1fr}.policy div{border-right:0;border-bottom:1px solid var(--line)}}
+.wlist{display:flex;gap:8px;flex-wrap:wrap}
+.wlist span{background:var(--soft);border-radius:8px;padding:8px 12px;font-weight:600}
+.copybox{width:100%;min-height:200px;border:2px solid var(--line);border-radius:10px;padding:12px;background:var(--bg);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="promise"><div class="wrap" id="promise"></div></div>
+<header class="sign">
+  <div class="wrap">
+    <span class="name" id="shopName">○○중고컴퓨터</span>
+    <nav aria-label="메뉴">
+      <a href="#stock" data-navcat="all" class="allcat">☰ 전체 상품</a>
+      <a href="#stock" data-navcat="office">사무용PC</a>
+      <a href="#stock" data-navcat="gaming">게이밍PC</a>
+      <a href="#stock" data-navcat="laptop">노트북</a>
+      <a href="#stock" data-navcat="monitor">모니터</a>
+      <a href="#games">게임 사양</a>
+      <a href="#shop">가게 안내</a>
+    </nav>
+    <a class="callbtn mono" id="callTop" href="tel:">전화 문의</a>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>집에 가져가서 <em>바로 켜서 쓰는</em> 중고컴퓨터</h1>
+      <p class="lead">쓰실 분과 용도만 말씀해 주세요. 아이 공부용부터 어르신 유튜브용, 롤·발로란트 게임용까지 맞는 사양으로 골라 프로그램까지 깔아서 드립니다.</p>
+      <div class="row">
+        <a class="btn" href="#stock">지금 있는 컴퓨터 보기</a>
+        <a class="btn ghost" href="#who">어떤 게 맞는지 모르겠어요</a>
+      </div>
+    </div>
+    <div class="checkcard" aria-label="출고 전 점검표">
+      <h3>출고 전 점검표 <small>매 대 공통</small></h3>
+      <ul>
+        <li>본체 안 먼지 청소, CPU 열전도 그리스 새로 바름</li>
+        <li>저장장치 건강 상태 검사 (불량 섹터·수명)</li>
+        <li>윈도우 새로 설치, 드라이버·업데이트 끝냄</li>
+        <li>쓰실 용도에 맞는 프로그램 미리 설치</li>
+        <li>몇 시간 켜 두고 발열·멈춤 확인</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="who" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>누가 쓰시나요?</h2>
+      <p>눌러 보시면 필요한 사양과 미리 깔아 드리는 프로그램이 나옵니다.</p>
+    </div>
+    <div class="who" id="whoList"></div>
+    <div class="detail" id="whoDetail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>사양 등급 한눈에</h2>
+      <p>가게에 있는 모든 컴퓨터는 이 네 등급 중 하나로 표시됩니다. 등급이 높을수록 아래 등급 일도 다 됩니다.</p>
+    </div>
+    <div class="tiers"><table>
+      <thead><tr><th>등급</th><th>CPU(두뇌)</th><th>메모리</th><th>저장장치</th><th>그래픽카드</th><th>이런 일에</th></tr></thead>
+      <tbody id="tierRows"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="games" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>이 게임 되나요?</h2>
+      <p>보통 화질(FHD)로 끊김 없이 돌리는 기준입니다. 게임을 누르면 그 게임이 되는 컴퓨터만 골라 보여 드립니다.</p>
+    </div>
+    <div class="games" id="gameList"></div>
+  </div>
+</section>
+
+<section id="stock">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>지금 있는 컴퓨터</h2>
+      <p id="stockNote">매물은 수시로 바뀝니다. 마음에 드는 게 없어도 전화 주시면 맞춰 드려요.</p>
+    </div>
+    <div id="featWrap" hidden><h3 class="sub-title">사장님 추천</h3><div class="feat" id="feat"></div></div>
+    <div class="filters" role="group" aria-label="골라 보기">
+      <span id="kindChips" style="display:contents"></span>
+      <select id="sortSel" aria-label="정렬">
+        <option value="new">최근 올린 순</option>
+        <option value="low">낮은 가격순</option>
+        <option value="high">높은 가격순</option>
+      </select>
+      <select id="tierFilter" aria-label="용도로 고르기">
+        <option value="-1">모든 용도</option>
+        <option value="0">인터넷·문서 이상</option>
+        <option value="1">가벼운 게임 이상</option>
+        <option value="2">인기 게임 이상</option>
+        <option value="3">고사양 게임</option>
+      </select>
+      <label class="note"><input type="checkbox" id="hideSold" checked> 팔린 것 숨기기</label>
+    </div>
+    <p class="note" id="filterNote" hidden></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="reviews" class="band" hidden>
+  <div class="wrap">
+    <div class="sec-head"><h2>손님 후기</h2><p>당근·중고나라·가게에서 실제로 받은 후기입니다.</p></div>
+    <div class="reviews" id="reviewList"></div>
+  </div>
+</section>
+
+<section id="care">
+  <div class="wrap" style="display:grid;gap:22px">
+    <div class="sec-head" style="margin:0"><h2>이렇게 손봐서 드립니다</h2><p>한 대 한 대 사장님이 직접 손봅니다.</p></div>
+    <ol class="steps">
+      <li><b>들여오기</b><span>상태 좋은 컴퓨터만 골라 들여옵니다</span></li>
+      <li><b>분해·청소</b><span>뜯어서 먼지를 털고 그리스를 새로 바릅니다</span></li>
+      <li><b>점검</b><span>부품 하나하나 검사하고 몇 시간 켜 둡니다</span></li>
+      <li><b>윈도우·프로그램</b><span>새로 깔고 쓰실 프로그램까지 넣습니다</span></li>
+      <li><b>전달</b><span>가게에서 직접 드리거나 꼼꼼히 포장해 보냅니다</span></li>
+    </ol>
+    <div style="display:grid;gap:12px">
+      <h3 class="sub-title" style="margin:0">무상 수리 기간</h3>
+      <div class="wlist" id="wList"></div>
+      <div class="policy">
+        <div><b>받고 <span id="retDays">7</span>일 안에 고장</b><span>바꿔 드리거나 환불해 드립니다</span></div>
+        <div><b>무상 수리 기간 안</b><span>공짜로 고쳐 드립니다</span></div>
+        <div><b>기간이 지난 뒤</b><span>부품값만 받고 고쳐 드립니다</span></div>
+      </div>
+      <p class="note">중고 제품이라 생활기스가 있을 수 있습니다. 상태는 사진과 등급(S·A·B·C)으로 미리 알려 드립니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="shop" class="band">
+  <div class="wrap">
+    <div class="sec-head"><h2>가게 안내</h2></div>
+    <div class="info">
+      <div class="box">
+        <h3>전화·문자</h3>
+        <p class="big-phone" id="phoneText">010-0000-0000</p>
+        <div class="links">
+          <a class="btn small" id="callLink" href="tel:">전화 걸기</a>
+          <button class="btn small ghost" id="copyPhone" type="button">번호 복사</button>
+        </div>
+        <p class="note">전화가 안 걸리면 번호를 눌러 복사해 주세요.</p>
+      </div>
+      <div class="box">
+        <h3>찾아오시는 길</h3>
+        <dl class="kv">
+          <dt>주소</dt><dd id="addrText">주소를 넣어 주세요</dd>
+          <dt>영업시간</dt><dd id="hoursText">평일 10:00–19:00</dd>
+        </dl>
+        <div class="links"><a class="btn small ghost" id="mapLink" href="https://map.naver.com" target="_blank" rel="noopener">네이버 지도에서 보기</a></div>
+      </div>
+      <div class="box">
+        <h3>믿고 사셔도 됩니다</h3>
+        <dl class="kv">
+          <dt>상호</dt><dd id="bizName">○○중고컴퓨터</dd>
+          <dt>대표</dt><dd id="ownerText">-</dd>
+          <dt>사업자번호</dt><dd id="bizNo" class="mono">등록 예정</dd>
+          <dt>무상 수리</dt><dd id="warrantyText">구입 후 1개월</dd>
+        </dl>
+        <div class="links" id="marketLinks"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="footName">○○중고컴퓨터</span>
+    <span id="footBiz">사업자등록번호 등록 예정</span>
+    <a href="#" data-keyopen style="color:var(--muted)">사장님 메뉴</a>
+  </div>
+</footer>
+
+<button class="btn adminbtn" id="adminOpen" hidden>사장님 메뉴</button>
+<div id="modalRoot"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* ---------- 고정 자료 ---------- */
+const TIERS=[
+ {name:"기본",cls:"t0",color:"#8aa39b",cpu:"인텔 i3·i5 8세대 이상 / 라이젠 3·5",ram:"8GB (넉넉히 16GB)",ssd:"SSD 256GB 이상",gpu:"없어도 됨 (내장 그래픽)",use:"인터넷, 유튜브, 카톡, 한글·엑셀, 인강, 은행 업무"},
+ {name:"가벼운 게임",cls:"t1",color:"#2f9a63",cpu:"인텔 i5 8~10세대 / 라이젠 5 2600~3600",ram:"16GB",ssd:"SSD 512GB",gpu:"GTX 1050Ti ~ GTX 1650",use:"롤, FC 온라인, 메이플스토리, 서든어택, 로블록스, 마인크래프트"},
+ {name:"인기 게임",cls:"t2",color:"#d08a1a",cpu:"인텔 i5 10~12세대 / 라이젠 5 3600~5600",ram:"16GB",ssd:"SSD 512GB~1TB",gpu:"GTX 1660 SUPER ~ RTX 3060",use:"발로란트, 오버워치 2, 로스트아크, 롤 고주사율, 가벼운 영상편집"},
+ {name:"고사양",cls:"t3",color:"#c24848",cpu:"인텔 i5 12~14세대 / 라이젠 5 7500F 이상",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 3060Ti ~ RTX 4060Ti 이상",use:"배틀그라운드 높은 옵션, 최신 스팀 게임, 디아블로 4, 영상편집·방송"}
+];
+const WHO=[
+ {id:"kid",title:"유치원·초등 아이",sub:"교육 영상, 타자연습, 로블록스",tier:0,
+  need:["기본 등급이면 충분 (로블록스·마인크래프트를 하면 가벼운 게임 등급)","화면 24인치, 키보드·마우스 포함","책상 아래 두는 작은 본체도 좋음"],
+  set:["유해 사이트 차단·사용 시간 제한 (윈도우 자녀 보호)","타자연습, 한컴오피스 또는 무료 오피스","EBS·유튜브 키즈 바로가기","줌(원격 수업)"]},
+ {id:"student",title:"중·고등 학생",sub:"인강, 과제, 롤·발로란트",tier:1,
+  need:["공부만 하면 기본 등급","게임도 하면 가벼운 게임~인기 게임 등급","메모리 16GB 권장"],
+  set:["EBS·인강 사이트 바로가기, 동영상 재생 프로그램","한글·오피스(과제 제출용)","크롬, 카카오톡 PC","게임 하면: 그래픽 드라이버 최신, 스팀·라이엇 설치"]},
+ {id:"office",title:"직장인·사무용",sub:"한글·엑셀, 은행, 화상회의",tier:0,
+  need:["기본 등급, 메모리 16GB면 창 여러 개 띄워도 넉넉","모니터 두 대 쓰실 수 있게 연결 단자 확인","노트북이면 무게·배터리 상태 확인"],
+  set:["한글·오피스, PDF 보기","공동인증서·은행 보안 프로그램 정리","줌·팀즈 화상회의, 웹캠 연결 확인","프린터 연결"]},
+ {id:"senior",title:"어르신",sub:"유튜브, 카톡, 사진·영상통화",tier:0,
+  need:["기본 등급이면 충분","화면은 크게 (24~27인치)","글자 잘 보이는 큰 키보드 추천"],
+  set:["글자·아이콘 크게 (화면 배율 150%)","바탕화면에 유튜브·카톡·뉴스 큰 버튼만 남김","광고 팝업·불필요 프로그램 정리","가게에서 원격으로 도와드릴 수 있게 원격지원 프로그램 설치"]},
+ {id:"gamer",title:"게임용",sub:"하고 싶은 게임 이름만 말씀하세요",tier:2,
+  need:["게임 이름에 맞춰 등급 결정 (아래 '이 게임 되나요?' 참고)","요즘은 메모리 16GB가 기본, 고사양은 32GB","모니터 144Hz면 체감이 확 좋아짐"],
+  set:["그래픽 드라이버 최신 설치","스팀·라이엇·넥슨·배틀넷 런처 설치","윈도우 게임 모드·전원 고성능 설정","원하시는 게임 미리 설치해 드림"]},
+ {id:"creator",title:"영상편집·방송",sub:"유튜브 편집, 트위치·치지직 방송",tier:3,
+  need:["고사양 등급","메모리 32GB, 저장장치 1TB 이상","그래픽카드 메모리(VRAM) 8GB 이상, 넉넉하면 12GB"],
+  set:["OBS 방송 프로그램, 편집 프로그램 체험판","캡처보드·마이크 연결 확인","저장장치 두 개로 나눠 쓰기"]}
+];
+const GAMES=[
+ {n:"리그 오브 레전드",t:1,need:"GTX 1050Ti · 16GB",note:"내장 그래픽으로도 돌아가지만 끊김 없이 하려면"},
+ {n:"FC 온라인",t:1,need:"GTX 1050Ti · 16GB"},
+ {n:"메이플스토리",t:1,need:"GTX 1650 · 16GB",note:"보스전 렉 줄이려면 메모리 16GB"},
+ {n:"서든어택",t:1,need:"GTX 1050Ti · 8~16GB"},
+ {n:"로블록스",t:1,need:"GTX 1050 · 8GB"},
+ {n:"마인크래프트",t:1,need:"GTX 1650 · 16GB",note:"셰이더(빛 효과) 넣으면 인기 게임 등급"},
+ {n:"발로란트",t:2,need:"GTX 1660S · 16GB",note:"144Hz 모니터 쓰면 이 등급"},
+ {n:"오버워치 2",t:2,need:"GTX 1660S · 16GB"},
+ {n:"로스트아크",t:2,need:"RTX 3060 · 16GB",note:"레이드에서 사람 많을 때 기준"},
+ {n:"배틀그라운드",t:3,need:"RTX 3060Ti 이상 · 16~32GB",note:"낮은 옵션은 인기 게임 등급도 가능"},
+ {n:"디아블로 4",t:3,need:"RTX 3060Ti 이상 · 32GB"},
+ {n:"최신 스팀 게임",t:3,need:"RTX 4060Ti 이상 · 32GB",note:"게임마다 다르니 이름을 알려 주세요"}
+];
+const KIND={desktop:"데스크탑",laptop:"노트북",monitor:"모니터",parts:"부품",etc:"주변기기·기타"};
+const hasSpecs=it=>it.kind==="desktop"||it.kind==="laptop";
+const STATUS={sale:"판매중",reserved:"예약중",sold:"판매완료"};
+const USES={kid:"아이",student:"학생",office:"사무",senior:"어르신",gamer:"게임",creator:"편집·방송"};
+
+const SAMPLE=[
+ {id:"ex1",kind:"desktop",brand:"HP 프로데스크 400 G5",title:"[중고] HP 프로데스크 400 G5 i5-8500 8GB SSD 256GB 윈도우11 사무용",cpu:"인텔 i5-8500",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"A",tier:0,uses:["office","senior","kid"],price:0,status:"sale",gift:true,featured:true,desc:"작고 조용합니다. 유튜브·카톡·은행 업무 충분합니다.",photos:[]},
+ {id:"ex2",kind:"desktop",brand:"조립PC",title:"[중고] 조립PC i5-10400F 16GB SSD 512GB GTX 1660 SUPER 윈도우11 롤·발로란트 게임용",cpu:"인텔 i5-10400F",ram:"16GB",ssd:"SSD 512GB",gpu:"GTX 1660 SUPER",hdd:"하드 500GB",ports:["HDMI","DP","DVI"],win11:true,grade:"A",tier:2,uses:["student","gamer"],price:0,status:"sale",gift:true,featured:true,desc:"발로란트 144프레임 이상 나옵니다.",photos:[]},
+ {id:"ex3",kind:"laptop",brand:"LG 그램 15Z990",title:"[중고] LG 그램 15Z990 i5-8265U 8GB SSD 256GB 윈도우11 노트북",cpu:"인텔 i5-8265U",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"B",tier:0,uses:["student","office"],price:0,status:"sale",desc:"가볍고 배터리 상태 양호. 모서리 생활기스 있습니다.",photos:[]},
+ {id:"ex4",kind:"desktop",brand:"조립PC",title:"[중고] 조립PC 라이젠5 7500F 32GB SSD 1TB RTX 4060 Ti 윈도우11 고사양 게임·편집용",cpu:"라이젠5 7500F",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 4060 Ti",win11:true,grade:"A",tier:3,uses:["gamer","creator"],price:0,status:"reserved",gift:true,desc:"배그·최신 게임 높은 옵션 가능.",photos:[]},
+ {id:"ex5",kind:"monitor",brand:"삼성 S24F350",title:"[중고] 삼성 24인치 S24F350 FHD HDMI 모니터",cpu:"",ram:"",ssd:"",gpu:"",win11:false,grade:"B",tier:-1,uses:["office","senior"],price:0,status:"sale",desc:"HDMI 케이블 같이 드립니다.",photos:[]}
+];
+const DEFAULT_SHOP={name:"○○중고컴퓨터",phone:"010-0000-0000",addr:"주소를 넣어 주세요",hours:"평일 10:00–19:00 / 토 10:00–15:00",owner:"",bizNo:"",warranty:"구입 후 1개월 무상 수리",wPc:"1개월",wLaptop:"1개월",wMonitor:"1개월",retDays:"7",daangn:"",joonggo:"",mapUrl:"",promise:"중고 PC·노트북·모니터 | 출고 전 점검·청소 | 무상 수리 보증 | 방문·택배 모두 가능"};
+const SAMPLE_REVIEWS=[
+ {stars:5,text:"어머니 쓰실 거라 글씨 크게 해 달라고 했더니 카톡이랑 유튜브만 딱 보이게 해 주셨어요.",what:"사무용 슬림 본체",who:"당근 손님",date:"예시"},
+ {stars:5,text:"아이 롤 하려고 샀는데 잘 돌아가고 조용합니다. 설치도 다 해 주셔서 바로 했어요.",what:"게임용 본체",who:"방문 손님",date:"예시"},
+ {stars:5,text:"노트북 상태 설명 그대로였고 배터리도 오래 갑니다.",what:"LG 그램 노트북",who:"중고나라 손님",date:"예시"}
+];
+
+/* ---------- 상태 ---------- */
+let items=null;            // null = 아직 못 불러옴 → 예시 보여줌
+let shop={...DEFAULT_SHOP};
+let db=null, assets=null, canEdit=false;
+let filt={kind:"all",tier:-1,hideSold:true,game:null,sort:"new"};
+let reviews=null;
+let whoSel="senior";
+
+/* ---------- 그리기 ---------- */
+function renderWho(){
+  $("#whoList").innerHTML=WHO.map(w=>`<button type="button" data-who="${w.id}" aria-pressed="${w.id===whoSel}">
+    <span class="lvl">${esc(TIERS[w.tier].name)} 등급부터</span><b>${esc(w.title)}</b><span>${esc(w.sub)}</span></button>`).join("");
+  const w=WHO.find(x=>x.id===whoSel);
+  $("#whoDetail").innerHTML=`<div><h3>${esc(w.title)}에게 맞는 사양</h3><ul>${w.need.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+   <div><h3>미리 해 드리는 세팅</h3><ul>${w.set.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+   <p style="margin-top:12px"><button class="btn small" type="button" data-showtier="${w.tier}" data-who-use="${w.id}">이 용도로 쓸 컴퓨터 보기</button></p></div>`;
+}
+function renderTiers(){
+  $("#tierRows").innerHTML=TIERS.map(t=>`<tr><th><span class="dot" style="background:${t.color}"></span>${esc(t.name)}</th><td>${esc(t.cpu)}</td><td>${esc(t.ram)}</td><td>${esc(t.ssd)}</td><td>${esc(t.gpu)}</td><td style="font-family:var(--f-body)">${esc(t.use)}</td></tr>`).join("");
+}
+function renderGames(){
+  $("#gameList").innerHTML=GAMES.map((g,i)=>`<button type="button" class="game" data-game="${i}">
+    <span class="pill ${TIERS[g.t].cls}">${esc(TIERS[g.t].name)} 등급</span><b>${esc(g.n)}</b>
+    <span class="need">${esc(g.need)}</span>${g.note?`<span class="note">${esc(g.note)}</span>`:""}</button>`).join("");
+}
+function priceText(it){return it.price>0?Number(it.price).toLocaleString("ko-KR")+"원":"가격 문의";}
+const localUrls={};
+function photoUrl(id){return localUrls[id]||("photos/"+id);}
+const NOIMG=`<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="8" width="28" height="48" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="32" cy="18" r="3" fill="currentColor"/><line x1="24" y1="30" x2="40" y2="30" stroke="currentColor" stroke-width="3"/><line x1="24" y1="37" x2="40" y2="37" stroke="currentColor" stroke-width="3"/></svg>`;
+
+/* 메뉴: 용도별(사무용PC·게이밍PC) + 종류별 */
+const CATS=[["all","전체"],["office","사무용PC"],["gaming","게이밍PC"],["laptop","노트북"],["monitor","모니터"],["parts","부품"],["etc","주변기기·기타"]];
+function inCat(it,k){
+  if(k==="all")return true;
+  if(k==="office")return hasSpecs(it)&&Number(it.tier)<=0;
+  if(k==="gaming")return hasSpecs(it)&&Number(it.tier)>=1;
+  return it.kind===k;
+}
+function warrantyFor(it){return it.kind==="laptop"?shop.wLaptop:it.kind==="monitor"?shop.wMonitor:shop.wPc;}
+function allItems(){return items===null||items.length===0?SAMPLE:items;}
+function visibleItems(){
+  const list=allItems().filter(it=>{
+    if(filt.hideSold&&it.status==="sold")return false;
+    if(!inCat(it,filt.kind))return false;
+    if(filt.tier>=0&&!(Number(it.tier)>=filt.tier))return false;
+    if(filt.use&&!(it.uses||[]).includes(filt.use))return false;
+    return true;
+  });
+  const p=it=>it.price>0?Number(it.price):null;
+  if(filt.sort==="low"||filt.sort==="high"){
+    const dir=filt.sort==="low"?1:-1;
+    list.sort((a,b)=>{const x=p(a),y=p(b);if(x===null&&y===null)return 0;if(x===null)return 1;if(y===null)return -1;return (x-y)*dir;});
+  }
+  return list;
+}
+function cardHtml(it,isSample,rank){
+  const ph=it.photos&&it.photos[0]?`<img src="${photoUrl(esc(it.photos[0]))}" alt="" loading="lazy">`:`<div class="noimg">${NOIMG}</div>`;
+  const st=it.status!=="sale"?`<span class="status ${it.status}">${STATUS[it.status]}</span>`:"";
+  const specs=hasSpecs(it)&&!rank?`<dl class="specs"><dt>CPU</dt><dd>${esc(it.cpu||"-")}</dd><dt>메모리</dt><dd>${esc(it.ram||"-")}</dd><dt>저장</dt><dd>${esc(it.ssd||"-")}</dd><dt>그래픽</dt><dd>${esc(it.gpu||"-")}</dd></dl>`:"";
+  const tier=Number(it.tier)>=0?`<span class="pill ${TIERS[it.tier].cls}">${esc(TIERS[it.tier].name)}</span>`:"";
+  return `<button type="button" class="card ${it.status==="sold"?"is-sold":""}" data-item="${esc(it.id)}">
+    <div class="ph">${ph}${rank?`<span class="rank">${rank}</span>`:""}${st}${isSample?'<span class="ex">예시</span>':""}</div>
+    <div class="body"><h3>${esc(it.title)}</h3>${specs}
+    <div class="badges">${tier}${it.win11?'<span class="win">윈도우11</span>':""}${it.gift?'<span class="gift">키보드·마우스 증정</span>':""}</div>
+    <div class="foot"><span class="price">${esc(priceText(it))}</span></div></div></button>`;
+}
+function renderChips(){
+  const base=allItems().filter(it=>!(filt.hideSold&&it.status==="sold"));
+  $("#kindChips").innerHTML=CATS.map(([k,l])=>`<button class="chip" type="button" data-kind="${k}" aria-pressed="${filt.kind===k}">${l}<span class="n">${base.filter(it=>inCat(it,k)).length}</span></button>`).join("");
+}
+function renderFeatured(){
+  const isSample=items===null||items.length===0;
+  const f=allItems().filter(it=>it.featured&&it.status!=="sold");
+  $("#featWrap").hidden=!f.length;
+  $("#feat").innerHTML=f.map((it,i)=>cardHtml(it,isSample,i+1)).join("");
+}
+function renderGrid(){
+  const isSample=items===null||items.length===0;
+  renderChips();renderFeatured();
+  const list=visibleItems();
+  const fn=$("#filterNote");
+  const parts=[];
+  if(filt.game!==null)parts.push(`"${GAMES[filt.game].n}" 되는 컴퓨터만 보는 중`);
+  if(filt.use)parts.push(`${USES[filt.use]}용으로 표시된 것만 보는 중`);
+  if(parts.length){fn.hidden=false;fn.innerHTML=esc(parts.join(" · "))+` <button class="chip" type="button" id="clearFilt">모두 보기</button>`;}else fn.hidden=true;
+  if(!list.length){$("#grid").innerHTML=`<div class="empty" style="grid-column:1/-1"><b>조건에 맞는 컴퓨터가 지금은 없어요.</b><br>전화 주시면 맞춰서 준비해 드립니다. <span class="mono">${esc(shop.phone)}</span></div>`;return;}
+  $("#grid").innerHTML=list.map(it=>cardHtml(it,isSample,0)).join("");
+}
+function renderReviews(){
+  const list=reviews&&reviews.length?reviews:(canEdit?SAMPLE_REVIEWS:[]);
+  $("#reviews").hidden=!list.length;
+  const isSample=!(reviews&&reviews.length);
+  $("#reviewList").innerHTML=list.map(r=>`<div class="rv"><span class="stars" aria-label="별 ${Number(r.stars)||5}개">${"★".repeat(Math.max(1,Math.min(5,Number(r.stars)||5)))}</span>
+    <p>${esc(r.text)}</p>${r.what?`<span class="what">${esc(r.what)}</span>`:""}
+    <span class="meta">${esc(r.who||"손님")} · ${esc(r.date||"")}${isSample?" · 사장님만 보이는 예시":""}</span></div>`).join("");
+}
+function renderShop(){
+  const s=shop;
+  document.title=s.name||"중고컴퓨터";
+  ["#shopName","#bizName","#footName"].forEach(k=>$(k).textContent=s.name);
+  $("#phoneText").textContent=s.phone;
+  const tel="tel:"+String(s.phone).replace(/[^0-9+]/g,"");
+  $("#callLink").href=tel;$("#callTop").href=tel;$("#callTop").textContent=s.phone||"전화 문의";
+  $("#addrText").textContent=s.addr;$("#hoursText").textContent=s.hours;
+  $("#ownerText").textContent=s.owner||"-";
+  $("#bizNo").textContent=s.bizNo||"등록 예정";
+  $("#footBiz").textContent="사업자등록번호 "+(s.bizNo||"등록 예정");
+  $("#warrantyText").textContent=`컴퓨터 ${s.wPc} · 노트북 ${s.wLaptop} · 모니터 ${s.wMonitor}`;
+  $("#wList").innerHTML=[["컴퓨터",s.wPc],["노트북",s.wLaptop],["모니터",s.wMonitor]].map(([k,v])=>`<span>${k} ${esc(v)}</span>`).join("");
+  $("#retDays").textContent=s.retDays||"7";
+  const map=s.mapUrl||("https://map.naver.com/p/search/"+encodeURIComponent(s.addr&&s.addr!=="주소를 넣어 주세요"?s.addr:s.name));
+  $("#mapLink").href=safeUrl(map);
+  const ml=[];
+  if(s.daangn)ml.push(`<a class="btn small ghost" target="_blank" rel="noopener" href="${esc(safeUrl(s.daangn))}">당근 가게 보기</a>`);
+  if(s.joonggo)ml.push(`<a class="btn small ghost" target="_blank" rel="noopener" href="${esc(safeUrl(s.joonggo))}">중고나라 글 보기</a>`);
+  $("#marketLinks").innerHTML=ml.join("");
+  $("#promise").innerHTML=String(s.promise||"").split("|").map(x=>x.trim()).filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join("");
+}
+function safeUrl(u){u=String(u||"").trim();return /^https?:\/\//i.test(u)?u:"#";}
+function renderAll(){renderShop();renderGrid();}
+
+/* ---------- 매물 자세히 ---------- */
+function openItem(id){
+  const it=allItems().find(x=>x.id===id);if(!it)return;
+  const photos=it.photos||[];
+  const ic=(svg,label,val)=>val?`<div class="sicon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${svg}</svg><small>${label}</small><b>${esc(val)}</b></div>`:"";
+  const specs=!hasSpecs(it)?"":`<div class="sicons">
+    ${ic('<rect x="7" y="7" width="18" height="18" rx="2"/><rect x="12" y="12" width="8" height="8"/><path d="M11 3v4M16 3v4M21 3v4M11 25v4M16 25v4M21 25v4M3 11h4M3 16h4M3 21h4M25 11h4M25 16h4M25 21h4"/>',"CPU",it.cpu)}
+    ${ic('<rect x="3" y="10" width="26" height="12" rx="1"/><path d="M8 14v4M13 14v4M19 14v4M24 14v4M6 22v4M26 22v4"/>',"메모리",it.ram)}
+    ${ic('<rect x="6" y="4" width="20" height="24" rx="2"/><path d="M10 9h12M10 13h8"/><circle cx="21" cy="22" r="2"/>',"저장장치",it.ssd)}
+    ${ic('<circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="5"/><circle cx="16" cy="16" r="1"/>',"추가 저장",it.hdd)}
+    ${ic('<rect x="3" y="8" width="26" height="14" rx="2"/><circle cx="12" cy="15" r="4"/><circle cx="22" cy="15" r="4"/><path d="M6 22v4"/>',"그래픽",it.gpu)}
+    ${ic('<path d="M4 6l11-1.5V15H4zM17 4.2L28 3v12H17zM4 17h11v10.5L4 26zM17 17h11v12l-11-1.4z"/>',"윈도우11",it.win11?"정품 설치":"아니요")}
+    </div>
+    ${(it.ports||[]).length?`<p class="note"><b>모니터 연결 단자:</b> ${esc(it.ports.join(", "))}</p>`:""}`;
+  const GRADE={S:"새것과 거의 같음",A:"깨끗함, 아주 작은 흔적 정도",B:"쓰던 흔적·생활기스 있음",C:"흠집 많음, 대신 값이 쌈"};
+  const similar=allItems().filter(x=>x.id!==it.id&&x.kind===it.kind&&x.status!=="sold"&&Math.abs(Number(x.tier)-Number(it.tier))<=1).slice(0,3);
+  const gamesOk=Number(it.tier)>=1?GAMES.filter(g=>g.t<=it.tier).map(g=>g.n).join(", "):"";
+  modal(`<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="itTitle">
+    <div class="top"><div><span class="note">${esc(KIND[it.kind]||"")} · ${STATUS[it.status]}</span><h2 id="itTitle">${esc(it.title)}</h2></div><button class="x" type="button" data-close aria-label="닫기">×</button></div>
+    <div class="gallery"><div class="main" id="gMain">${photos[0]?`<img src="${photoUrl(esc(photos[0]))}" alt="${esc(it.title)} 사진">`:`<div style="display:grid;place-items:center;height:100%;color:var(--muted)">${NOIMG}<span>사진 준비 중</span></div>`}</div>
+    ${photos.length>1?`<div class="thumbs">${photos.map((p,i)=>`<button type="button" data-thumb="${esc(p)}" aria-current="${i===0}"><img src="${photoUrl(esc(p))}" alt="사진 ${i+1}"></button>`).join("")}</div>`:""}</div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="price" style="font-size:1.2rem">${esc(priceText(it))}</span>${Number(it.tier)>=0?`<span class="pill ${TIERS[it.tier].cls}">${esc(TIERS[it.tier].name)} 등급</span>`:""}</div>
+    ${specs}
+    ${it.gift?`<p><span class="gift">키보드·마우스·전원선 같이 드립니다</span></p>`:""}
+    ${it.desc?`<p style="white-space:pre-wrap">${esc(it.desc)}</p>`:""}
+    ${gamesOk?`<p class="note"><b>이런 게임 됩니다:</b> ${esc(gamesOk)}</p>`:""}
+    <dl class="kv"><dt>겉모양</dt><dd><b>${esc(it.grade||"A")}급</b> — ${esc(GRADE[it.grade]||GRADE.A)}</dd>
+    <dt>무상 수리</dt><dd>${esc(warrantyFor(it))} (받고 ${esc(shop.retDays||"7")}일 안에 고장 나면 교환·환불)</dd></dl>
+    ${similar.length?`<div style="display:grid;gap:8px"><b>비슷한 컴퓨터도 보세요</b><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">${similar.map(x=>cardHtml(x,!(items&&items.length),0)).join("")}</div></div>`:""}
+    <div style="background:var(--soft);border-radius:8px;padding:14px;display:grid;gap:6px"><b>문의는 전화·문자로</b><span class="big-phone" style="font-size:1.3rem">${esc(shop.phone)}</span><span class="note">"홈페이지에서 ${esc(it.title)} 보고 연락드려요" 라고 말씀해 주세요.</span></div>
+  </div>`);
+}
+
+/* ---------- 창 공통 ---------- */
+let lastFocus=null;
+function modal(html){lastFocus=document.activeElement;$("#modalRoot").innerHTML=`<div class="overlay" data-close-bg>${html}</div>`;document.body.style.overflow="hidden";const f=$("#modalRoot [data-close]");f&&f.focus();}
+function closeModal(){$("#modalRoot").innerHTML="";document.body.style.overflow="";lastFocus&&lastFocus.focus&&lastFocus.focus();}
+let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,3200);}
+
+/* ---------- 사장님 메뉴 ---------- */
+let adminTab="add", editing=null, draftPhotos=[], confirmDel=null, busy=false;
+function blankItem(){return{kind:"desktop",title:"",cpu:"",ram:"",ssd:"",gpu:"",win11:true,grade:"A",tier:0,uses:[],price:0,status:"sale",desc:"",photos:[]};}
+function openAdmin(tab){adminTab=tab||adminTab;if(adminTab==="add"&&!editing){editing=blankItem();draftPhotos=[];}renderAdmin();}
+function renderAdmin(){
+  const tabs=[["add",editing&&editing.id?"컴퓨터 고치기":"컴퓨터 올리기"],["list","올린 것 관리"],["review","손님 후기"],["shop","가게 정보"],["guide","장사 참고"]];
+  let body="";
+  if(adminTab==="add")body=formHtml();
+  else if(adminTab==="list")body=listHtml();
+  else if(adminTab==="copy")body=copyHtml();
+  else if(adminTab==="review")body=reviewAdminHtml();
+  else if(adminTab==="shop")body=shopFormHtml();
+  else body=guideHtml();
+  modal(`<div class="sheet admin" role="dialog" aria-modal="true" aria-labelledby="adTitle">
+    <div class="top"><h2 id="adTitle">사장님 메뉴</h2><button class="x" type="button" data-close aria-label="닫기">×</button></div>
+    <div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button type="button" role="tab" data-tab="${k}" aria-selected="${k===adminTab}">${l}</button>`).join("")}</div>
+    ${body}</div>`);
+}
+function formHtml(){
+  const it=editing||blankItem();
+  const sel=(v,a)=>v===a?"selected":"";
+  return `<form id="itemForm" style="display:grid;gap:16px">
+  <div class="field"><span class="lbl">① 사진 (첫 번째가 대표 사진)</span>
+    <div class="photos" id="photoBox">${draftPhotos.map((p,i)=>`<div class="p ${i===0?"first":""}"><img src="${p.url}" alt="사진 ${i+1}"><button type="button" data-delphoto="${i}" aria-label="사진 ${i+1} 빼기">빼기</button></div>`).join("")}
+    <label class="upl" for="photoIn">＋<br>사진 넣기</label></div>
+    <input type="file" id="photoIn" accept="image/*" multiple hidden>
+    <span class="hint">휴대폰이면 바로 사진을 찍거나 앨범에서 여러 장 고를 수 있어요.</span></div>
+  <div class="field"><span class="lbl">② 종류</span><div class="choices">${Object.entries(KIND).map(([k,l])=>`<label><input type="radio" name="kind" value="${k}" ${it.kind===k?"checked":""}>${l}</label>`).join("")}</div></div>
+  <div class="field"><label for="fBrand">③ 상표·모델명</label><input type="text" id="fBrand" value="${esc(it.brand||"")}" placeholder="예) HP 프로데스크 400 G5 / 조립PC / LG 그램 15Z990"><span class="hint">본체 옆이나 밑 스티커에 적혀 있어요. 직접 맞춘 거면 '조립PC'.</span></div>
+  <div class="two">
+    <div class="field"><label for="fCpu">CPU</label><input type="text" id="fCpu" value="${esc(it.cpu)}" placeholder="예) i5-10400F"></div>
+    <div class="field"><label for="fRam">메모리</label><input type="text" id="fRam" value="${esc(it.ram)}" placeholder="예) 16GB"></div>
+    <div class="field"><label for="fSsd">저장장치</label><input type="text" id="fSsd" value="${esc(it.ssd)}" placeholder="예) SSD 512GB"></div>
+    <div class="field"><label for="fGpu">그래픽카드</label><input type="text" id="fGpu" value="${esc(it.gpu)}" placeholder="예) GTX 1660 SUPER"></div>
+    <div class="field"><label for="fHdd">추가 저장장치 (없으면 비워 두기)</label><input type="text" id="fHdd" value="${esc(it.hdd||"")}" placeholder="예) 하드 500GB"></div>
+  </div>
+  <div class="field"><span class="lbl">모니터 연결 단자 (있는 것 모두)</span><div class="choices">${["HDMI","DP","DVI","VGA(RGB)"].map(p=>`<label><input type="checkbox" name="ports" value="${p}" ${(it.ports||[]).includes(p)?"checked":""}>${p}</label>`).join("")}</div></div>
+  <div class="field"><span class="lbl">④ 이 컴퓨터로 되는 일 (등급)</span><div class="choices">
+    <label><input type="radio" name="tier" value="-1" ${Number(it.tier)===-1?"checked":""}>해당 없음(모니터 등)</label>
+    ${TIERS.map((t,i)=>`<label><input type="radio" name="tier" value="${i}" ${Number(it.tier)===i?"checked":""}>${t.name}</label>`).join("")}</div>
+    <span class="hint">헷갈리시면 그래픽카드 보고 고르세요: 없음→기본, GTX 1050~1650→가벼운 게임, GTX 1660~RTX 3060→인기 게임, 그 위→고사양</span></div>
+  <div class="field"><span class="lbl">⑤ 누구에게 추천 (여러 개 가능)</span><div class="choices">${Object.entries(USES).map(([k,l])=>`<label><input type="checkbox" name="uses" value="${k}" ${(it.uses||[]).includes(k)?"checked":""}>${l}</label>`).join("")}</div></div>
+  <div class="field"><span class="lbl">덤·표시</span><div class="choices">
+    <label><input type="checkbox" id="fGift" ${it.gift?"checked":""}>키보드·마우스 같이 드림</label>
+    <label><input type="checkbox" id="fFeat" ${it.featured?"checked":""}>'사장님 추천'에 올리기</label></div></div>
+  <div class="field"><label for="fTitle">⑥ 제목</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="text" id="fTitle" value="${esc(it.title)}" placeholder="아래 버튼을 누르면 자동으로 만들어져요" style="flex:1 1 260px"><button class="btn small" type="button" data-autotitle>제목 자동으로 만들기</button></div>
+    <span class="hint">위에 적은 내용으로 "[중고] 모델 CPU 메모리 저장장치 그래픽 윈도우11 용도" 모양으로 만들어 드려요. 손님들이 이렇게 검색합니다.</span></div>
+  <div class="two">
+    <div class="field"><span class="lbl">윈도우11</span><div class="choices"><label><input type="radio" name="win" value="1" ${it.win11?"checked":""}>설치됨</label><label><input type="radio" name="win" value="0" ${!it.win11?"checked":""}>아니요</label></div></div>
+    <div class="field"><label for="fGrade">겉모양 상태</label><select id="fGrade"><option value="S" ${sel(it.grade,"S")}>S급 (새것 같음)</option><option value="A" ${sel(it.grade,"A")}>A급 (깨끗함)</option><option value="B" ${sel(it.grade,"B")}>B급 (생활기스)</option><option value="C" ${sel(it.grade,"C")}>C급 (흠집 많음)</option></select></div>
+  </div>
+  <div class="field"><label for="fPrice">⑦ 가격</label>
+    <div class="choices"><label><input type="checkbox" id="fAsk" ${!(it.price>0)?"checked":""}>가격은 전화로 (가격 문의)</label></div>
+    <input type="number" id="fPrice" inputmode="numeric" min="0" step="1000" value="${it.price>0?it.price:""}" placeholder="숫자만, 예) 350000" ${!(it.price>0)?"disabled":""}></div>
+  <div class="field"><span class="lbl">⑧ 판매 상태</span><div class="choices">${Object.entries(STATUS).map(([k,l])=>`<label><input type="radio" name="status" value="${k}" ${it.status===k?"checked":""}>${l}</label>`).join("")}</div></div>
+  <div class="field"><label for="fDesc">⑨ 설명 (자유롭게)</label><textarea id="fDesc" placeholder="예) 조용하고 발열 적습니다. 키보드·마우스 같이 드립니다.">${esc(it.desc)}</textarea></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="submit" id="saveBtn" style="font-size:1.1rem;padding:14px 26px">${it.id?"고친 내용 저장":"홈페이지에 올리기"}</button>
+  ${it.id?`<button class="btn ghost" type="button" data-newitem>새로 올리기로</button>`:""}</div>
+  </form>`;
+}
+function listHtml(){
+  if(!items||!items.length)return `<div class="empty">아직 올린 컴퓨터가 없어요. '컴퓨터 올리기'에서 첫 번째 컴퓨터를 올려 보세요.<br>그 전까지 손님 화면에는 '예시' 매물이 보입니다.</div>`;
+  return `<div class="mylist">${items.map(it=>`<div class="myrow">
+    ${it.photos&&it.photos[0]?`<img src="${photoUrl(esc(it.photos[0]))}" alt="">`:`<span class="noimg">사진 없음</span>`}
+    <div><b>${esc(it.title||"(제목 없음)")}</b><br><span class="note">${STATUS[it.status]} · ${esc(priceText(it))}</span></div>
+    <div class="acts">
+      <button class="btn small ghost" type="button" data-edit="${esc(it.id)}">고치기</button>
+      <button class="btn small ghost" type="button" data-copypost="${esc(it.id)}">당근용 글 만들기</button>
+      ${it.status!=="sale"?`<button class="btn small ghost" type="button" data-setst="${esc(it.id)}:sale">판매중으로</button>`:""}
+      ${it.status!=="reserved"?`<button class="btn small ghost" type="button" data-setst="${esc(it.id)}:reserved">예약중으로</button>`:""}
+      ${it.status!=="sold"?`<button class="btn small ghost" type="button" data-setst="${esc(it.id)}:sold">팔렸어요</button>`:""}
+      ${confirmDel===it.id?`<button class="btn small warn" type="button" data-del="${esc(it.id)}">정말 지우기 (되돌릴 수 없음)</button><button class="btn small ghost" type="button" data-nodel>취소</button>`:`<button class="btn small ghost" type="button" data-askdel="${esc(it.id)}">지우기</button>`}
+    </div></div>`).join("")}</div>`;
+}
+/* 당근·중고나라에 붙여 넣을 글 */
+let copyItem=null, copyNote="";
+function postText(it){
+  const L=[];
+  L.push(it.title||"");L.push("");
+  if(hasSpecs(it)){
+    L.push("■ 사양");
+    if(it.cpu)L.push("- CPU: "+it.cpu);if(it.ram)L.push("- 메모리: "+it.ram);if(it.ssd)L.push("- 저장장치: "+it.ssd);if(it.hdd)L.push("- 추가 저장장치: "+it.hdd);if(it.gpu)L.push("- 그래픽: "+it.gpu);if((it.ports||[]).length)L.push("- 모니터 연결: "+it.ports.join(", "));
+    L.push("- 윈도우11: "+(it.win11?"정품 설치되어 있음":"아님"));L.push("");
+    if(Number(it.tier)>=1){L.push("■ 되는 게임");L.push(GAMES.filter(g=>g.t<=it.tier).map(g=>g.n).join(", "));L.push("");}
+  }
+  L.push("■ 상태: "+(it.grade||"A")+"급");
+  if(it.gift)L.push("■ 키보드·마우스·전원선 같이 드립니다");
+  if(it.desc){L.push("");L.push(it.desc);}
+  L.push("");L.push("■ 출고 전 청소·점검, 윈도우 새로 설치해서 드립니다.");
+  L.push("■ 무상 수리 "+warrantyFor(it)+" / 받고 "+(shop.retDays||"7")+"일 안에 고장 나면 교환·환불");
+  L.push("");L.push("가격: "+priceText(it));
+  L.push(shop.name+" "+shop.phone);
+  if(shop.addr&&shop.addr!==DEFAULT_SHOP.addr)L.push(shop.addr);
+  L.push("다른 컴퓨터도 홈페이지에서 보실 수 있어요.");
+  return L.join("\n");
+}
+function copyHtml(){
+  if(!copyItem)return `<div class="empty">'올린 것 관리'에서 글을 만들 컴퓨터를 골라 주세요.</div>`;
+  return `<div style="display:grid;gap:12px">${copyNote?`<p style="font-weight:700;color:var(--ok)">${esc(copyNote)}</p>`:""}
+    <p>아래 글을 통째로 복사해서 당근·중고나라 글쓰기에 붙여 넣으세요. 제목은 맨 첫 줄입니다.</p>
+    <textarea class="copybox" id="copyText" aria-label="붙여 넣을 글">${esc(postText(copyItem))}</textarea>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" data-docopy>글 전체 복사</button><button class="btn ghost" type="button" data-tab="list">올린 것 관리로</button></div></div>`;
+}
+/* 손님 후기 관리 */
+function reviewAdminHtml(){
+  const list=reviews||[];
+  return `<form id="reviewForm" style="display:grid;gap:12px">
+    <p>당근·중고나라에서 받은 후기를 그대로 옮겨 적어 주세요. <b>실제로 받은 후기만</b> 올려야 합니다.</p>
+    <div class="field"><label for="rText">후기 내용</label><textarea id="rText" placeholder="손님이 남긴 글 그대로"></textarea></div>
+    <div class="two"><div class="field"><label for="rWhat">산 물건</label><input type="text" id="rWhat" placeholder="예) 게임용 본체"></div>
+    <div class="field"><label for="rWho">어디서 받은 후기</label><select id="rWho"><option>당근 손님</option><option>중고나라 손님</option><option>방문 손님</option><option>전화 손님</option></select></div></div>
+    <div class="field"><label for="rStars">별점</label><select id="rStars"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option></select></div>
+    <button class="btn" type="submit" style="justify-self:start">후기 올리기</button></form>
+    <div class="mylist">${list.map(r=>`<div class="myrow" style="grid-template-columns:1fr"><div><b>${"★".repeat(Number(r.stars)||5)}</b> ${esc(r.text)}<br><span class="note">${esc(r.what||"")} · ${esc(r.who||"")} · ${esc(r.date||"")}</span></div>
+      <div class="acts">${confirmDel===r.id?`<button class="btn small warn" type="button" data-delrv="${esc(r.id)}">정말 지우기</button><button class="btn small ghost" type="button" data-nodel>취소</button>`:`<button class="btn small ghost" type="button" data-askdel="${esc(r.id)}">지우기</button>`}</div></div>`).join("")}</div>`;
+}
+async function saveReview(){
+  const text=($("#rText").value||"").trim();
+  if(!text){toast("후기 내용을 적어 주세요.");return;}
+  if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
+  const d=new Date();
+  try{await db.collection("reviews").add({text,what:$("#rWhat").value.trim(),who:$("#rWho").value,stars:Number($("#rStars").value),date:`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`,createdAt:d.toISOString()});toast("후기를 올렸어요.");renderAdmin();}
+  catch(e){toast("올리지 못했어요. 다시 눌러 주세요.");}
+}
+function autoTitle(){
+  readForm();const it=editing;
+  const useName=Number(it.tier)>=3?"고사양 게임·편집용":Number(it.tier)===2?"게임용":Number(it.tier)===1?"가벼운 게임용":hasSpecs(it)?(it.kind==="laptop"?"노트북":"사무용"):"";
+  const games=Number(it.tier)===2?"롤·발로란트 ":Number(it.tier)===1?"롤·메이플 ":"";
+  const parts=["[중고]",it.brand,hasSpecs(it)?it.cpu.replace(/^인텔\s*/,""):"",hasSpecs(it)?it.ram:"",hasSpecs(it)?it.ssd:"",hasSpecs(it)&&it.gpu&&!/내장/.test(it.gpu)?it.gpu:"",it.win11&&hasSpecs(it)?"윈도우11":"",games+useName].map(x=>String(x||"").trim()).filter(Boolean);
+  $("#fTitle").value=parts.join(" ");
+  if(!it.brand&&!it.cpu)toast("③ 상표·모델명과 CPU를 먼저 적으면 더 좋은 제목이 나와요.");
+}
+function shopFormHtml(){
+  const s=shop;
+  const f=(id,label,v,ph,hint)=>`<div class="field"><label for="${id}">${label}</label><input type="text" id="${id}" value="${esc(v)}" placeholder="${esc(ph||"")}">${hint?`<span class="hint">${hint}</span>`:""}</div>`;
+  return `<form id="shopForm" style="display:grid;gap:14px">
+    ${f("sName","가게 이름",s.name,"예) ○○컴퓨터")}
+    ${f("sPhone","전화번호",s.phone,"010-0000-0000")}
+    ${f("sAddr","주소",s.addr,"예) ○○시 ○○구 ○○로 12")}
+    ${f("sHours","영업시간",s.hours)}
+    <div class="two">${f("sOwner","대표자 이름",s.owner)}${f("sBiz","사업자등록번호",s.bizNo,"000-00-00000","사업자등록증에 적힌 번호")}</div>
+    <div class="two">${f("sWPc","컴퓨터 무상 수리 기간",s.wPc,"예) 6개월")}${f("sWLaptop","노트북 무상 수리 기간",s.wLaptop,"예) 1개월")}</div>
+    <div class="two">${f("sWMonitor","모니터 무상 수리 기간",s.wMonitor,"예) 3개월")}${f("sRet","받고 며칠 안 고장이면 교환·환불",s.retDays,"7")}</div>
+    ${f("sPromise","맨 위 검은 띠에 보일 약속",s.promise,"","항목 사이에 | 를 넣어 나눕니다. 예) 출고 전 점검 | 무상 수리 1년 | 당일 발송")}
+    ${f("sDaangn","당근 가게 주소",s.daangn,"https://www.daangn.com/...","당근 앱에서 '공유 → 링크 복사' 한 주소를 붙여 넣으세요")}
+    ${f("sJoonggo","중고나라 글 주소",s.joonggo,"https://...")}
+    ${f("sMap","네이버 지도 주소 (없어도 됨)",s.mapUrl,"https://naver.me/...")}
+    <button class="btn" type="submit" style="justify-self:start;font-size:1.1rem;padding:14px 26px">가게 정보 저장</button>
+  </form>`;
+}
+function guideHtml(){return `<div class="guide" style="display:grid;gap:10px">
+  <h3>요즘 손님들이 많이 찾는 것 (2026년 11월 기준)</h3>
+  <ol>
+   <li><b>"윈도우11 되나요?"</b> — 윈도우10 무료 지원이 2025년 10월에 끝났습니다. 인텔 8세대·라이젠 2000번대 이상이어야 정식으로 윈도우11이 깔립니다. 매물마다 '윈도우11' 표시를 꼭 해 주세요. 7세대 이하는 값을 낮춰 사무·부품용으로 파는 게 좋습니다.</li>
+   <li><b>새 부품값이 많이 올랐습니다</b> — 2026년 들어 인공지능 붐 때문에 메모리·그래픽카드 새것 값이 크게 올랐습니다. 새 컴퓨터가 비싸져서 중고를 찾는 손님이 늘었고, 중고 그래픽카드 값도 올랐습니다. 메모리 16GB가 이제 기본으로 여겨집니다.</li>
+   <li><b>PC방 인기 게임</b> — 리그 오브 레전드가 몇 년째 1위이고, 발로란트·배틀그라운드·오버워치 2·서든어택이 뒤를 잇습니다. 2026년엔 리니지 클래식도 상위권에 올랐습니다. 제목에 "롤·발로 되는"처럼 게임 이름을 넣으면 검색이 잘 됩니다.</li>
+   <li><b>어르신·아이용은 '세팅'이 곧 상품</b> — 같은 사양이라도 글자 크게, 바탕화면 정리, 유해 사이트 차단을 해 주면 다른 가게와 차이가 납니다.</li>
+  </ol>
+  <h3>당근·중고나라에 올릴 때</h3>
+  <ol>
+   <li>제목: <b>용도 + 핵심 부품 + 윈도우11</b> — 예) "롤·발로란트 게임용 i5-10400F GTX1660S 윈도우11"</li>
+   <li>설명 맨 아래에 홈페이지 주소를 붙이면 다른 컴퓨터도 같이 보고 연락이 옵니다.</li>
+   <li>팔리면 여기 '올린 것 관리'에서 <b>팔렸어요</b>만 눌러 주세요.</li>
+  </ol>
+  <p class="note">이 내용은 참고용입니다. 시세와 게임 사양은 계속 바뀌니 가끔 확인해 주세요.</p></div>`;}
+
+/* 사진 줄이기: 휴대폰 사진이 크니 긴 쪽 1600픽셀 JPEG로 */
+function shrink(file){return new Promise((res,rej)=>{
+  const url=URL.createObjectURL(file);const img=new Image();
+  img.onload=()=>{const m=1600;let w=img.naturalWidth,h=img.naturalHeight;const r=Math.min(1,m/Math.max(w,h));w=Math.round(w*r);h=Math.round(h*r);
+    const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);URL.revokeObjectURL(url);
+    c.toBlob(b=>b?res(b):rej(new Error("변환 실패")),"image/jpeg",0.85);};
+  img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error("사진을 읽지 못했어요"));};img.src=url;});}
+
+async function addPhotos(files){
+  if(!assets){toast("사진 올리기는 사장님 계정으로 열었을 때만 됩니다.");return;}
+  readForm();
+  for(const f of files){
+    try{toast("사진 올리는 중…");const b=await shrink(f);const r=await assets.upload(b,{type:"image/jpeg"});draftPhotos.push({id:r.id,url:r.url});}
+    catch(e){toast(e&&e.code==="too_large"?"사진이 너무 큽니다.":e&&e.code==="quota_or_state"?"사진 저장 공간이 꽉 찼어요. 지운 매물 사진을 정리해 주세요.":"사진 하나를 올리지 못했어요. 다시 해 주세요.");}
+  }
+  toast("사진 "+draftPhotos.length+"장 준비됨");renderAdmin();
+}
+function readForm(){
+  const F=$("#itemForm");if(!F||!editing)return;
+  const v=s=>(F.querySelector(s)||{}).value||"";
+  editing.hdd=v("#fHdd").trim();editing.ports=[...F.querySelectorAll('input[name=ports]:checked')].map(x=>x.value);
+  editing.brand=v("#fBrand").trim();editing.gift=!!(F.querySelector("#fGift")||{}).checked;editing.featured=!!(F.querySelector("#fFeat")||{}).checked;
+  editing.title=v("#fTitle").trim();editing.cpu=v("#fCpu").trim();editing.ram=v("#fRam").trim();editing.ssd=v("#fSsd").trim();editing.gpu=v("#fGpu").trim();
+  editing.kind=(F.querySelector('input[name=kind]:checked')||{}).value||"desktop";
+  editing.tier=Number((F.querySelector('input[name=tier]:checked')||{}).value??0);
+  editing.uses=[...F.querySelectorAll('input[name=uses]:checked')].map(x=>x.value);
+  editing.win11=(F.querySelector('input[name=win]:checked')||{}).value==="1";
+  editing.grade=v("#fGrade");editing.status=(F.querySelector('input[name=status]:checked')||{}).value||"sale";
+  editing.price=$("#fAsk").checked?0:Math.max(0,Math.round(Number(v("#fPrice"))||0));
+  editing.desc=v("#fDesc");
+}
+async function saveItem(){
+  if(busy)return;readForm();
+  if(!editing.title){autoTitle();readForm();}
+  if(!editing.title){toast("⑥ 제목을 적어 주세요.");$("#fTitle").focus();return;}
+  if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
+  busy=true;$("#saveBtn").disabled=true;
+  const data={...editing,photos:draftPhotos.map(p=>p.id),updatedAt:new Date().toISOString()};
+  const id=data.id;delete data.id;
+  try{
+    if(id){await db.collection("items").doc(id).set(data);toast("고친 내용을 저장했어요.");adminTab="list";}
+    else{data.createdAt=data.updatedAt;await db.collection("items").add(data);toast("홈페이지에 올렸어요!");
+      copyItem={...data};copyNote="홈페이지에 올렸어요! 당근·중고나라에도 올리시려면 아래 글을 복사하세요.";adminTab="copy";}
+    editing=blankItem();draftPhotos=[];renderAdmin();
+  }catch(e){toast(e&&e.code==="quota_exceeded"?"저장 공간이 꽉 찼어요. 오래된 매물을 지워 주세요.":"저장하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.");$("#saveBtn")&&($("#saveBtn").disabled=false);}
+  finally{busy=false;}
+}
+async function setStatus(id,st){
+  try{await db.collection("items").doc(id).update({status:st,updatedAt:new Date().toISOString()});toast(STATUS[st]+"으로 바꿨어요.");}catch(e){toast("바꾸지 못했어요. 다시 눌러 주세요.");}
+}
+async function delItem(id){
+  const it=items.find(x=>x.id===id);
+  try{await db.collection("items").doc(id).delete();
+    if(assets&&it&&it.photos)for(const p of it.photos){try{await assets.delete(p);}catch(e){}}
+    confirmDel=null;toast("지웠어요.");renderAdmin();
+  }catch(e){toast("지우지 못했어요. 다시 해 주세요.");}
+}
+async function saveShop(){
+  const g=id=>($("#"+id).value||"").trim();
+  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),promise:g("sPromise")};
+  if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
+  try{await db.doc("shop/info").set(next);shop={...DEFAULT_SHOP,...next};renderShop();toast("가게 정보를 저장했어요.");}catch(e){toast("저장하지 못했어요. 다시 눌러 주세요.");}
+}
+
+/* ---------- 이벤트 ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a[data-navcat],[data-close-bg]");if(!t)return;
+  if(t.matches("[data-close-bg]")&&e.target!==t)return;
+  if(t.dataset.navcat){e.preventDefault();filt={...filt,kind:t.dataset.navcat,tier:-1,game:null,use:null};$("#tierFilter").value="-1";renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
+  if(t.matches("[data-autotitle]")){autoTitle();return;}
+  if(t.dataset.copypost){const it=items.find(x=>x.id===t.dataset.copypost);if(it){copyItem=it;copyNote="";adminTab="copy";renderAdmin();}return;}
+  if(t.matches("[data-docopy]")){const ta=$("#copyText");navigator.clipboard.writeText(ta.value).then(()=>toast("복사했어요. 당근 글쓰기에 붙여 넣으세요.")).catch(()=>{ta.focus();ta.select();toast("글을 선택했어요. 길게 눌러 복사하세요.");});return;}
+  if(t.dataset.delrv){(async()=>{try{await db.collection("reviews").doc(t.dataset.delrv).delete();confirmDel=null;toast("지웠어요.");renderAdmin();}catch(err){toast("지우지 못했어요.");}})();return;}
+  if(t.matches("[data-close],[data-close-bg]")){closeModal();return;}
+  if(t.dataset.who){whoSel=t.dataset.who;renderWho();return;}
+  if(t.dataset.showtier!==undefined){filt={...filt,tier:-1,use:t.dataset.whoUse,game:null};$("#tierFilter").value="-1";renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
+  if(t.dataset.game!==undefined){const g=GAMES[+t.dataset.game];filt={...filt,tier:g.t,game:+t.dataset.game,use:null};$("#tierFilter").value=String(g.t);renderGrid();$("#stock").scrollIntoView({behavior:"smooth"});return;}
+  if(t.id==="clearFilt"){filt={...filt,tier:-1,game:null,use:null};$("#tierFilter").value="-1";renderGrid();return;}
+  if(t.dataset.kind){filt.kind=t.dataset.kind;document.querySelectorAll(".chip[data-kind]").forEach(c=>c.setAttribute("aria-pressed",c===t));renderGrid();return;}
+  if(t.dataset.item){openItem(t.dataset.item);return;}
+  if(t.dataset.thumb){const m=$("#gMain img");if(m)m.src=photoUrl(t.dataset.thumb);document.querySelectorAll("[data-thumb]").forEach(b=>b.setAttribute("aria-current",b===t));return;}
+  if(t.id==="copyPhone"){navigator.clipboard.writeText(shop.phone).then(()=>toast("번호를 복사했어요.")).catch(()=>{const r=document.createRange();r.selectNodeContents($("#phoneText"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("번호를 선택했어요. 길게 눌러 복사하세요.");});return;}
+  if(t.id==="adminOpen"){openAdmin();return;}
+  if(t.dataset.tab){if(adminTab==="add")readForm();adminTab=t.dataset.tab;confirmDel=null;if(adminTab==="add"&&!editing){editing=blankItem();draftPhotos=[];}renderAdmin();return;}
+  if(t.dataset.delphoto!==undefined){readForm();draftPhotos.splice(+t.dataset.delphoto,1);renderAdmin();return;}
+  if(t.matches("[data-newitem]")){editing=blankItem();draftPhotos=[];renderAdmin();return;}
+  if(t.dataset.edit){const it=items.find(x=>x.id===t.dataset.edit);if(it){editing=JSON.parse(JSON.stringify(it));draftPhotos=(it.photos||[]).map(id=>({id,url:photoUrl(id)}));adminTab="add";renderAdmin();}return;}
+  if(t.dataset.setst){const [id,st]=t.dataset.setst.split(":");setStatus(id,st);return;}
+  if(t.dataset.askdel){confirmDel=t.dataset.askdel;renderAdmin();return;}
+  if(t.matches("[data-nodel]")){confirmDel=null;renderAdmin();return;}
+  if(t.dataset.del){delItem(t.dataset.del);return;}
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="tierFilter"){filt.tier=+e.target.value;filt.game=null;renderGrid();}
+  if(e.target.id==="hideSold"){filt.hideSold=e.target.checked;renderGrid();}
+  if(e.target.id==="sortSel"){filt.sort=e.target.value;renderGrid();}
+  if(e.target.id==="fAsk"){$("#fPrice").disabled=e.target.checked;if(!e.target.checked)$("#fPrice").focus();}
+  if(e.target.id==="photoIn"&&e.target.files.length){addPhotos([...e.target.files]);}
+});
+document.addEventListener("submit",e=>{e.preventDefault();if(e.target.id==="itemForm")saveItem();if(e.target.id==="shopForm")saveShop();if(e.target.id==="reviewForm")saveReview();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#modalRoot").innerHTML)closeModal();});
+
+/* ---------- 시작 ---------- */
+renderWho();renderTiers();renderGames();renderAll();
+
+/* ---------- 깃허브 저장소에 매물·사진 저장 ----------
+   손님: data/*.json 과 photos/ 를 그냥 읽음.
+   사장님: 이 기기에 '열쇠(토큰)'를 한 번 넣어 두면 깃허브에 바로 저장. */
+const GH=(()=>{
+  const host=location.hostname, seg=location.pathname.split("/").filter(Boolean)[0]||"";
+  const owner=host.endsWith(".github.io")?host.split(".")[0]:"wodn1413";
+  const repo=host.endsWith(".github.io")?(seg&&!seg.includes(".")?seg:host):"computer-shop";
+  return {owner,repo,api:`https://api.github.com/repos/${owner}/${repo}`};
+})();
+const KEY="shop-gh-token";
+function getToken(){try{return localStorage.getItem(KEY)||"";}catch(e){return "";}}
+function setToken(t){try{t?localStorage.setItem(KEY,t):localStorage.removeItem(KEY);}catch(e){}}
+async function gh(path,opt={}){
+  const r=await fetch(GH.api+path,{...opt,headers:{"Accept":"application/vnd.github+json","Authorization":"Bearer "+getToken(),...(opt.headers||{})}});
+  if(!r.ok){const e=new Error("github "+r.status);e.status=r.status;throw e;}
+  return r.status===204?null:r.json();
+}
+const b64=s=>btoa(unescape(encodeURIComponent(s)));
+const unb64=s=>decodeURIComponent(escape(atob(s.replace(/\n/g,""))));
+const blob64=b=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(String(f.result).split(",")[1]);f.onerror=rej;f.readAsDataURL(b);});
+async function shaOf(path){try{return (await gh("/contents/"+path)).sha;}catch(e){if(e.status===404)return null;throw e;}}
+let queue=Promise.resolve();
+function commitJson(path,obj,msg){
+  queue=queue.then(async()=>{const sha=await shaOf(path);
+    await gh("/contents/"+path,{method:"PUT",body:JSON.stringify({message:msg,content:b64(JSON.stringify(obj,null,1)),...(sha?{sha}:{})})});});
+  return queue;
+}
+const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const strip=o=>{const c={...o};delete c.id;return c;};
+const saveItems=m=>commitJson("data/items.json",items.map(x=>({...x})),m);
+const saveReviews=m=>commitJson("data/reviews.json",reviews.map(x=>({...x})),m);
+/* 사장님 메뉴가 쓰는 저장 함수들 (원래 모양 그대로) */
+const ghDb={
+  collection(name){
+    const isItems=name==="items";
+    const list=()=>{if(isItems){items=items||[];return items;}reviews=reviews||[];return reviews;};
+    const after=async m=>{(isItems?renderGrid:renderReviews)();await (isItems?saveItems:saveReviews)(m);
+      if($("#modalRoot .admin")&&(adminTab==="list"||adminTab==="review"))renderAdmin();};
+    return {
+      async add(data){const id=newId();list().unshift({id,...data});await after("추가: "+(data.title||data.text||"").slice(0,40));return {id};},
+      doc(id){return {
+        async set(data){const L=list(),i=L.findIndex(x=>x.id===id);const v={id,...data};if(i>=0)L[i]=v;else L.unshift(v);await after("고침: "+(data.title||"").slice(0,40));},
+        async update(p){const L=list(),i=L.findIndex(x=>x.id===id);if(i<0)throw new Error("없음");L[i]={...L[i],...p};await after("상태 바꿈");},
+        async delete(){const L=list(),i=L.findIndex(x=>x.id===id);if(i>=0)L.splice(i,1);await after("지움");}
+      };}
+    };
+  },
+  doc(path){return {async set(data){shop={...DEFAULT_SHOP,...data};renderShop();await commitJson("data/shop.json",data,"가게 정보 고침");}};}
+};
+const ghAssets={
+  async upload(blob){const id=newId()+".jpg";const content=await blob64(blob);
+    queue=queue.then(()=>gh("/contents/photos/"+id,{method:"PUT",body:JSON.stringify({message:"사진 올림",content})}));await queue;
+    localUrls[id]=URL.createObjectURL(blob);return {id,url:localUrls[id]};},
+  async delete(id){queue=queue.then(async()=>{const sha=await shaOf("photos/"+id);if(sha)await gh("/contents/photos/"+id,{method:"DELETE",body:JSON.stringify({message:"사진 지움",sha})});});await queue;}
+};
+
+async function loadJson(path,fallback){
+  if(getToken()){try{const f=await gh("/contents/"+path);return JSON.parse(unb64(f.content));}catch(e){if(e.status===404)return fallback;}}
+  try{const r=await fetch(path+"?t="+Date.now());if(r.ok)return await r.json();}catch(e){}
+  return fallback;
+}
+async function loadAll(){
+  const [it,sh,rv]=await Promise.all([loadJson("data/items.json",[]),loadJson("data/shop.json",null),loadJson("data/reviews.json",[])]);
+  items=Array.isArray(it)?it:[];reviews=Array.isArray(rv)?rv:[];
+  if(sh)shop={...DEFAULT_SHOP,...sh};
+  renderAll();renderReviews();
+}
+async function checkToken(){
+  if(!getToken()){canEdit=false;db=null;assets=null;$("#adminOpen").hidden=true;return false;}
+  try{const r=await gh("");canEdit=!!(r.permissions&&r.permissions.push);}catch(e){canEdit=false;}
+  db=canEdit?ghDb:null;assets=canEdit?ghAssets:null;$("#adminOpen").hidden=!canEdit;return canEdit;
+}
+function openKey(){
+  modal(`<div class="sheet admin" role="dialog" aria-modal="true" aria-labelledby="kTitle">
+   <div class="top"><h2 id="kTitle">사장님 메뉴 열기</h2><button class="x" type="button" data-close aria-label="닫기">×</button></div>
+   ${getToken()?`<p>이 기기에는 이미 열쇠가 들어 있어요.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" data-openadmin>사장님 메뉴 열기</button><button class="btn ghost" type="button" data-forget>이 기기에서 열쇠 빼기</button></div>`:
+   `<p>처음 한 번만 하면 됩니다. 아들이 알려 준 <b>열쇠 글자</b>를 아래 칸에 붙여 넣고 '확인'을 누르세요. 이 기기에만 기억됩니다.</p>
+    <form id="keyForm" style="display:grid;gap:10px"><div class="field"><label for="keyIn">열쇠 글자</label><input type="text" id="keyIn" autocomplete="off" spellcheck="false" placeholder="github_pat_ 로 시작하는 긴 글자"></div>
+    <button class="btn" type="submit" style="justify-self:start">확인</button></form>`}
+  </div>`);
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-keyopen],[data-openadmin],[data-forget]");if(!t)return;
+  e.preventDefault();
+  if(t.matches("[data-keyopen]")){getToken()&&canEdit?openAdmin():openKey();}
+  else if(t.matches("[data-openadmin]")){openAdmin();}
+  else if(t.matches("[data-forget]")){setToken("");checkToken();closeModal();toast("이 기기에서 열쇠를 뺐어요.");}
+});
+document.addEventListener("submit",async e=>{
+  if(e.target.id!=="keyForm")return;e.preventDefault();
+  const v=($("#keyIn").value||"").trim();if(!v){toast("열쇠 글자를 붙여 넣어 주세요.");return;}
+  setToken(v);toast("확인하는 중…");
+  if(await checkToken()){closeModal();toast("열렸어요!");await loadAll();openAdmin();}
+  else{setToken("");toast("열쇠가 맞지 않아요. 다시 붙여 넣어 주세요.");}
+});
+
+(async()=>{
+  const timer=setTimeout(()=>{if(items===null)$("#stockNote").textContent="매물 목록을 불러오지 못했어요. 잠시 뒤 새로고침해 주세요. 전화 주시면 바로 알려 드립니다.";},10000);
+  await checkToken();
+  await loadAll();clearTimeout(timer);
+})();
+})();
+</script>
+
+</body>
+</html>
