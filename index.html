@@ -163,7 +163,9 @@ section{padding:72px 0}
 .grow b{font-size:1.06rem;font-weight:700}
 .grow .need{grid-column:1;color:var(--ink2);font-size:.9rem}
 .grow .need em{font-style:normal;color:var(--muted)}
-.grow .lv{grid-row:1/3;grid-column:2}
+.grow .lv{grid-row:1/4;grid-column:2}
+.grow .need strong{color:var(--brand);font-weight:700;margin-right:2px}
+.grow .gnote{grid-column:1;color:var(--muted);font-size:.85rem}
 @media (max-width:760px){.gtable{grid-template-columns:1fr}}
 .tierbox{margin-top:48px}
 .tierbox h3{font-size:1.2rem;font-weight:700;margin-bottom:6px}
@@ -460,7 +462,7 @@ section.contact{padding:52px 0}
   <section class="pagehead">
     <div class="wrap">
       <h1>이 게임 되나요?</h1>
-      <p>보통 화질(FHD)에서 끊김 없이 돌아가는 기준입니다. 게임을 누르면 그 게임이 되는 컴퓨터만 보여 드립니다.</p>
+      <p>보통 화질(FHD)에서 끊김 없이 넉넉하게 돌아가는 <b>권장 사양</b> 기준입니다. 최소 사양은 겨우 켜지는 정도라 권하지 않습니다. 게임을 누르면 그 게임이 되는 컴퓨터만 보여 드립니다.</p>
     </div>
   </section>
   <section class="tight-top">
@@ -559,9 +561,9 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 /* ---------- 고정 자료 ---------- */
 const TIERS=[
  {name:"기본",cls:"t0",color:"#8aa39b",cpu:"인텔 i3·i5 8세대 이상 / 라이젠 3·5",ram:"8GB (넉넉히 16GB)",ssd:"SSD 256GB 이상",gpu:"없어도 됨 (내장 그래픽)",use:"인터넷, 유튜브, 카톡, 한글·엑셀, 인강, 은행 업무"},
- {name:"가벼운 게임",cls:"t1",color:"#2f9a63",cpu:"인텔 i5 8~10세대 / 라이젠 5 2600~3600",ram:"16GB",ssd:"SSD 512GB",gpu:"GTX 1050Ti ~ GTX 1650",use:"롤, FC 온라인, 메이플스토리, 서든어택, 로블록스, 마인크래프트"},
- {name:"인기 게임",cls:"t2",color:"#d08a1a",cpu:"인텔 i5 10~12세대 / 라이젠 5 3600~5600",ram:"16GB",ssd:"SSD 512GB~1TB",gpu:"GTX 1660 SUPER ~ RTX 3060",use:"발로란트, 오버워치 2, 로스트아크, 롤 고주사율, 가벼운 영상편집"},
- {name:"고사양",cls:"t3",color:"#c24848",cpu:"인텔 i5 12~14세대 / 라이젠 5 7500F 이상",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 3060Ti ~ RTX 4060Ti 이상",use:"배틀그라운드 높은 옵션, 최신 스팀 게임, 디아블로 4, 영상편집·방송"}
+ {name:"가벼운 게임",cls:"t1",color:"#2f9a63",cpu:"인텔 i5 8~10세대 / 라이젠 5 2600~3600",ram:"16GB",ssd:"SSD 512GB",gpu:"GTX 1650 ~ GTX 1660",use:"롤, FC 온라인, 메이플스토리, 서든어택, 로블록스, 마인크래프트"},
+ {name:"인기 게임",cls:"t2",color:"#d08a1a",cpu:"인텔 i5 10~12세대 / 라이젠 5 3600~5600",ram:"16~32GB",ssd:"SSD 512GB~1TB",gpu:"GTX 1660 SUPER ~ RTX 3060",use:"발로란트, 오버워치 2, 로스트아크, 롤 고주사율, 가벼운 영상편집"},
+ {name:"고사양",cls:"t3",color:"#c24848",cpu:"인텔 i5 12~14세대 / 라이젠 5 7500F 이상",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 3060Ti ~ RTX 4060 이상",use:"배틀그라운드 높은 옵션, 최신 스팀 게임, 디아블로 4, 영상편집·방송"}
 ];
 const WHO=[
  {id:"kid",title:"유치원·초등 아이",sub:"교육 영상, 타자연습, 로블록스",tier:0,
@@ -584,18 +586,18 @@ const WHO=[
   set:["OBS 방송 프로그램, 편집 프로그램 체험판","캡처보드·마이크 연결 확인","저장장치 두 개로 나눠 쓰기"]}
 ];
 const GAMES=[
- {n:"리그 오브 레전드",t:1,need:"GTX 1050Ti · 16GB",note:"내장 그래픽으로도 돌아가지만 끊김 없이 하려면"},
- {n:"FC 온라인",t:1,need:"GTX 1050Ti · 16GB"},
- {n:"메이플스토리",t:1,need:"GTX 1650 · 16GB",note:"보스전 렉 줄이려면 메모리 16GB"},
- {n:"서든어택",t:1,need:"GTX 1050Ti · 8~16GB"},
- {n:"로블록스",t:1,need:"GTX 1050 · 8GB"},
- {n:"마인크래프트",t:1,need:"GTX 1650 · 16GB",note:"셰이더(빛 효과) 넣으면 인기 게임 단계"},
- {n:"발로란트",t:2,need:"GTX 1660S · 16GB",note:"144Hz 모니터 쓰면 이 등급"},
- {n:"오버워치 2",t:2,need:"GTX 1660S · 16GB"},
- {n:"로스트아크",t:2,need:"RTX 3060 · 16GB",note:"레이드에서 사람 많을 때 기준"},
- {n:"배틀그라운드",t:3,need:"RTX 3060Ti 이상 · 16~32GB",note:"낮은 옵션은 인기 게임 단계도 가능"},
- {n:"디아블로 4",t:3,need:"RTX 3060Ti 이상 · 32GB"},
- {n:"최신 스팀 게임",t:3,need:"RTX 4060Ti 이상 · 32GB",note:"게임마다 다르니 이름을 알려 주세요"}
+ {n:"리그 오브 레전드",t:1,need:"GTX 1650 · 16GB",min:"내장 그래픽 · 8GB",note:"144Hz 모니터로 하려면 GTX 1660"},
+ {n:"FC 온라인",t:1,need:"GTX 1660 · 16GB",min:"GTX 1050Ti · 8GB"},
+ {n:"메이플스토리",t:1,need:"GTX 1660 · 16GB",min:"GTX 1050 · 8GB",note:"보스전 렉은 CPU·메모리가 좌우"},
+ {n:"서든어택",t:1,need:"GTX 1650 · 16GB",min:"GTX 1050 · 8GB"},
+ {n:"로블록스",t:1,need:"GTX 1650 · 16GB",min:"내장 그래픽 · 8GB"},
+ {n:"마인크래프트",t:1,need:"GTX 1660 · 16GB",min:"내장 그래픽 · 8GB",note:"셰이더(빛 효과) 넣으면 인기 게임 단계"},
+ {n:"발로란트",t:2,need:"RTX 3060 · 16GB",min:"GTX 1050Ti · 8GB",note:"144Hz 이상 모니터 기준"},
+ {n:"오버워치 2",t:2,need:"RTX 3060 · 16GB",min:"GTX 1050 · 8GB"},
+ {n:"로스트아크",t:2,need:"RTX 3060 · 32GB",min:"GTX 1050Ti · 16GB",note:"레이드에서 사람 많을 때 기준"},
+ {n:"배틀그라운드",t:3,need:"RTX 4060 · 32GB",min:"GTX 1060 · 16GB",note:"낮은 옵션이면 인기 게임 단계도 가능"},
+ {n:"디아블로 4",t:3,need:"RTX 4060 · 32GB",min:"GTX 1060 · 16GB"},
+ {n:"최신 스팀 게임",t:3,need:"RTX 4060Ti 이상 · 32GB",min:"게임마다 다름",note:"하실 게임 이름을 알려 주세요"}
 ];
 const KIND={desktop:"데스크탑",laptop:"노트북",monitor:"모니터",parts:"부품",etc:"주변기기·기타"};
 const hasSpecs=it=>it.kind==="desktop"||it.kind==="laptop";
@@ -641,7 +643,7 @@ function renderTiers(){
 }
 function renderGames(){
   $("#gameList").innerHTML=GAMES.map((g,i)=>`<button type="button" class="grow" data-game="${i}">
-    <b>${esc(g.n)}</b><span class="need">${esc(g.need)}${g.note?` <em>· ${esc(g.note)}</em>`:""}</span>${lvHtml(g.t)}</button>`).join("");
+    <b>${esc(g.n)}</b><span class="need"><strong>권장</strong> ${esc(g.need)}<em> · 최소 ${esc(g.min)}</em></span>${g.note?`<span class="gnote">${esc(g.note)}</span>`:""}${lvHtml(g.t)}</button>`).join("");
 }
 function priceText(it){return it.price>0?Number(it.price).toLocaleString("ko-KR")+"원":"가격 문의";}
 const localUrls={};
@@ -868,7 +870,7 @@ function formHtml(){
   <div class="field"><span class="lbl">④ 이 컴퓨터로 되는 일 (등급)</span><div class="choices">
     <label><input type="radio" name="tier" value="-1" ${Number(it.tier)===-1?"checked":""}>해당 없음(모니터 등)</label>
     ${TIERS.map((t,i)=>`<label><input type="radio" name="tier" value="${i}" ${Number(it.tier)===i?"checked":""}>${t.name}</label>`).join("")}</div>
-    <span class="hint">헷갈리시면 그래픽카드 보고 고르세요: 없음→기본, GTX 1050~1650→가벼운 게임, GTX 1660~RTX 3060→인기 게임, 그 위→고사양</span></div>
+    <span class="hint">헷갈리시면 그래픽카드 보고 고르세요: 없음→기본, GTX 1050Ti~1660→가벼운 게임, GTX 1660 SUPER~RTX 3060→인기 게임, RTX 3060Ti 이상→고사양</span></div>
   <div class="field"><span class="lbl">⑤ 누구에게 추천 (여러 개 가능)</span><div class="choices">${Object.entries(USES).map(([k,l])=>`<label><input type="checkbox" name="uses" value="${k}" ${(it.uses||[]).includes(k)?"checked":""}>${l}</label>`).join("")}</div></div>
   <div class="field"><span class="lbl">덤·표시</span><div class="choices">
     <label><input type="checkbox" id="fGift" ${it.gift?"checked":""}>키보드·마우스 같이 드림</label>
