@@ -396,6 +396,52 @@ section.contact{padding:52px 0}
 .banner .uses a{background:rgba(255,255,255,.88);border:1px solid #c6d5f1;color:#10357f;text-decoration:none;font-weight:700;font-size:1rem;padding:9px 16px;border-radius:12px;box-shadow:0 2px 6px rgba(16,53,127,.08)}
 .banner .uses a:hover{border-color:var(--brand);color:var(--brand)}
 @media (max-width:760px){.banner .uses{gap:6px;margin-top:20px;max-width:330px}.banner .uses a{font-size:.88rem;padding:7px 11px}}
+.kakaobtn{background:#fee500!important;border-color:#fee500!important;color:#191600!important}
+.contact-acts{display:grid;justify-items:end;gap:4px}
+@media (max-width:700px){.contact-acts{justify-items:start}}
+/* 상담봇 */
+.botbtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:15;display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;background:var(--brand);color:#fff;font-weight:800;font-size:1.05rem;padding:14px 20px 14px 16px;cursor:pointer;box-shadow:0 10px 26px rgba(29,91,214,.35)}
+.botbtn:hover{background:var(--brand-d)}
+.botbtn svg{width:24px;height:24px}
+.adminbtn{bottom:calc(max(16px,env(safe-area-inset-bottom,0px)) + 66px)}
+.bot{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(max(16px,env(safe-area-inset-bottom,0px)) + 66px);z-index:16;width:min(390px,calc(100vw - 32px));height:min(620px,calc(100dvh - 120px));background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(15,22,36,.28);display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line)}
+.bot[hidden]{display:none!important}
+.bot-head{display:flex;align-items:center;gap:10px;padding:14px 14px 14px 18px;background:var(--brand);color:#fff}
+.bot-head .av{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.bot-head .av svg{width:20px;height:20px}
+.bot-head div{flex:1;min-width:0;line-height:1.3}
+.bot-head b{display:block;font-size:1.02rem}
+.bot-head small{opacity:.85;font-size:.82rem}
+.bot-head button{border:0;background:rgba(255,255,255,.18);color:#fff;width:38px;height:38px;border-radius:10px;font-size:1.3rem;cursor:pointer;flex:none}
+.bot-body{flex:1;overflow-y:auto;padding:16px 14px 18px;background:#f3f5f9;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:88%;padding:11px 14px;border-radius:16px;font-size:.97rem;line-height:1.55}
+.msg.b{background:#fff;align-self:flex-start;border-top-left-radius:4px;box-shadow:0 1px 2px rgba(15,22,36,.06)}
+.msg.u{background:var(--brand);color:#fff;align-self:flex-end;border-top-right-radius:4px;font-weight:600}
+.msg ul{margin:6px 0 0;padding-left:1.1em}
+.msg .dim{color:var(--muted);font-size:.9em}
+.opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.opts button{border:1px solid #bfd0f0;background:#fff;color:var(--brand-d);font-weight:700;font-size:.93rem;padding:9px 13px;border-radius:999px;cursor:pointer}
+.opts button:hover{background:var(--brand-soft);border-color:var(--brand)}
+.botitems{display:grid;gap:6px;margin-top:10px}
+.botitem{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:6px;background:#fff}
+.botitem:hover{border-color:var(--brand)}
+.botitem:focus-visible{outline:3px solid var(--brand)}
+.bi-ph{width:56px;height:56px;border-radius:9px;background:var(--tile);display:grid;place-items:center;overflow:hidden;color:#b0bccd}
+.bi-ph img{width:100%;height:100%;object-fit:cover}
+.bi-ph svg{width:40px;height:40px}
+.bi-tx{min-width:0;display:grid;gap:2px}
+.bi-tx b{font-size:.88rem;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bi-tx span{font-size:.82rem;color:var(--ink2);font-weight:700}
+.botlinks{display:grid;gap:6px;margin-top:10px}
+.botcall{display:inline-flex;justify-content:center;align-items:center;margin-top:8px;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:10px}
+.botlinks .botcall{margin-top:0}
+.botcall.ghost{background:#fff;color:var(--ink);border:1px solid var(--line2)}
+.botcall.kakao{background:#fee500;color:#191600}
+@media (max-width:560px){
+  .botbtn{padding:12px 16px 12px 13px;font-size:.98rem}
+  .bot{right:0;left:0;bottom:0;width:100%;height:min(88dvh,680px);border-radius:20px 20px 0 0}
+}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -470,7 +516,8 @@ section.contact{padding:52px 0}
   <section class="band contact">
     <div class="wrap">
       <div><h2>찾는 컴퓨터가 없으세요?</h2><p>쓰실 분과 용도만 말씀해 주시면 맞춰서 준비해 드립니다.</p></div>
-      <a class="big-phone" id="phoneHome" href="tel:">010-0000-0000</a>
+      <div class="contact-acts"><a class="big-phone" id="phoneHome" href="tel:">010-0000-0000</a>
+        <div class="links"><button class="btn small ghost" type="button" data-openbot="">상담봇에게 묻기</button><a class="btn small kakaobtn" id="kakaoHome" href="#" target="_blank" rel="noopener" hidden>카카오톡 상담</a></div></div>
     </div>
   </section>
 </div>
@@ -616,6 +663,13 @@ section.contact{padding:52px 0}
 </footer>
 
 <button class="btn adminbtn" id="adminOpen" hidden>사장님 메뉴</button>
+<button class="botbtn" id="botOpen" type="button" aria-controls="bot" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01" stroke-width="3" stroke-linecap="round"/></svg>상담</button>
+<div class="bot" id="bot" role="dialog" aria-label="상담" hidden>
+  <div class="bot-head"><span class="av"><svg viewBox="0 0 20 20" fill="none" stroke="#1d5bd6" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3" width="15" height="10" rx="1.5"/><path d="M7 17h6M10 13v4"/></svg></span>
+    <div><b id="botTitle">○○중고컴퓨터 상담</b><small>단추를 눌러 골라 주세요</small></div>
+    <button type="button" id="botClose" aria-label="상담 닫기">×</button></div>
+  <div class="bot-body" id="botBody" aria-live="polite"></div>
+</div>
 <div id="modalRoot"></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -678,7 +732,7 @@ const SAMPLE=[
  {id:"ex4",kind:"desktop",brand:"조립PC",title:"[중고] 조립PC 라이젠5 7500F 32GB SSD 1TB RTX 4060 Ti 윈도우11 고사양 게임·편집용",cpu:"라이젠5 7500F",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 4060 Ti",win11:true,grade:"A",tier:3,uses:["gamer","creator"],price:0,status:"reserved",gift:true,desc:"배그·최신 게임 높은 옵션 가능.",photos:[]},
  {id:"ex5",kind:"monitor",brand:"삼성 S24F350",title:"[중고] 삼성 24인치 S24F350 FHD HDMI 모니터",cpu:"",ram:"",ssd:"",gpu:"",win11:false,grade:"B",tier:-1,uses:["office","senior"],price:0,status:"sale",desc:"HDMI 케이블 같이 드립니다.",photos:[]}
 ];
-const DEFAULT_SHOP={name:"○○중고컴퓨터",phone:"010-0000-0000",addr:"주소를 넣어 주세요",hours:"평일 10:00–19:00 / 토 10:00–15:00",owner:"",bizNo:"",warranty:"구입 후 1개월 무상 수리",wPc:"1개월",wLaptop:"1개월",wMonitor:"1개월",retDays:"7",daangn:"",joonggo:"",mapUrl:"",promise:"중고 PC·노트북·모니터 | 출고 전 점검·청소 | 무상 수리 보증 | 방문·택배 모두 가능"};
+const DEFAULT_SHOP={name:"○○중고컴퓨터",phone:"010-0000-0000",addr:"주소를 넣어 주세요",hours:"평일 10:00–19:00 / 토 10:00–15:00",owner:"",bizNo:"",warranty:"구입 후 1개월 무상 수리",wPc:"1개월",wLaptop:"1개월",wMonitor:"1개월",retDays:"7",daangn:"",joonggo:"",mapUrl:"",kakao:"",promise:"중고 PC·노트북·모니터 | 출고 전 점검·청소 | 무상 수리 보증 | 방문·택배 모두 가능"};
 const SAMPLE_REVIEWS=[
  {stars:5,text:"어머니 쓰실 거라 글씨 크게 해 달라고 했더니 카톡이랑 유튜브만 딱 보이게 해 주셨어요.",what:"사무용 슬림 본체",who:"당근 손님",date:"예시"},
  {stars:5,text:"아이 롤 하려고 샀는데 잘 돌아가고 조용합니다. 설치도 다 해 주셔서 바로 했어요.",what:"게임용 본체",who:"방문 손님",date:"예시"},
@@ -799,7 +853,7 @@ function renderReviews(){
 function renderShop(){
   const s=shop;
   document.title=s.name||"중고컴퓨터";
-  ["#shopName","#bizName","#footName","#bannerName"].forEach(k=>$(k).textContent=s.name);
+  ["#shopName","#bizName","#footName","#bannerName"].forEach(k=>$(k).textContent=s.name);$("#botTitle").textContent=s.name+" 상담";
   $("#phoneText").textContent=s.phone;
   const tel="tel:"+String(s.phone).replace(/[^0-9+]/g,"");
   $("#callLink").href=tel;$("#callTop").href=tel;$("#callHero").href=tel;$("#phoneHome").href=tel;$("#phoneHome").textContent=s.phone;renderBanner();$("#callTop").textContent=s.phone||"전화 문의";
@@ -813,7 +867,9 @@ function renderShop(){
   const ml=[];
   if(s.daangn)ml.push(`<a class="btn small ghost" target="_blank" rel="noopener" href="${esc(safeUrl(s.daangn))}">당근 가게 보기</a>`);
   if(s.joonggo)ml.push(`<a class="btn small ghost" target="_blank" rel="noopener" href="${esc(safeUrl(s.joonggo))}">중고나라 글 보기</a>`);
+  if(s.kakao)ml.unshift(`<a class="btn small kakaobtn" target="_blank" rel="noopener" href="${esc(safeUrl(s.kakao))}">카카오톡 상담</a>`);
   $("#marketLinks").innerHTML=ml.join("");
+  const hk=$("#kakaoHome");if(hk){hk.hidden=!s.kakao;if(s.kakao)hk.href=safeUrl(s.kakao);}
   $("#promise").innerHTML=String(s.promise||"").split("|").map(x=>x.trim()).filter(Boolean).map(x=>`<li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>${esc(x)}</li>`).join("");
 }
 function safeUrl(u){u=String(u||"").trim();return /^https?:\/\//i.test(u)?u:"#";}
@@ -857,6 +913,97 @@ function route(){
   scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
+
+/* ---------- 상담봇: 단추를 눌러 고르는 방식 (돈 안 듦, 틀린 말 안 함) ---------- */
+let botState={};
+const BUDGETS=[["30만 원 이하",0,300000],["30~60만 원",300000,600000],["60~100만 원",600000,1000000],["100만 원 넘어도 괜찮아요",1000000,1e12],["아직 모르겠어요",0,1e12]];
+function botBody(){return $("#botBody");}
+function botScroll(){const b=botBody();b.scrollTop=b.scrollHeight;}
+function botSay(html){botBody().insertAdjacentHTML("beforeend",`<div class="msg b">${html}</div>`);botScroll();}
+function botMe(text){botBody().querySelectorAll(".opts").forEach(o=>o.remove());botBody().insertAdjacentHTML("beforeend",`<div class="msg u">${esc(text)}</div>`);}
+function botOpts(list){botBody().insertAdjacentHTML("beforeend",`<div class="opts">${list.map(([l,k])=>`<button type="button" data-bot="${esc(k)}">${esc(l)}</button>`).join("")}</div>`);botScroll();}
+const HOME_OPTS=()=>[["컴퓨터 추천받기","rec"],["이 게임 되나요?","games"],["가격·무상 수리","price"],["위치·영업시간","place"],["사람과 상담하기","human"]];
+function botStart(){
+  botBody().innerHTML="";botState={};
+  botSay(`안녕하세요, <b>${esc(shop.name)}</b>입니다.<br>궁금하신 걸 아래에서 눌러 주세요.`);
+  botOpts(HOME_OPTS());
+}
+function botItemsHtml(list){
+  return `<div class="botitems">${list.map(it=>`<button type="button" class="botitem" data-item="${esc(it.id)}">
+    <span class="bi-ph">${it.photos&&it.photos[0]?`<img src="${photoUrl(esc(it.photos[0]))}" alt="">`:(ART[it.kind]||ART.desktop)}</span>
+    <span class="bi-tx"><b>${esc(String(it.title||"").replace(/^\[중고\]\s*/,""))}</b><span>${esc(priceText(it))}${Number(it.tier)>=0?" · "+esc(TIERS[it.tier].name):""}</span></span></button>`).join("")}</div>`;
+}
+function botMatch(need,kind,lo,hi){
+  const list=allItems().filter(it=>hasSpecs(it)&&it.status!=="sold"&&Number(it.tier)>=need
+    &&(kind==="any"||it.kind===kind)
+    &&(!(it.price>0)||(it.price>=lo&&it.price<hi)));
+  list.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0)||(a.tier-b.tier)||((a.price||1e12)-(b.price||1e12)));
+  return list;
+}
+function botAfter(){botOpts([["다시 고르기","rec"],["전체 상품 보기","go:#/list/all"],["사람과 상담하기","human"],["처음으로","start"]]);}
+function botStep(k,label){
+  if(label)botMe(label);
+  const [cmd,arg]=k.split(":");
+  if(cmd==="start"){botStart();return;}
+  if(cmd==="go"){location.hash=k.slice(3);closeBot();return;}
+  if(cmd==="rec"){botState={};botSay("누가 쓰실 컴퓨터인가요?");botOpts(WHO.map(w=>[w.title,"who:"+w.id]));return;}
+  if(cmd==="who"){botState.who=arg;const w=WHO.find(x=>x.id===arg);
+    if(arg==="gamer"){botSay("어떤 게임을 하세요?");botOpts([...GAMES.map((g,i)=>[g.n,"game:"+i]),["잘 모르겠어요","game:-1"]]);return;}
+    botState.need=w?w.tier:0;
+    botSay(`그럼 <b>${esc(TIERS[botState.need].name)}</b> 단계 컴퓨터면 충분합니다.<br>본체와 노트북 중 어떤 걸 찾으세요?`);
+    botOpts([["본체(데스크탑)","kind:desktop"],["노트북","kind:laptop"],["상관없어요","kind:any"]]);return;}
+  if(cmd==="game"){const i=+arg;
+    if(i>=0){const g=GAMES[i];botState.need=g.t;botSay(`${esc(g.n)}은(는) <b>${esc(g.need)}</b> 정도면 끊김 없이 됩니다. (${esc(TIERS[g.t].name)} 단계)`);}
+    else{botState.need=2;botSay("그럼 요즘 많이 하는 게임(발로란트, 오버워치 등)이 다 되는 <b>인기 게임</b> 단계로 찾아 드릴게요.");}
+    botSay("본체와 노트북 중 어떤 걸 찾으세요?");
+    botOpts([["본체(데스크탑)","kind:desktop"],["노트북","kind:laptop"],["상관없어요","kind:any"]]);return;}
+  if(cmd==="kind"){botState.kind=arg;botSay("생각하시는 예산은 어느 정도세요?");botOpts(BUDGETS.map((b,i)=>[b[0],"budget:"+i]));return;}
+  if(cmd==="budget"){const b=BUDGETS[+arg];const need=botState.need||0;
+    const list=botMatch(need,botState.kind||"any",b[1],b[2]);
+    const isSample=items===null||items.length===0;
+    if(list.length){
+      botSay(`지금 있는 것 중에 맞는 컴퓨터 <b>${list.length}대</b>를 찾았어요.${isSample?" (지금은 예시 매물입니다)":""} 누르면 자세히 볼 수 있어요.`+botItemsHtml(list.slice(0,4)));
+      const w=WHO.find(x=>x.id===botState.who);
+      if(w&&w.set&&w.set.length)botSay(`그리고 이렇게 미리 세팅해서 드려요.<ul>${w.set.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`);
+      if(list.some(it=>!(it.price>0)))botSay("'가격 문의'로 된 건 상태에 따라 가격이 달라서 전화나 문자로 알려 드려요.");
+    }else{
+      botSay(`지금은 딱 맞는 컴퓨터가 없네요. 매물이 수시로 바뀌니 <b>전화나 문자</b> 주시면 맞춰서 준비해 드릴게요.<br><a class="botcall" href="tel:${esc(String(shop.phone).replace(/[^0-9+]/g,""))}">${esc(shop.phone)} 전화 걸기</a>`);
+    }
+    botAfter();return;}
+  if(cmd==="games"){botSay("어떤 게임이 되는지 궁금하세요?");botOpts([...GAMES.map((g,i)=>[g.n,"gq:"+i]),["처음으로","start"]]);return;}
+  if(cmd==="gq"){const i=+arg,g=GAMES[i];
+    const list=botMatch(g.t,"any",0,1e12);
+    botSay(`<b>${esc(g.n)}</b><br>끊김 없이 하려면: <b>${esc(g.need)}</b><br>최소 사양: ${esc(g.min)}${g.note?`<br><span class="dim">${esc(g.note)}</span>`:""}`);
+    if(list.length)botSay(`이 게임이 되는 컴퓨터가 지금 <b>${list.length}대</b> 있어요.`+botItemsHtml(list.slice(0,3)));
+    else botSay("지금 이 게임이 되는 컴퓨터는 없어요. 전화 주시면 맞춰서 준비해 드려요.");
+    botOpts([["다른 게임 보기","games"],...(list.length?[["되는 컴퓨터 모두 보기","go:#/list/all?game="+i]]:[]),["처음으로","start"]]);return;}
+  if(cmd==="price"){
+    botSay(`중고라서 가격은 사양과 상태마다 달라요. '가격 문의'로 된 건 전화나 문자 주시면 바로 알려 드려요.`);
+    botSay(`<b>무상 수리</b><br>컴퓨터 ${esc(shop.wPc)}, 노트북 ${esc(shop.wLaptop)}, 모니터 ${esc(shop.wMonitor)}<br>받고 ${esc(shop.retDays||"7")}일 안에 고장 나면 바꿔 드리거나 환불해 드려요.<br>기간이 지나도 부품값만 받고 고쳐 드려요.`);
+    botSay("모든 컴퓨터는 청소·점검하고 윈도우와 쓰실 프로그램까지 깔아서 드려요. 가게에서 받으셔도 되고 택배로도 보내 드려요.");
+    botOpts([["컴퓨터 추천받기","rec"],["사람과 상담하기","human"],["처음으로","start"]]);return;}
+  if(cmd==="place"){
+    const map=shop.mapUrl||("https://map.naver.com/p/search/"+encodeURIComponent(shop.addr&&shop.addr!==DEFAULT_SHOP.addr?shop.addr:shop.name));
+    botSay(`<b>주소</b><br>${esc(shop.addr)}<br><br><b>영업시간</b><br>${esc(shop.hours)}<br><a class="botcall ghost" href="${esc(safeUrl(map))}" target="_blank" rel="noopener">네이버 지도에서 보기</a>`);
+    botOpts([["사람과 상담하기","human"],["처음으로","start"]]);return;}
+  if(cmd==="human"){
+    const tel=String(shop.phone).replace(/[^0-9+]/g,"");
+    botSay(`사장님이 직접 답해 드려요.<div class="botlinks">
+      <a class="botcall" href="tel:${esc(tel)}">전화 걸기 ${esc(shop.phone)}</a>
+      <a class="botcall ghost" href="sms:${esc(tel)}">문자 보내기</a>
+      ${shop.kakao?`<a class="botcall kakao" href="${esc(safeUrl(shop.kakao))}" target="_blank" rel="noopener">카카오톡으로 상담</a>`:""}</div>`);
+    botOpts([["처음으로","start"]]);return;}
+}
+function openBot(){const b=$("#bot");b.hidden=false;$("#botOpen").setAttribute("aria-expanded","true");if(!botBody().children.length)botStart();setTimeout(()=>{const f=b.querySelector(".opts button");f&&f.focus();},50);}
+function closeBot(){$("#bot").hidden=true;$("#botOpen").setAttribute("aria-expanded","false");}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-bot],#botOpen,#botClose,[data-openbot]");if(!t)return;
+  if(t.id==="botOpen"){$("#bot").hidden?openBot():closeBot();return;}
+  if(t.id==="botClose"){closeBot();return;}
+  if(t.matches("[data-openbot]")){e.preventDefault();openBot();const k=t.dataset.openbot;if(k)botStep(k,t.textContent.trim());return;}
+  botStep(t.dataset.bot,t.textContent.trim());
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#bot").hidden&&!$("#modalRoot").innerHTML)closeBot();});
 
 /* ---------- 매물 자세히 ---------- */
 function openItem(id){
@@ -1051,6 +1198,7 @@ function shopFormHtml(){
     ${f("sDaangn","당근 가게 주소",s.daangn,"https://www.daangn.com/...","당근 앱에서 '공유 → 링크 복사' 한 주소를 붙여 넣으세요")}
     ${f("sJoonggo","중고나라 글 주소",s.joonggo,"https://...")}
     ${f("sMap","네이버 지도 주소 (없어도 됨)",s.mapUrl,"https://naver.me/...")}
+    ${f("sKakao","카카오톡 채널 상담 주소 (없어도 됨)",s.kakao,"http://pf.kakao.com/_xxxxx/chat","카카오톡 채널 관리자 화면의 '채팅 주소'를 붙여 넣으면 홈페이지에 카톡 상담 단추가 생깁니다")}
     <button class="btn" type="submit" style="justify-self:start;font-size:1.1rem;padding:14px 26px">가게 정보 저장</button>
   </form>`;
 }
@@ -1134,7 +1282,7 @@ function keepShopForm(){const F=$("#shopForm");shopFormKeep=F?[...F.querySelecto
 function restoreShopForm(){if(!shopFormKeep)return;shopFormKeep.forEach(([id,v])=>{const el=$("#"+id);if(el)el.value=v;});shopFormKeep=null;}
 async function saveShop(){
   const g=id=>($("#"+id).value||"").trim();
-  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),promise:g("sPromise"),banner:bannerDraft!==undefined?(bannerDraft?bannerDraft.id:""):(shop.banner||"")};
+  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),kakao:g("sKakao"),promise:g("sPromise"),banner:bannerDraft!==undefined?(bannerDraft?bannerDraft.id:""):(shop.banner||"")};
   if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
   try{await db.doc("shop/info").set(next);shop={...DEFAULT_SHOP,...next};bannerDraft=undefined;renderShop();toast("가게 정보를 저장했어요.");}catch(e){toast("저장하지 못했어요. 다시 눌러 주세요.");}
 }
