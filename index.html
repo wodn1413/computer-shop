@@ -391,6 +391,11 @@ section.contact{padding:52px 0}
 .banner .chips{margin-bottom:24px}
 
 .banner .row{margin-top:34px}
+.banner .uses{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:26px auto 0;max-width:420px}
+.banner .uses a{text-align:center}
+.banner .uses a{background:rgba(255,255,255,.88);border:1px solid #c6d5f1;color:#10357f;text-decoration:none;font-weight:700;font-size:1rem;padding:9px 16px;border-radius:12px;box-shadow:0 2px 6px rgba(16,53,127,.08)}
+.banner .uses a:hover{border-color:var(--brand);color:var(--brand)}
+@media (max-width:760px){.banner .uses{gap:6px;margin-top:20px;max-width:330px}.banner .uses a{font-size:.88rem;padding:7px 11px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -429,7 +434,14 @@ section.contact{padding:52px 0}
           <a href="#/who">세팅까지 끝낸 PC <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a>
         </div>
         <h1><span class="b1">컴퓨터는</span> <span class="b2" id="bannerName">○○중고컴퓨터</span></h1>
-        <p class="sub">사무용, 공부용, 어르신용, 게임용, 방송용</p>
+        <div class="uses" aria-label="용도로 바로 고르기">
+          <a href="#/list/all?use=kid">아이 공부용</a>
+          <a href="#/list/all?use=student">학생용</a>
+          <a href="#/list/all?use=office">사무용</a>
+          <a href="#/list/all?use=senior">어르신용</a>
+          <a href="#/list/all?use=gamer">게임용</a>
+          <a href="#/list/all?use=creator">편집·방송용</a>
+        </div>
         <div class="row">
           <a class="btn" href="#/list/all">전체 상품 보기</a>
           <a class="btn ghost" id="callHero" href="tel:">전화로 물어보기</a>
