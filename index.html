@@ -1471,7 +1471,7 @@ function renderAdmin(){
   else if(adminTab==="shop")body=shopFormHtml();
   else body=guideHtml();
   modal(`<div class="sheet admin" role="dialog" aria-modal="true" aria-labelledby="adTitle">
-    <div class="top"><h2 id="adTitle">사장님 메뉴</h2><button class="x" type="button" data-close aria-label="닫기">×</button></div>
+    <div class="top"><h2 id="adTitle">사장님 메뉴</h2><div style="display:flex;gap:8px;align-items:center"><button class="btn small ghost" type="button" data-keylink>다른 휴대폰 연결</button><button class="x" type="button" data-close aria-label="닫기">×</button></div></div>
     <div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button type="button" role="tab" data-tab="${k}" aria-selected="${k===adminTab}">${l}</button>`).join("")}</div>
     ${body}</div>`);
 }
@@ -1763,6 +1763,10 @@ document.addEventListener("click",e=>{
   if(t.dataset.addrow){readForm();const k=t.dataset.addrow==="rows"?"infoRows":"optBoxes";editing[k]=[...(k==="infoRows"?itRows(editing):itOpts(editing)),["",""]];renderAdmin();const ins=document.querySelectorAll(`input[name=${k==="infoRows"?"rowL":"optL"}]`);ins.length&&ins[ins.length-1].focus();return;}
   if(t.dataset.delrow){readForm();const [w,i]=t.dataset.delrow.split(":");const k=w==="rows"?"infoRows":"optBoxes";const arr=[...(k==="infoRows"?itRows(editing):itOpts(editing))];arr.splice(+i,1);editing[k]=arr;renderAdmin();return;}
   if(t.matches("[data-resettop]")){readForm();["chips","infoRows","optBoxes","priceNote","askNote"].forEach(k=>delete editing[k]);renderAdmin();toast("윗부분을 사양대로 다시 채웠어요.");return;}
+  if(t.matches("[data-keylink]")){keyLinkBox();return;}
+  if(t.matches("[data-copykeylink]")){const u=location.origin+location.pathname+"#key="+getToken();
+    navigator.clipboard.writeText(u).then(()=>toast("주소를 복사했어요. 카톡으로 보내세요.")).catch(()=>{const ta=$("#keyLinkTa");if(ta){ta.hidden=false;ta.value=u;ta.focus();ta.select();}toast("주소를 선택했어요. 길게 눌러 복사하세요.");});return;}
+  if(t.matches("[data-backadmin]")){renderAdmin();return;}
   if(t.matches("[data-newitem]")){editing=blankItem();draftPhotos=[];renderAdmin();return;}
   if(t.dataset.edit){const it=items.find(x=>x.id===t.dataset.edit);if(it){editing=JSON.parse(JSON.stringify(it));draftPhotos=(it.photos||[]).map(id=>({id,url:photoUrl(id)}));adminTab="add";renderAdmin();}return;}
   if(t.dataset.setst){const [id,st]=t.dataset.setst.split(":");setStatus(id,st);return;}
@@ -1858,6 +1862,20 @@ async function checkToken(){
   try{const r=await gh("");canEdit=!!(r.permissions&&r.permissions.push);}catch(e){canEdit=false;}
   db=canEdit?ghDb:null;assets=canEdit?ghAssets:null;$("#adminOpen").hidden=!canEdit;return canEdit;
 }
+function keyLinkBox(){
+  modal(`<div class="sheet admin" role="dialog" aria-modal="true" aria-labelledby="klTitle">
+   <div class="top"><h2 id="klTitle">다른 휴대폰 연결</h2><button class="x" type="button" data-close aria-label="닫기">×</button></div>
+   <p style="line-height:1.7">아버님 휴대폰처럼 다른 기기에서도 사장님 메뉴를 쓰게 하는 방법입니다. 긴 열쇠 글자를 칠 필요가 없습니다.</p>
+   <ol style="line-height:1.9;padding-left:1.3em;margin:0">
+    <li>아래 <b>'연결 주소 복사'</b>를 누릅니다.</li>
+    <li>카톡으로 아버님께 보냅니다.</li>
+    <li>아버님이 그 주소를 <b>한 번 누르시면 끝</b>입니다. 그 휴대폰에서는 다음부터 '사장님 메뉴'가 바로 열립니다.</li>
+    <li>아버님이 누르신 뒤에는 <b>카톡 메시지를 지워 주세요.</b> 이 주소를 가진 사람은 홈페이지를 고칠 수 있습니다.</li>
+   </ol>
+   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" data-copykeylink>연결 주소 복사</button><button class="btn ghost" type="button" data-backadmin>사장님 메뉴로 돌아가기</button></div>
+   <textarea id="keyLinkTa" rows="3" readonly hidden aria-label="연결 주소"></textarea>
+  </div>`);
+}
 function openKey(){
   modal(`<div class="sheet admin" role="dialog" aria-modal="true" aria-labelledby="kTitle">
    <div class="top"><h2 id="kTitle">사장님 메뉴 열기</h2><button class="x" type="button" data-close aria-label="닫기">×</button></div>
@@ -1883,8 +1901,15 @@ document.addEventListener("submit",async e=>{
 });
 
 (async()=>{
+  let keyed=false;
+  const km=location.hash.match(/^#key=(github_pat_[A-Za-z0-9_]+)$/);
+  if(km){setToken(km[1]);keyed=true;try{history.replaceState(null,"",location.pathname+location.search+"#/");}catch(e){location.hash="#/";}}
   const timer=setTimeout(()=>{if(items===null)$("#stockNote").textContent="매물 목록을 불러오지 못했어요. 잠시 뒤 새로고침해 주세요. 전화 주시면 바로 알려 드립니다.";},10000);
   await checkToken();
+  if(keyed){if(canEdit){modal(`<div class="sheet admin" role="dialog" aria-modal="true" aria-labelledby="kdTitle"><div class="top"><h2 id="kdTitle">준비 끝났습니다</h2><button class="x" type="button" data-close aria-label="닫기">×</button></div>
+    <p style="font-size:1.1rem;line-height:1.7">이 휴대폰에서 이제 <b>사장님 메뉴</b>를 쓸 수 있어요.<br>홈페이지 맨 아래 <b>'사장님 메뉴'</b>를 누르면 바로 열립니다.</p>
+    <button class="btn" type="button" data-openadmin style="justify-self:start;font-size:1.1rem">지금 사장님 메뉴 열기</button></div>`);}
+    else{setToken("");toast("열쇠가 맞지 않아요. 아들에게 주소를 다시 받아 주세요.");}}
   await loadAll();clearTimeout(timer);
 })();
 })();
