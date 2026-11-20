@@ -442,6 +442,185 @@ section.contact{padding:52px 0}
   .bot{right:0;left:0;bottom:0;width:100%;height:min(88dvh,680px);border-radius:20px 20px 0 0}
 }
 
+
+/* 첫 화면 베스트: 큰 사진 + 순위 번호 */
+.card .ph .rank{position:absolute;top:0;left:0;min-width:34px;height:34px;padding:0 8px;display:grid;place-items:center;background:#111a2b;color:#fff;font-weight:800;font-size:1rem;font-variant-numeric:tabular-nums;border-bottom-right-radius:8px}
+.grid.best{grid-template-columns:repeat(5,1fr);gap:34px 16px}
+.grid.best .card .ph{border-radius:4px;background:#0d1d44}
+.grid.best .card .body{padding-top:12px;gap:6px}
+.grid.best .card h3{font-size:.97rem;font-weight:500}
+.grid.best .card .spec{display:none}
+.card .minis .mini{background:#fff;border:1px solid var(--line2);color:var(--ink2);font-weight:500;border-radius:3px}
+.card .ph:has(.rank) .tags-on{left:auto;right:12px;top:12px}
+.card .ph:has(.rank) .ex{top:auto;bottom:10px}
+@media (max-width:1100px){.grid.best{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:860px){.grid.best{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){
+  .grid.best{grid-template-columns:1fr 1fr;gap:26px 10px}
+  .card .ph .rank{min-width:28px;height:28px;font-size:.88rem}
+  .grid.best .card h3{font-size:.9rem}
+  .card .ph:has(.rank) .tags-on{right:8px;top:8px;align-items:flex-end}
+}
+
+
+/* ===== 상품 자세히 화면 ===== */
+.pd-top{padding:22px 0 40px}
+.crumb{font-size:.88rem;color:var(--muted);margin-bottom:16px}
+.crumb a{color:var(--muted);text-decoration:none}.crumb a:hover{color:var(--brand)}
+.pd-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.pd-gal{display:flex;gap:12px}
+.pd-thumbs{display:grid;gap:8px;align-content:start;flex:none;width:68px}
+.pd-thumbs button{all:unset;cursor:pointer;width:68px;height:68px;border:2px solid var(--line);border-radius:4px;overflow:hidden;box-sizing:border-box}
+.pd-thumbs button[aria-current="true"]{border-color:var(--brand)}
+.pd-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.pd-main{flex:1;aspect-ratio:1/1;background:var(--tile);position:relative;overflow:hidden;border-radius:6px}
+.pd-main img{width:100%;height:100%;object-fit:cover;display:block}
+.pd-info{display:grid;gap:14px}
+.pd-brand{color:var(--brand);font-weight:600;font-size:.95rem}
+.pd-info h1{font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:700;line-height:1.45;letter-spacing:-.03em}
+.pd-chips{display:flex;gap:6px;flex-wrap:wrap}
+.pd-chips span{font-size:.82rem;border:1px solid var(--line2);border-radius:4px;padding:3px 8px;color:var(--ink2)}
+.pd-price{padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pd-price b{font-size:1.9rem;font-weight:800;letter-spacing:-.03em}
+.pd-price b.ask{font-size:1.15rem;color:var(--brand-d)}
+.pd-kv{display:grid;grid-template-columns:88px 1fr;gap:10px 12px;font-size:.96rem}
+.pd-kv dt{color:var(--muted)}
+.pd-kv dd{margin:0}
+.pd-opts{display:grid;gap:10px}
+.pd-opts .opt{border:2px solid var(--brand);border-radius:8px;padding:10px 14px;display:grid;gap:2px}
+.pd-opts .opt span{font-size:.82rem;color:var(--muted)}
+.pd-opts .opt b{font-weight:700}
+.pd-acts{display:flex;gap:8px;flex-wrap:wrap}
+.pd-acts .btn{flex:1 1 150px;justify-content:center;font-size:1.05rem}
+.pd-tabs{position:sticky;top:0;z-index:5;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pd-tabs .wrap{display:flex}
+.pd-tabs a{flex:1;text-align:center;padding:15px 8px;font-weight:700;color:var(--ink2);text-decoration:none;border-bottom:3px solid transparent}
+.pd-tabs a:hover{color:var(--brand);border-bottom-color:var(--brand)}
+.pd-col{max-width:860px;margin:0 auto;padding:0 16px}
+.pd-detail{padding:56px 0 20px;text-align:center}
+.pd-head{font-size:clamp(2.1rem,6vw,3.6rem);font-weight:900;letter-spacing:-.05em;line-height:1.15}
+.pd-bar{display:inline-block;margin-top:16px;background:#111;color:#fff;padding:8px 16px;font-size:clamp(.88rem,1.8vw,1.1rem);font-weight:500}
+.pd-photo{margin:28px 0 0}
+.pd-photo img{width:100%;display:block;border-radius:6px}
+.pd-photo figcaption,.pd-fine{font-size:.86rem;color:var(--muted);margin-top:12px}
+.pd-ready{margin-top:64px;display:flex;align-items:center;gap:28px;text-align:left;background:linear-gradient(120deg,#0f1a33,#1d3f8f);color:#fff;border-radius:14px;padding:36px 40px}
+.pd-ready .plug{flex:none;width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#9cc1ff}
+.pd-ready .plug svg{width:54px;height:54px}
+.pd-ready b{display:block;font-size:clamp(1.5rem,3.6vw,2.2rem);font-weight:900;line-height:1.25;letter-spacing:-.04em;color:#ffd24a}
+.pd-ready span{display:block;margin-top:8px;color:rgba(255,255,255,.85)}
+.pd-pts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.pd-pts>div{background:#f1f4fa;border-radius:12px;padding:26px 14px;display:grid;justify-items:center;gap:8px}
+.pd-pts svg{width:44px;height:44px;color:var(--brand)}
+.pd-pts b{font-size:1.15rem;font-weight:800}
+.pd-pts span{font-size:.9rem;color:var(--ink2);line-height:1.5}
+.pb{margin-top:80px}
+.pb h3,.pd-games h3,.pd-memo h3{font-size:clamp(1.7rem,4.4vw,2.6rem);font-weight:900;letter-spacing:-.05em;line-height:1.25}
+.pb h3 em{font-style:normal;color:var(--brand)}
+.pb>p{margin-top:16px;font-size:clamp(1rem,2vw,1.15rem);line-height:1.7;color:var(--ink2)}
+.pb>p b{color:var(--ink)}
+.pb-img{display:block;width:100%;margin:26px auto 0;border-radius:8px}
+.pb-img.sq{max-width:520px}
+.pb-cpu{background:linear-gradient(180deg,#14509e,#1d8fe0);color:#fff;border-radius:16px;padding:48px 28px 40px}
+.pb-cpu h3{color:#fff}.pb-cpu>p{color:rgba(255,255,255,.88)}
+.pb-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:30px 0 0;text-align:left}
+.pb-stats div{padding:0 16px;border-left:1px solid rgba(255,255,255,.35)}
+.pb-stats div:first-child{border-left:0}
+.pb-stats dt{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800}
+.pb-stats dd{margin:2px 0 0;color:rgba(255,255,255,.8);font-size:.92rem}
+.pb-ssdimg{position:relative;margin-top:26px}
+.pb-ssdimg img{width:100%;display:block;border-radius:8px}
+.pb-ssdimg span{position:absolute;inset:0;display:grid;place-content:center;color:#e8e8e8;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.pb-ssdimg span b{font-size:clamp(2rem,6vw,3.6rem);font-weight:900;letter-spacing:-.03em}
+.pb-ssdimg span small{font-size:clamp(.9rem,2vw,1.2rem);opacity:.9}
+.pb-boot{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
+.pb-boot figure{margin:0}
+.pb-boot img{width:100%;display:block;border-radius:8px}
+.pb-boot figcaption{display:grid;gap:6px;margin-top:10px;font-weight:600}
+.pb-boot figcaption b{padding:6px;color:#fff;font-size:1.05rem}
+.pb-boot .slow{background:#7a7f88}.pb-boot .fast{background:#f59e0b}
+.pb-uses{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:26px}
+.pb-uses.one{grid-template-columns:1fr}
+.pb-uses figure{margin:0;position:relative}
+.pb-uses img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.pb-uses figcaption{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:clamp(1.1rem,3vw,1.7rem);font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.7);background:rgba(0,0,0,.18)}
+.pd-games{margin-top:80px}
+.pd-sub{display:inline-block;margin-top:12px;background:#111;color:#fff;padding:6px 14px;font-size:.92rem}
+.gtiles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+.gt{aspect-ratio:16/8;border-radius:10px;background:radial-gradient(circle at 75% 20%,rgba(255,255,255,.25),transparent 55%),linear-gradient(135deg,var(--c),#0b1220);color:#fff;display:grid;place-content:center;gap:6px;padding:12px}
+.gt b{font-size:clamp(1.15rem,3vw,1.7rem);font-weight:900;letter-spacing:-.03em}
+.gt span{font-size:.85rem;opacity:.85}
+.pb-win{background:linear-gradient(160deg,#0a5cd8,#2aa1f5);color:#fff;border-radius:16px;padding:48px 24px 36px}
+.pb-win h3{color:#fff}.pb-win>p{color:rgba(255,255,255,.9)}
+.winlogo{display:grid;grid-template-columns:1fr 1fr;gap:5px;width:70px;height:70px;margin:0 auto 22px}
+.winlogo i{background:#fff}
+.winfeat{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.winfeat li{background:rgba(255,255,255,.14);border-radius:10px;padding:22px 10px;display:grid;justify-items:center;gap:10px;font-weight:700}
+.winfeat svg{width:46px;height:46px}
+.pb-psu{background:#07080b;color:#fff;border-radius:16px;padding:48px 24px 36px}
+.pb-psu h3{color:#fff}.pb-psu h3 em{color:#e3b77a}.pb-psu>p{color:rgba(255,255,255,.85)}
+.pb-psu .pd-fine{color:rgba(255,255,255,.6)}
+.pb-size{font-size:1.15rem;font-weight:600}
+.pb-ports{background:#ececec;border-radius:16px;padding:36px 20px}
+.pb-ports h3{font-size:1.3rem;font-weight:700}
+.pb-ports ul{list-style:none;padding:0;margin:20px 0 0;display:flex;justify-content:center;gap:clamp(12px,4vw,30px);flex-wrap:wrap}
+.pb-ports li{width:clamp(96px,22vw,130px);aspect-ratio:1;border-radius:50%;background:#fff;display:grid;grid-template-rows:1.4fr 1fr;overflow:hidden}
+.pb-ports li svg{width:64%;margin:auto auto 0}
+.pb-ports li span{background:#3a3a3a;color:#fff;display:grid;place-items:center;font-weight:700}
+.pb-warn{margin-top:18px;font-weight:700;font-size:clamp(.98rem,2.2vw,1.2rem);color:var(--ink)!important}
+.pd-stable{margin-top:80px;text-align:left}
+.pd-stable h3{font-size:1.3rem;font-weight:700;padding-bottom:10px;border-bottom:3px solid #555}
+.pd-stable table{width:100%;border-collapse:collapse}
+.pd-stable th,.pd-stable td{padding:12px 10px;border-bottom:1px dashed var(--line2);text-align:left;font-size:1rem}
+.pd-stable th{width:160px;background:#f5f6f8;font-weight:600;white-space:nowrap}
+.pd-stable th svg{width:18px;height:18px;vertical-align:-3px;margin-right:8px;color:var(--muted)}
+.pd-more{display:grid;gap:12px;margin-top:60px}
+.pd-more img{width:100%;display:block;border-radius:6px}
+.pd-memo{margin-top:80px;background:var(--brand-soft);border-radius:14px;padding:36px 24px}
+.pd-memo h3{font-size:1.5rem}
+.pd-memo p{margin-top:12px;white-space:pre-wrap;font-size:1.08rem;line-height:1.7}
+.pd-ship{padding:70px 0 40px}
+.pd-center{background:#f1f2f4;padding:30px 26px;text-align:left;border-radius:6px}
+.pc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;padding-bottom:12px;border-bottom:3px solid #333}
+.pc-head h3{font-size:1.8rem;font-weight:900;letter-spacing:-.04em}
+.pc-head span{color:var(--ink2)}
+.pd-center table{width:100%;border-collapse:collapse}
+.pd-center th,.pd-center td{padding:18px 6px;border-bottom:1px solid #c9ccd2;vertical-align:top;text-align:left}
+.pd-center th{width:140px;font-size:1.35rem;font-weight:900;white-space:nowrap}
+.pd-center ul{margin:0;padding-left:1em;display:grid;gap:6px;line-height:1.6}
+.pc-tel{display:inline-block;background:#333;color:#fff;border-radius:999px;padding:2px 14px;font-weight:700;text-decoration:none}
+#pd-sim{padding-top:30px}
+@media (max-width:860px){
+  .pd-grid{grid-template-columns:1fr;gap:24px}
+  .pd-gal{flex-direction:column-reverse}
+  .pd-thumbs{display:flex;width:auto;overflow-x:auto}
+  .pd-thumbs button{flex:none;width:60px;height:60px}
+}
+@media (max-width:560px){
+  .pd-top{padding:14px 0 28px}
+  .pd-ready{flex-direction:column;text-align:center;padding:28px 20px;gap:16px}
+  .pd-ready .plug{width:72px;height:72px}.pd-ready .plug svg{width:40px;height:40px}
+  .pd-pts{grid-template-columns:1fr}
+  .pd-pts>div{grid-template-columns:44px 1fr;justify-items:start;text-align:left;padding:16px;column-gap:14px}
+  .pd-pts svg{grid-row:1/3}
+  .pd-pts span br{display:none}
+  .pb,.pd-games,.pd-stable,.pd-memo{margin-top:56px}
+  .pb-cpu,.pb-win,.pb-psu{padding:36px 16px 28px}
+  .pb-stats{grid-template-columns:1fr 1fr;gap:16px 0}
+  .pb-stats div:nth-child(3){border-left:0}
+  .pb-boot{grid-template-columns:1fr 1fr;gap:10px}
+  .pb-boot figcaption{font-size:.82rem}.pb-boot figcaption b{font-size:.9rem}
+  .gtiles{grid-template-columns:1fr 1fr;gap:8px}
+  .gt span{font-size:.72rem}
+  .winfeat{grid-template-columns:1fr 1fr}
+  .pd-stable th{width:auto;font-size:.88rem;padding:10px 6px}
+  .pd-stable td{font-size:.9rem;padding:10px 6px}
+  .pd-center{padding:22px 14px}
+  .pd-center th,.pd-center td{display:block;width:auto;padding:6px 2px}
+  .pd-center th{padding-top:18px;font-size:1.15rem}
+  .pd-center td{border-bottom:1px solid #c9ccd2;padding-bottom:16px}
+  .pd-center tr th{border-bottom:0}
+}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -506,10 +685,10 @@ section.contact{padding:52px 0}
   <section>
     <div class="wrap">
       <div class="sec-head">
-        <div><h2>잘 나가는 제품</h2><p id="bestNote">요즘 손님들이 많이 찾는 컴퓨터입니다.</p></div>
+        <div><h2>베스트</h2><p id="bestNote">요즘 손님들이 많이 찾는 제품입니다.</p></div>
         <a class="more" href="#/list/all">전체 상품 보기 <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a>
       </div>
-      <div class="grid" id="bestGrid"></div>
+      <div class="grid best" id="bestGrid"></div>
     </div>
   </section>
 
@@ -653,6 +832,8 @@ section.contact{padding:52px 0}
     </div>
   </section>
 </div>
+<!-- 상품 자세히 -->
+<div class="page" data-page="item" id="itemPage"></div>
 </main>
 
 <footer>
@@ -726,11 +907,16 @@ const STATUS={sale:"판매중",reserved:"예약중",sold:"판매완료"};
 const USES={kid:"아이",student:"학생",office:"사무",senior:"어르신",gamer:"게임",creator:"편집·방송"};
 
 const SAMPLE=[
- {id:"ex1",kind:"desktop",brand:"HP 프로데스크 400 G5",title:"[중고] HP 프로데스크 400 G5 i5-8500 8GB SSD 256GB 윈도우11 사무용",cpu:"인텔 i5-8500",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"A",tier:0,uses:["office","senior","kid"],price:0,status:"sale",gift:true,featured:true,desc:"작고 조용합니다. 유튜브·카톡·은행 업무 충분합니다.",photos:[]},
- {id:"ex2",kind:"desktop",brand:"조립PC",title:"[중고] 조립PC i5-10400F 16GB SSD 512GB GTX 1660 SUPER 윈도우11 롤·발로란트 게임용",cpu:"인텔 i5-10400F",ram:"16GB",ssd:"SSD 512GB",gpu:"GTX 1660 SUPER",hdd:"하드 500GB",ports:["HDMI","DP","DVI"],win11:true,grade:"A",tier:2,uses:["student","gamer"],price:0,status:"sale",gift:true,featured:true,desc:"발로란트 144프레임 이상 나옵니다.",photos:[]},
- {id:"ex3",kind:"laptop",brand:"LG 그램 15Z990",title:"[중고] LG 그램 15Z990 i5-8265U 8GB SSD 256GB 윈도우11 노트북",cpu:"인텔 i5-8265U",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"B",tier:0,uses:["student","office"],price:0,status:"sale",desc:"가볍고 배터리 상태 양호. 모서리 생활기스 있습니다.",photos:[]},
- {id:"ex4",kind:"desktop",brand:"조립PC",title:"[중고] 조립PC 라이젠5 7500F 32GB SSD 1TB RTX 4060 Ti 윈도우11 고사양 게임·편집용",cpu:"라이젠5 7500F",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 4060 Ti",win11:true,grade:"A",tier:3,uses:["gamer","creator"],price:0,status:"reserved",gift:true,desc:"배그·최신 게임 높은 옵션 가능.",photos:[]},
- {id:"ex5",kind:"monitor",brand:"삼성 S24F350",title:"[중고] 삼성 24인치 S24F350 FHD HDMI 모니터",cpu:"",ram:"",ssd:"",gpu:"",win11:false,grade:"B",tier:-1,uses:["office","senior"],price:0,status:"sale",desc:"HDMI 케이블 같이 드립니다.",photos:[]}
+ {id:"ex1",kind:"desktop",brand:"HP 프로데스크 400 G5",title:"[중고] HP 미니 본체 i5-8500 8GB SSD 256GB 윈도우11 사무용",cpu:"인텔 i5-8500",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"A",tier:0,uses:["office","senior","kid"],price:0,status:"sale",gift:true,featured:true,desc:"작고 조용합니다. 유튜브·카톡·은행 업무 충분합니다.",photos:[],sampleImg:"img/sample/1.jpg"},
+ {id:"ex2",kind:"desktop",brand:"조립PC",title:"[중고] 게이밍 본체 i5-10400F 16GB SSD 512GB GTX 1660 SUPER 롤·발로란트",cpu:"인텔 i5-10400F",ram:"16GB",ssd:"SSD 512GB",gpu:"GTX 1660 SUPER",hdd:"하드 500GB",ports:["HDMI","DP","DVI"],win11:true,grade:"A",tier:2,uses:["student","gamer"],price:0,status:"sale",gift:true,featured:true,desc:"발로란트 144프레임 이상 나옵니다.",board:"B460 보드",psu:"정격 500W",caseName:"강화유리 미들타워 (블랙)",photos:[],sampleImg:"img/sample/2.jpg"},
+ {id:"ex3",kind:"laptop",brand:"LG 그램 15Z990",title:"[중고] LG 그램 15Z990 i5-8265U 8GB SSD 256GB 가벼운 노트북",cpu:"인텔 i5-8265U",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"B",tier:0,uses:["student","office"],price:0,status:"sale",featured:true,desc:"가볍고 배터리 상태 양호. 모서리 생활기스 있습니다.",photos:[],sampleImg:"img/sample/3.jpg"},
+ {id:"ex4",kind:"desktop",brand:"조립PC",title:"[중고] 고사양 게이밍 본체 라이젠5 7500F 32GB SSD 1TB RTX 4060 Ti",cpu:"라이젠5 7500F",ram:"32GB",ssd:"SSD 1TB",gpu:"RTX 4060 Ti",win11:true,grade:"A",tier:3,uses:["gamer","creator"],price:0,status:"sale",gift:true,featured:true,desc:"배그·최신 게임 높은 옵션 가능.",photos:[],sampleImg:"img/sample/4.jpg"},
+ {id:"ex5",kind:"monitor",brand:"삼성 S24F350",title:"[중고] 삼성 24인치 FHD 모니터 HDMI 케이블 포함",cpu:"",ram:"",ssd:"",gpu:"",win11:false,grade:"B",tier:-1,uses:["office","senior"],price:0,status:"sale",featured:true,desc:"HDMI 케이블 같이 드립니다.",photos:[],sampleImg:"img/sample/5.jpg"},
+ {id:"ex6",kind:"laptop",brand:"사무용 노트북",title:"[중고] 사무용 노트북 i5 8세대 8GB SSD 256GB 인강·문서용",cpu:"인텔 i5-8250U",ram:"8GB",ssd:"SSD 256GB",gpu:"내장 그래픽",win11:true,grade:"A",tier:0,uses:["student","office","senior"],price:0,status:"sale",featured:true,desc:"인강·문서 작업에 알맞습니다.",photos:[],sampleImg:"img/sample/6.jpg"},
+ {id:"ex7",kind:"parts",brand:"그래픽카드",title:"[중고] 그래픽카드 RTX 3060 12GB 듀얼 팬 점검 완료",cpu:"",ram:"",ssd:"",gpu:"RTX 3060",win11:false,grade:"A",tier:-1,uses:["gamer"],price:0,status:"sale",featured:true,desc:"게임으로 온도·소음 점검했습니다.",photos:[],sampleImg:"img/sample/7.jpg"},
+ {id:"ex8",kind:"desktop",brand:"사무용 세트",title:"[중고] 본체+24인치 모니터 세트 i5 16GB SSD 512GB 바로 쓰는 사무용",cpu:"인텔 i5-9400",ram:"16GB",ssd:"SSD 512GB",gpu:"내장 그래픽",win11:true,grade:"A",tier:0,uses:["office","senior","kid"],price:0,status:"sale",gift:true,featured:true,desc:"키보드·마우스까지 한 번에 드립니다.",photos:[],sampleImg:"img/sample/8.jpg"},
+ {id:"ex9",kind:"parts",brand:"SSD",title:"[중고] SSD 256GB 2.5인치 상태 점검 완료",cpu:"",ram:"",ssd:"",gpu:"",win11:false,grade:"A",tier:-1,uses:[],price:0,status:"sale",featured:true,desc:"수명·속도 점검 후 드립니다.",photos:[],sampleImg:"img/sample/9.jpg"},
+ {id:"ex10",kind:"monitor",brand:"27인치 커브드",title:"[중고] 27인치 커브드 모니터 FHD 게임·영상용",cpu:"",ram:"",ssd:"",gpu:"",win11:false,grade:"A",tier:-1,uses:["gamer","office"],price:0,status:"sale",featured:true,desc:"화면 불량 없이 깨끗합니다.",photos:[],sampleImg:"img/sample/10.jpg"}
 ];
 const DEFAULT_SHOP={name:"○○중고컴퓨터",phone:"010-0000-0000",addr:"주소를 넣어 주세요",hours:"평일 10:00–19:00 / 토 10:00–15:00",owner:"",bizNo:"",warranty:"구입 후 1개월 무상 수리",wPc:"1개월",wLaptop:"1개월",wMonitor:"1개월",retDays:"7",daangn:"",joonggo:"",mapUrl:"",kakao:"",promise:"중고 PC·노트북·모니터 | 출고 전 점검·청소 | 무상 수리 보증 | 방문·택배 모두 가능"};
 const SAMPLE_REVIEWS=[
@@ -769,6 +955,7 @@ function renderGames(){
 function priceText(it){return it.price>0?Number(it.price).toLocaleString("ko-KR")+"원":"가격 문의";}
 const localUrls={};
 function photoUrl(id){return localUrls[id]||("photos/"+id);}
+function firstImg(it){return it.photos&&it.photos[0]?photoUrl(esc(it.photos[0])):(it.sampleImg?esc(it.sampleImg):"");}
 /* 사진이 없을 때: 종류별 선 그림 */
 const ART={
  desktop:`<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="36" y="14" width="48" height="92" rx="5"/><path d="M44 26h32M44 33h32"/><circle cx="60" cy="50" r="4"/><path d="M48 72h24M48 78h24M48 84h24M48 90h24" stroke-width="1.6"/><path d="M42 106v4M78 106v4"/></svg>`,
@@ -810,17 +997,17 @@ function specLine(it){
   const gpu=it.gpu&&!/내장/.test(it.gpu)?it.gpu:"";
   return [it.cpu&&it.cpu.replace(/^인텔\s*/,""),it.ram,it.ssd,gpu].filter(Boolean).map(esc).join(" / ");
 }
-function cardHtml(it,isSample){
-  const ph=it.photos&&it.photos[0]?`<img src="${photoUrl(esc(it.photos[0]))}" alt="" loading="lazy">`:noImg(it.kind);
+function cardHtml(it,isSample,rank){
+  const fi=firstImg(it),ph=fi?`<img src="${fi}" alt="" loading="lazy">`:noImg(it.kind);
   const tags=[];
-  if(it.featured&&it.status!=="sold")tags.push(`<span class="tag pick-tag">인기</span>`);
+  if(it.featured&&it.status!=="sold"&&rank===undefined)tags.push(`<span class="tag pick-tag">인기</span>`);
   if(it.status!=="sale")tags.push(`<span class="tag ${it.status}">${STATUS[it.status]}</span>`);
-  const minis=[it.win11&&hasSpecs(it)?"윈도우11":"",it.gift?"키보드·마우스 증정":"",it.grade?it.grade+"급":""].filter(Boolean).map(x=>`<span class="mini">${esc(x)}</span>`).join("");
+  const minis=["택배 가능",it.gift?"키보드·마우스 증정":"",it.win11&&hasSpecs(it)?"윈도우11":"",it.grade?it.grade+"급":""].filter(Boolean).map(x=>`<span class="mini">${esc(x)}</span>`).join("");
   const sl=specLine(it);
   return `<button type="button" class="card ${it.status==="sold"?"is-sold":""}" data-item="${esc(it.id)}">
-    <div class="ph">${ph}${tags.length?`<span class="tags-on">${tags.join("")}</span>`:""}${isSample?'<span class="ex">예시</span>':""}</div>
+    <div class="ph">${ph}${rank?`<span class="rank">${rank}</span>`:""}${tags.length?`<span class="tags-on">${tags.join("")}</span>`:""}${isSample?'<span class="ex">예시</span>':""}</div>
     <div class="body"><h3>${esc(String(it.title||"").replace(/^\[중고\]\s*/,""))}</h3>${sl?`<p class="spec">${sl}</p>`:""}
-    <div class="meta"><span class="price ${it.price>0?"":"ask"}">${esc(priceText(it))}</span>${lvHtml(it.tier)}</div>
+    ${it.price>0?`<div class="meta"><span class="price">${esc(priceText(it))}</span></div>`:""}
     ${minis?`<div class="minis">${minis}</div>`:""}</div></button>`;
 }
 function renderChips(){
@@ -873,14 +1060,14 @@ function renderShop(){
   $("#promise").innerHTML=String(s.promise||"").split("|").map(x=>x.trim()).filter(Boolean).map(x=>`<li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>${esc(x)}</li>`).join("");
 }
 function safeUrl(u){u=String(u||"").trim();return /^https?:\/\//i.test(u)?u:"#";}
-function renderAll(){renderShop();renderGrid();}
+function renderAll(){renderShop();renderGrid();if(curItemId)renderItemPage(curItemId);}
 
 function renderHome(){
   const isSample=items===null||items.length===0;
   const live=allItems().filter(it=>it.status!=="sold");
   let best=live.filter(it=>it.featured);
-  if(!best.length)best=live.slice(0,8);
-  $("#bestGrid").innerHTML=best.length?best.slice(0,8).map(it=>cardHtml(it,isSample)).join(""):`<div class="empty" style="grid-column:1/-1"><b>지금 준비 중입니다</b>전화 주시면 맞춰서 준비해 드립니다.</div>`;
+  if(best.length<10)best=best.concat(live.filter(it=>!it.featured)).slice(0,10);
+  $("#bestGrid").innerHTML=best.length?best.slice(0,10).map((it,i)=>cardHtml(it,isSample,i+1)).join(""):`<div class="empty" style="grid-column:1/-1"><b>지금 준비 중입니다</b>전화 주시면 맞춰서 준비해 드립니다.</div>`;
   const tiles=[["office","사무용PC","desktop"],["gaming","게이밍PC","desktop"],["laptop","노트북","laptop"],["monitor","모니터","monitor"]];
   $("#catTiles").innerHTML=tiles.map(([k,l,a])=>`<a href="#/list/${k}">${ART[a]}<div><b>${l}</b><span>${live.filter(it=>inCat(it,k)).length}대 있음</span></div></a>`).join("");
 }
@@ -890,7 +1077,7 @@ function renderBanner(){
   else{b.classList.remove("has-photo");im.innerHTML=`<div class="defimg" aria-hidden="true"></div>`;}
 }
 /* 화면 나누기: 주소 뒤 #/... 로 화면을 바꿈 (뒤로 가기도 됨) */
-const PAGES=["home","list","who","games","shop"];
+const PAGES=["home","list","who","games","shop","item"];
 function route(){
   const h=decodeURIComponent(location.hash.replace(/^#\/?/,""));
   const [path,q]=h.split("?");const seg=(path||"").split("/");
@@ -910,6 +1097,7 @@ function route(){
   const cur=document.querySelector(`.sign nav a[data-nav="${key}"]`);if(cur)cur.setAttribute("aria-current","page");
   const names={home:"",list:$("#listTitle").textContent,who:"용도별 추천",games:"게임 사양",shop:"가게 안내"};
   document.title=(names[page]?names[page]+" - ":"")+(shop.name||"중고컴퓨터");
+  if(page==="item")renderItemPage(seg[1]||"");else curItemId=null;
   scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
@@ -930,7 +1118,7 @@ function botStart(){
 }
 function botItemsHtml(list){
   return `<div class="botitems">${list.map(it=>`<button type="button" class="botitem" data-item="${esc(it.id)}">
-    <span class="bi-ph">${it.photos&&it.photos[0]?`<img src="${photoUrl(esc(it.photos[0]))}" alt="">`:(ART[it.kind]||ART.desktop)}</span>
+    <span class="bi-ph">${firstImg(it)?`<img src="${firstImg(it)}" alt="">`:(ART[it.kind]||ART.desktop)}</span>
     <span class="bi-tx"><b>${esc(String(it.title||"").replace(/^\[중고\]\s*/,""))}</b><span>${esc(priceText(it))}${Number(it.tier)>=0?" · "+esc(TIERS[it.tier].name):""}</span></span></button>`).join("")}</div>`;
 }
 function botMatch(need,kind,lo,hi){
@@ -1005,6 +1193,218 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#bot").hidden&&!$("#modalRoot").innerHTML)closeBot();});
 
+/* ---------- 상품 자세히 (쿠팡처럼 따로 보는 화면) ---------- */
+const SPEC_ICONS={
+ cpu:'<rect x="7" y="7" width="18" height="18" rx="2"/><rect x="12" y="12" width="8" height="8"/><path d="M11 3v4M16 3v4M21 3v4M11 25v4M16 25v4M21 25v4M3 11h4M3 16h4M3 21h4M25 11h4M25 16h4M25 21h4"/>',
+ gpu:'<rect x="3" y="8" width="26" height="14" rx="2"/><circle cx="12" cy="15" r="4"/><circle cx="22" cy="15" r="4"/><path d="M6 22v4"/>',
+ ram:'<rect x="3" y="10" width="26" height="12" rx="1"/><path d="M8 14v4M13 14v4M19 14v4M24 14v4M6 22v4M26 22v4"/>',
+ ssd:'<rect x="6" y="4" width="20" height="24" rx="2"/><path d="M10 9h12M10 13h8"/><circle cx="21" cy="22" r="2"/>',
+ hdd:'<circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="5"/><circle cx="16" cy="16" r="1"/>',
+ port:'<rect x="4" y="9" width="24" height="14" rx="2"/><path d="M9 14h2M13 14h2M17 14h2M21 14h2M11 18h10"/>',
+ board:'<rect x="4" y="4" width="24" height="24" rx="2"/><rect x="9" y="9" width="8" height="8"/><path d="M20 9h4M20 13h4M9 21h15"/>',
+ psu:'<rect x="4" y="6" width="24" height="20" rx="2"/><circle cx="16" cy="16" r="6"/><path d="M16 10v12M10 16h12"/>',
+ case:'<rect x="9" y="3" width="14" height="26" rx="2"/><circle cx="16" cy="9" r="1.6"/><path d="M12 15h8M12 19h8M12 23h8"/>',
+ win:'<path d="M4 6l11-1.5V15H4zM17 4.2L28 3v12H17zM4 17h11v10.5L4 26zM17 17h11v12l-11-1.4z"/>'
+};
+const GAME_COLORS=["#1f4fbf","#7a2bbf","#c2410c","#0f766e","#b91c1c","#1e3a8a","#9333ea","#0e7490","#a16207","#be123c","#334155","#15803d"];
+function itemGames(it){
+  if(Array.isArray(it.games)&&it.games.length)return it.games.map(Number).filter(i=>GAMES[i]);
+  if(!hasSpecs(it)||!(Number(it.tier)>=1))return [];
+  return GAMES.map((g,i)=>i).filter(i=>GAMES[i].t<=Number(it.tier));
+}
+function itemHeadline(it){
+  if(it.headline)return it.headline;
+  if(hasSpecs(it)){
+    const cpu=String(it.cpu||"").replace(/^인텔\s*/,"").split(/[-\s]/)[0];
+    const what=it.kind==="laptop"?"노트북":Number(it.tier)>=1?"게이밍 PC":"사무용 PC";
+    return (cpu?cpu+" ":"")+what;
+  }
+  return it.brand||KIND[it.kind]||"상품";
+}
+function specBar(it){return [it.cpu,it.ram,it.ssd,it.gpu&&!/내장/.test(it.gpu)?it.gpu:"",it.win11&&hasSpecs(it)?"윈도우11":""].filter(Boolean).map(esc).join(" / ");}
+let curItemId=null;
+function renderItemPage(id){
+  curItemId=id;
+  const el=$("#itemPage");
+  const it=allItems().find(x=>x.id===id);
+  if(!it){el.innerHTML=`<section><div class="wrap"><div class="empty"><b>이 상품은 지금 없어요</b>팔렸거나 내려간 상품입니다. <a href="#/list/all">전체 상품 보기</a></div></div></section>`;return;}
+  const isSample=!(items&&items.length);
+  const pics=(it.photos||[]).map(p=>photoUrl(esc(p)));
+  if(!pics.length&&it.sampleImg)pics.push(esc(it.sampleImg));
+  const tel=String(shop.phone).replace(/[^0-9+]/g,"");
+  const GRADE={S:"새것과 거의 같음",A:"깨끗함, 아주 작은 흔적 정도",B:"쓰던 흔적·생활기스 있음",C:"흠집 많음, 대신 값이 쌈"};
+  const chips=[it.grade?it.grade+"급":"",it.win11&&hasSpecs(it)?"윈도우11 정품":"",it.gift?"키보드·마우스 증정":"","택배 가능"].filter(Boolean);
+  const opt=(label,val)=>val?`<div class="opt"><span>${label}</span><b>${esc(val)}</b></div>`:"";
+
+  const games=itemGames(it);
+  const similar=allItems().filter(x=>x.id!==it.id&&x.status!=="sold"&&x.kind===it.kind).slice(0,5);
+  const big=(svg)=>`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${svg}</svg>`;
+  el.innerHTML=`
+  <section class="pd-top"><div class="wrap">
+    <nav class="crumb"><a href="#/">홈</a> › <a href="#/list/${it.kind==="laptop"?"laptop":it.kind==="monitor"?"monitor":it.kind==="parts"?"parts":Number(it.tier)>=1?"gaming":"office"}">${esc(it.kind==="desktop"?(Number(it.tier)>=1?"게이밍PC":"사무용PC"):KIND[it.kind]||"상품")}</a></nav>
+    <div class="pd-grid">
+      <div class="pd-gal">
+        ${pics.length>1?`<div class="pd-thumbs">${pics.map((p,i)=>`<button type="button" data-pdthumb="${p}" aria-current="${i===0}" aria-label="사진 ${i+1} 크게 보기"><img src="${p}" alt=""></button>`).join("")}</div>`:""}
+        <div class="pd-main" id="pdMain">${pics[0]?`<img src="${pics[0]}" alt="${esc(it.title)} 사진">`:noImg(it.kind)}${isSample?'<span class="ex">예시</span>':""}${it.status!=="sale"?`<span class="tags-on"><span class="tag ${it.status}">${STATUS[it.status]}</span></span>`:""}</div>
+      </div>
+      <div class="pd-info">
+        <span class="pd-brand">${esc(shop.name)}</span>
+        <h1>${esc(String(it.title||"").replace(/^\[중고\]\s*/,""))}</h1>
+        <div class="pd-chips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div>
+        <div class="pd-price">${it.price>0?`<b>${esc(priceText(it))}</b>`:`<b class="ask">가격은 전화·문자로 알려 드려요</b>`}</div>
+        <dl class="pd-kv">
+          <dt>받는 방법</dt><dd>택배 · 가게에서 직접 받기</dd>
+          <dt>무상 수리</dt><dd>${esc(warrantyFor(it))} <span class="note">(받고 ${esc(shop.retDays||"7")}일 안에 고장 나면 교환·환불)</span></dd>
+          <dt>겉모양</dt><dd>${esc(it.grade||"A")}급 <span class="note">${esc(GRADE[it.grade]||GRADE.A)}</span></dd>
+        </dl>
+        ${hasSpecs(it)?`<div class="pd-opts">${opt("CPU · 그래픽",[it.cpu,it.gpu].filter(Boolean).join(", "))}${opt("저장장치 · 메모리",[it.ssd,it.ram].filter(Boolean).join(", "))}</div>`:""}
+        <div class="pd-acts">
+          <a class="btn" href="tel:${esc(tel)}">전화 문의 ${esc(shop.phone)}</a>
+          <a class="btn ghost" href="sms:${esc(tel)}">문자 보내기</a>
+          ${shop.kakao?`<a class="btn kakaobtn" href="${esc(safeUrl(shop.kakao))}" target="_blank" rel="noopener">카카오톡 상담</a>`:""}
+        </div>
+        <p class="note">"홈페이지에서 이 상품 보고 연락드려요" 라고 말씀해 주시면 바로 알아들어요.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <nav class="pd-tabs"><div class="wrap"><a href="#pd-detail" data-jump="pd-detail">상품 상세</a><a href="#pd-ship" data-jump="pd-ship">구매 안내</a>${similar.length?`<a href="#pd-sim" data-jump="pd-sim">비슷한 상품</a>`:""}</div></nav>
+
+  <section class="pd-detail" id="pd-detail"><div class="pd-col">
+    <h2 class="pd-head">${esc(itemHeadline(it))}</h2>
+    ${specBar(it)?`<p class="pd-bar">${specBar(it)}</p>`:""}
+    ${pics[0]?`<figure class="pd-photo"><img src="${pics[0]}" alt="${esc(it.title)} 사진" loading="lazy"><figcaption>${isSample?"※ 이해를 돕기 위한 예시 사진입니다.":"※ 실제로 파는 그 제품 사진입니다."}</figcaption></figure>`:""}
+
+    <div class="pd-ready">
+      <div class="plug">${big('<path d="M11 4v6M21 4v6"/><path d="M7 10h18v5a9 9 0 0 1-18 0z"/><path d="M16 24v5"/>')}</div>
+      <div><b>받자마자 선만 꽂고<br>바로 쓰세요</b><span>윈도우와 쓰실 프로그램까지 다 깔아서 드립니다.</span></div>
+    </div>
+    <div class="pd-pts">
+      <div>${big('<circle cx="14" cy="14" r="8"/><path d="M20 20l7 7"/><path d="M10.5 14l2.5 2.5 4.5-5"/>')}<b>점검·청소</b><span>부품 하나하나 확인하고<br> 먼지까지 청소</span></div>
+      <div>${big('<path d="M4 10l12-6 12 6v12l-12 6-12-6z"/><path d="M4 10l12 6 12-6M16 16v12"/>')}<b>안전 포장</b><span>완충재로 겹겹이 싸서<br> 택배로 보내 드림</span></div>
+      <div>${big('<path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z"/><path d="M11 15.5l3.5 3.5 6.5-7"/>')}<b>무상 수리 ${esc(warrantyFor(it))}</b><span>고장 나면<br> 사장님이 직접 고쳐 드림</span></div>
+    </div>
+
+    ${partBlocks(it)}
+    ${games.length?`<div class="pd-games"><h3>이런 게임이 잘 돌아갑니다</h3><p class="pd-sub">FHD(1920×1080) 화질 기준입니다</p>
+      <div class="gtiles">${games.map((i,n)=>`<div class="gt" style="--c:${GAME_COLORS[i%GAME_COLORS.length]}"><b>${esc(GAMES[i].n)}</b><span>${esc(GAMES[i].need)}</span></div>`).join("")}</div></div>`:""}
+
+    ${moreBlocks(it)}
+    ${specTable(it)}
+    ${pics.length>1?`<div class="pd-more">${pics.slice(1).map((p,i)=>`<img src="${p}" alt="${esc(it.title)} 사진 ${i+2}" loading="lazy">`).join("")}</div>`:""}
+
+    ${it.desc?`<div class="pd-memo"><h3>사장님 한마디</h3><p>${esc(it.desc)}</p></div>`:""}
+  </div></section>
+
+  <section class="pd-ship" id="pd-ship"><div class="pd-col">${centerBox(it)}</div></section>
+
+  ${similar.length?`<section id="pd-sim"><div class="wrap"><div class="sec-head"><div><h2>비슷한 상품</h2></div></div>
+    <div class="grid best">${similar.map(x=>cardHtml(x,isSample,0)).join("")}</div></div></section>`:""}`;
+  document.title=itemHeadline(it)+" - "+(shop.name||"중고컴퓨터");
+}
+
+/* 부품 설명: 사양 칸에 적힌 글로 자동으로 만들어짐 */
+const CPU_INTEL={"8100":[4,4,3.6,3.6],"10100":[4,8,3.6,4.3],"12100":[4,8,3.3,4.3],"4590":[4,4,3.3,3.7],"6500":[4,4,3.2,3.6],"7500":[4,4,3.4,3.8],"8400":[6,6,2.8,4.0],"8500":[6,6,3.0,4.1],"9400":[6,6,2.9,4.1],"10400":[6,12,2.9,4.3],"11400":[6,12,2.6,4.4],"12400":[6,12,2.5,4.4],"13400":[10,16,2.5,4.6],"4770":[4,8,3.4,3.9],"6700":[4,8,3.4,4.0],"7700":[4,8,3.6,4.2],"8700":[6,12,3.2,4.6],"9700":[8,8,3.0,4.7],"10700":[8,16,2.9,4.8],"12700":[12,20,2.1,4.9],"8250U":[4,8,1.6,3.4],"8265U":[4,8,1.6,3.9],"10210U":[4,8,1.6,4.2],"1135G7":[4,8,2.4,4.2]};
+const CPU_AMD={"2600":[6,12,3.4,3.9],"3600":[6,12,3.6,4.2],"5500":[6,12,3.6,4.2],"5600":[6,12,3.5,4.4],"5600X":[6,12,3.7,4.6],"7500F":[6,12,3.7,5.0],"7600":[6,12,3.8,5.1],"5700X":[8,16,3.4,4.6],"5800X":[8,16,3.8,4.7]};
+function cpuInfo(name){
+  const s=String(name||"").toUpperCase();
+  const amd=/라이젠|RYZEN/.test(s);
+  const m=s.match(/(\d{4,5})([A-Z]\d?[A-Z]?\d?)?/);if(!m)return null;
+  const num=m[1],suf=(m[2]||"").replace(/^F$|^K$|^KF$/,"");
+  const T=amd?CPU_AMD:CPU_INTEL;
+  return T[num+suf]||T[num+(m[2]||"")]||T[num]||null;
+}
+function gb(v){const m=String(v||"").match(/(\d+)\s*(TB|GB)/i);if(!m)return 0;return m[2].toUpperCase()==="TB"?+m[1]*1024:+m[1];}
+const USE_PICS={office:["img/parts/use-office.jpg","문서·사무 작업"],senior:["img/parts/use-senior.jpg","유튜브·카톡·은행"],student:["img/parts/use-study.jpg","인강·숙제"],kid:["img/parts/use-study.jpg","아이 공부"],gamer:["img/parts/use-game.jpg","게임"],creator:["img/parts/use-game.jpg","영상 편집·방송"]};
+const PART_NOTE='<p class="pd-fine">※ 이해를 돕기 위한 그림이며, 실제 부품 제조사는 다를 수 있습니다.</p>';
+function partBlocks(it){
+  if(!hasSpecs(it))return "";
+  const out=[];const t=Number(it.tier);
+  // CPU
+  if(it.cpu){
+    const c=cpuInfo(it.cpu);const nm=esc(it.cpu);
+    const job=t>=3?"최신 게임과 영상 편집까지":t>=1?"게임과 여러 프로그램을 동시에":"인터넷, 문서, 유튜브를";
+    out.push(`<div class="pb pb-cpu"><h3>${nm}</h3>
+      <p>${c?`${c[0]}코어 ${c[1]}스레드 `:""}${nm}${c?`(${c[2].toFixed(1)}~${c[3].toFixed(1)}GHz)`:""} 프로세서가 들어 있어<br>${job} 막힘 없이 처리합니다.</p>
+      <img class="pb-img sq" src="img/parts/cpu.jpg" alt="" loading="lazy">
+      ${c?`<dl class="pb-stats"><div><dt>${c[0]}</dt><dd>코어</dd></div><div><dt>${c[1]}</dt><dd>스레드</dd></div><div><dt>${c[2].toFixed(1)}GHz</dt><dd>기본 속도</dd></div><div><dt>${c[3].toFixed(1)}GHz</dt><dd>최대 속도</dd></div></dl>`:""}</div>`);
+  }
+  // SSD
+  if(/SSD/i.test(it.ssd||"")){
+    const cap=esc(String(it.ssd).replace(/SSD\s*/i,"").trim()||it.ssd);
+    out.push(`<div class="pb pb-ssd"><h3>빠른 부팅과 로딩 속도<br>SSD ${cap}</h3>
+      <div class="pb-ssdimg"><img src="img/parts/ssd.jpg" alt="" loading="lazy"><span><b>SSD ${cap}</b><small>빠른 저장장치</small></span></div>${PART_NOTE}
+      <p>예전 하드디스크와 달리 <b>켜지는 속도가 빠르고</b>, 프로그램과 게임이 <b>금방 열립니다.</b></p>
+      <div class="pb-boot"><figure><img src="img/parts/boot-hdd.jpg" alt="" loading="lazy"><figcaption><span>하드디스크 컴퓨터 켜지는 시간</span><b class="slow">1분 넘게 걸리기도 함</b></figcaption></figure>
+      <figure><img src="img/parts/boot-ssd.jpg" alt="" loading="lazy"><figcaption><span>SSD 컴퓨터 켜지는 시간</span><b class="fast">30초 안팎</b></figcaption></figure></div></div>`);
+  }
+  // 메모리
+  if(it.ram){
+    const g=gb(it.ram);
+    const say=g>=32?"고사양 게임, 영상 편집, 창 수십 개를 띄워도 넉넉합니다.":g>=16?"게임을 하면서 인터넷 창을 여러 개 띄워도 버벅이지 않습니다.":"인터넷, 문서, 유튜브, 카톡 같은 일상 작업에 충분합니다.";
+    out.push(`<div class="pb pb-ram"><h3>${g>=16?"넉넉한":"알맞은"} 메모리<br>${esc(it.ram)}</h3><p>${say}</p>
+      <img class="pb-img" src="img/parts/ram.jpg" alt="" loading="lazy">${PART_NOTE}</div>`);
+  }
+  // 쓰임새 사진
+  const uses=[...new Set((it.uses||[]).map(u=>USE_PICS[u]).filter(Boolean).map(x=>x[0]))].slice(0,2);
+  const pics=uses.length?uses:[t>=1?USE_PICS.gamer[0]:USE_PICS.office[0]];
+  const cap=p=>Object.values(USE_PICS).find(x=>x[0]===p)[1];
+  out.push(`<div class="pb pb-use"><h3>이런 분께 딱 맞습니다</h3><div class="pb-uses ${pics.length===1?"one":""}">${pics.map(p=>`<figure><img src="${p}" alt="" loading="lazy"><figcaption>${esc(cap(p))}</figcaption></figure>`).join("")}</div></div>`);
+  return out.join("");
+}
+/* 윈도우·파워·케이스·단자·사양표·안내 */
+const WIN_FEATS=[
+ ['<rect x="4" y="6" width="24" height="17" rx="2"/><path d="M11 27h10M16 23v4"/><path d="M8 18c4-6 9-8 16-7"/>',"깔끔한 바탕화면"],
+ ['<rect x="4" y="6" width="11" height="9" rx="1"/><rect x="17" y="6" width="11" height="9" rx="1"/><rect x="4" y="17" width="24" height="9" rx="1"/>',"화면 나눠 쓰기"],
+ ['<rect x="4" y="6" width="24" height="20" rx="2"/><path d="M4 22h24"/><rect x="14" y="23" width="4" height="2"/>',"가운데 시작 단추"],
+ ['<rect x="8" y="14" width="16" height="13" rx="2"/><path d="M11 14v-3a5 5 0 0 1 10 0v3"/><circle cx="16" cy="20" r="1.6"/>',"튼튼한 보안"],
+ ['<rect x="4" y="9" width="17" height="14" rx="2"/><path d="M21 14l7-4v12l-7-4"/>',"영상통화 바로 연결"],
+ ['<rect x="5" y="5" width="9" height="9" rx="1"/><rect x="18" y="5" width="9" height="9" rx="1"/><rect x="5" y="18" width="9" height="9" rx="1"/><rect x="18" y="18" width="9" height="9" rx="1"/>',"일과 여가를 한 번에"]
+];
+const PORT_SVG={
+ HDMI:'<path d="M10 22h44v10l-6 6H16l-6-6z" fill="#1c1c1c"/><rect x="16" y="26" width="32" height="5" fill="#d8d8d8"/>',
+ DP:'<path d="M10 22h44v16H16l-6-6z" fill="#1c1c1c"/><rect x="16" y="26" width="32" height="5" fill="#d8d8d8"/>',
+ DVI:'<path d="M8 22h48l-4 16H12z" fill="#e9e4d6" stroke="#888" stroke-width="1.5"/>'+Array.from({length:16},(_,i)=>`<rect x="${14+(i%8)*4.4}" y="${26+Math.floor(i/8)*5}" width="2.4" height="2.4" fill="#444"/>`).join("")+'<rect x="50" y="28" width="3" height="4" fill="#444"/>',
+ "VGA(RGB)":'<path d="M8 22h48l-5 16H13z" fill="#2b4f9e"/>'+Array.from({length:15},(_,i)=>`<circle cx="${17+(i%5)*7.5+(i>=5&&i<10?3.5:0)}" cy="${26+Math.floor(i/5)*4.5}" r="1.4" fill="#fff"/>`).join("")
+};
+const DEF_SHIP="가게에서 직접 받으시거나 택배로 보내 드립니다.\n평일 오후 2시 전에 말씀 주시면 그날 보내 드립니다.\n받으시는 데 보통 하루 정도 걸립니다. (택배사 사정에 따라 늦어질 수 있음)";
+const DEF_RETURN="받고 7일 안에 고장 나면 바꿔 드리거나 환불해 드립니다.\n떨어뜨리거나 물에 젖는 등 쓰시다 생긴 고장은 교환·환불이 어렵습니다.\n단순히 마음이 바뀌신 경우 오가는 택배비는 손님이 내셔야 합니다.\n같이 드린 키보드·마우스 등을 잃어버리시면 그 값을 따로 받습니다.";
+function lines(t){return String(t||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);}
+function moreBlocks(it){
+  const out=[];
+  if(hasSpecs(it)&&it.win11)out.push(`<div class="pb pb-win"><div class="winlogo" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <h3>정품 윈도우11 설치</h3><p>윈도우 설치 걱정 없이 받자마자 바로 쓰세요.</p>
+    <ul class="winfeat">${WIN_FEATS.map(([s,l])=>`<li><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${s}</svg><span>${l}</span></li>`).join("")}</ul></div>`);
+  if(it.psu)out.push(`<div class="pb pb-psu"><h3>안정적인 전원 공급<br><em>파워 ${esc(it.psu)}</em></h3>
+    <p>컴퓨터의 심장이라고 불리는 파워!<br>모든 부품에 전기를 고르게 보내 컴퓨터를 안정적으로 지켜 줍니다.</p>
+    <img class="pb-img sq" src="img/parts/psu.jpg" alt="" loading="lazy">${PART_NOTE}</div>`);
+  if(it.caseName||it.size){const pic=(it.photos&&it.photos[0])?photoUrl(esc(it.photos[0])):(it.sampleImg?esc(it.sampleImg):"");
+    out.push(`<div class="pb pb-case"><h3>케이스${it.caseName?`<br><em>${esc(it.caseName)}</em>`:""}</h3>
+    ${pic?`<img class="pb-img sq" src="${pic}" alt="" loading="lazy">`:""}${it.size?`<p class="pb-size">${esc(it.size)}</p>`:""}</div>`);}
+  if((it.ports||[]).length)out.push(`<div class="pb pb-ports"><h3>지원 포트</h3><ul>${it.ports.map(p=>`<li><svg viewBox="0 0 64 60" aria-hidden="true">${PORT_SVG[p]||""}</svg><span>${esc(p.replace("(RGB)",""))}</span></li>`).join("")}</ul>
+    <p class="pb-warn">※ 사시기 전에 쓰시는 모니터의 연결 단자를 꼭 확인해 주세요!</p></div>`);
+  return out.join("");
+}
+function specTable(it){
+  const r=[["cpu","프로세서",it.cpu?(()=>{const c=cpuInfo(it.cpu);return it.cpu+(c?` (${c[2].toFixed(2)}~${c[3].toFixed(2)}GHz)`:"");})():""],
+    ["board","메인보드",it.board],["ram","메모리",it.ram],["ssd","저장장치",it.ssd],["hdd","추가 저장장치",it.hdd],["psu","파워",it.psu],
+    ["gpu","그래픽",it.gpu],["win","운영체제",hasSpecs(it)?(it.win11?"윈도우11 정품":"설치 안 됨"):""],["port","연결 단자",(it.ports||[]).join(", ")],
+    ["case","모델명",it.caseName||it.brand]].filter(x=>x[2]);
+  if(!r.length)return "";
+  return `<div class="pd-stable"><h3>제품 사양</h3><table><tbody>${r.map(([k,l,v])=>`<tr><th><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">${SPEC_ICONS[k]||SPEC_ICONS.case}</svg>${l}</th><td>${esc(v)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function centerBox(it){
+  const tel=esc(shop.phone);
+  const row=(h,list)=>`<tr><th>${h}</th><td><ul>${list.map(x=>`<li>${x}</li>`).join("")}</ul></td></tr>`;
+  return `<div class="pd-center"><div class="pc-head"><h3>구매 안내</h3><span>사시기 전에 꼭 읽어 주세요</span></div><table><tbody>
+    ${row("제품 안내",["이 제품은 <b>중고 제품</b>입니다.","중고라서 <b>생활기스나 작은 흠집</b>이 있을 수 있습니다. (겉모양 "+esc(it.grade||"A")+"급)"])}
+    ${row("배송 안내",lines(shop.shipInfo||DEF_SHIP).map(esc))}
+    ${row("문의",[`전화 <a class="pc-tel" href="tel:${esc(String(shop.phone).replace(/[^0-9+]/g,""))}">${tel}</a> 로 연락 주세요. (${esc(shop.hours)})`])}
+    ${row("무상 수리",[`고장 나면 <b>${esc(warrantyFor(it))} 동안 무상으로</b> 고쳐 드립니다.`,"기간이 지나도 부품값만 받고 고쳐 드립니다."])}
+    ${row("교환·반품",lines(shop.returnInfo||DEF_RETURN).map(esc))}
+  </tbody></table></div>`;
+}
+
 /* ---------- 매물 자세히 ---------- */
 function openItem(id){
   const it=allItems().find(x=>x.id===id);if(!it)return;
@@ -1024,7 +1424,7 @@ function openItem(id){
   const gamesOk=Number(it.tier)>=1?GAMES.filter(g=>g.t<=it.tier).map(g=>g.n).join(", "):"";
   modal(`<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="itTitle">
     <div class="top"><div><span class="note">${esc(KIND[it.kind]||"")} · ${STATUS[it.status]}</span><h2 id="itTitle">${esc(it.title)}</h2></div><button class="x" type="button" data-close aria-label="닫기">×</button></div>
-    <div class="gallery"><div class="main" id="gMain">${photos[0]?`<img src="${photoUrl(esc(photos[0]))}" alt="${esc(it.title)} 사진">`:noImg(it.kind)}</div>
+    <div class="gallery"><div class="main" id="gMain">${photos[0]?`<img src="${photoUrl(esc(photos[0]))}" alt="${esc(it.title)} 사진">`:(it.sampleImg?`<img src="${esc(it.sampleImg)}" alt="${esc(it.title)} 예시 사진">`:noImg(it.kind))}</div>
     ${photos.length>1?`<div class="thumbs">${photos.map((p,i)=>`<button type="button" data-thumb="${esc(p)}" aria-current="${i===0}"><img src="${photoUrl(esc(p))}" alt="사진 ${i+1}"></button>`).join("")}</div>`:""}</div>
     <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><span class="price" style="font-size:1.5rem">${esc(priceText(it))}</span>${lvHtml(it.tier)}</div>
     ${specs}
@@ -1079,7 +1479,12 @@ function formHtml(){
     <div class="field"><label for="fSsd">저장장치</label><input type="text" id="fSsd" value="${esc(it.ssd)}" placeholder="예) SSD 512GB"></div>
     <div class="field"><label for="fGpu">그래픽카드</label><input type="text" id="fGpu" value="${esc(it.gpu)}" placeholder="예) GTX 1660 SUPER"></div>
     <div class="field"><label for="fHdd">추가 저장장치 (없으면 비워 두기)</label><input type="text" id="fHdd" value="${esc(it.hdd||"")}" placeholder="예) 하드 500GB"></div>
+    <div class="field"><label for="fBoard">메인보드 (몰라도 됨)</label><input type="text" id="fBoard" value="${esc(it.board||"")}" placeholder="예) H310 보드"></div>
+    <div class="field"><label for="fPsu">파워 (몰라도 됨)</label><input type="text" id="fPsu" value="${esc(it.psu||"")}" placeholder="예) 정격 500W"></div>
+    <div class="field"><label for="fCase">케이스 이름 (몰라도 됨)</label><input type="text" id="fCase" value="${esc(it.caseName||"")}" placeholder="예) 다크플래쉬 DS500 블랙"></div>
+    <div class="field"><label for="fSize">크기 (몰라도 됨)</label><input type="text" id="fSize" value="${esc(it.size||"")}" placeholder="예) 가로 21cm × 깊이 41cm × 높이 48cm"></div>
   </div>
+  <span class="hint" style="margin-top:-8px">적은 칸만 상품 화면에 설명으로 나옵니다. 모르는 칸은 비워 두셔도 됩니다.</span>
   <div class="field"><span class="lbl">모니터 연결 단자 (있는 것 모두)</span><div class="choices">${["HDMI","DP","DVI","VGA(RGB)"].map(p=>`<label><input type="checkbox" name="ports" value="${p}" ${(it.ports||[]).includes(p)?"checked":""}>${p}</label>`).join("")}</div></div>
   <div class="field"><span class="lbl">④ 이 컴퓨터로 되는 일 (등급)</span><div class="choices">
     <label><input type="radio" name="tier" value="-1" ${Number(it.tier)===-1?"checked":""}>해당 없음(모니터 등)</label>
@@ -1100,7 +1505,9 @@ function formHtml(){
     <div class="choices"><label><input type="checkbox" id="fAsk" ${!(it.price>0)?"checked":""}>가격은 전화로 (가격 문의)</label></div>
     <input type="number" id="fPrice" inputmode="numeric" min="0" step="1000" value="${it.price>0?it.price:""}" placeholder="숫자만, 예) 350000" ${!(it.price>0)?"disabled":""}></div>
   <div class="field"><span class="lbl">⑧ 판매 상태</span><div class="choices">${Object.entries(STATUS).map(([k,l])=>`<label><input type="radio" name="status" value="${k}" ${it.status===k?"checked":""}>${l}</label>`).join("")}</div></div>
-  <div class="field"><label for="fDesc">⑨ 설명 (자유롭게)</label><textarea id="fDesc" placeholder="예) 조용하고 발열 적습니다. 키보드·마우스 같이 드립니다.">${esc(it.desc)}</textarea></div>
+  <div class="field"><label for="fHead">상품 화면 맨 위 큰 제목 (비우면 자동)</label><input type="text" id="fHead" value="${esc(it.headline||"")}" placeholder="예) i7 가성비 게이밍PC"></div>
+  <div class="field"><span class="lbl">이 컴퓨터로 되는 게임 (아무것도 안 고르면 ④ 등급에 맞춰 자동)</span><div class="choices">${GAMES.map((g,i)=>`<label><input type="checkbox" name="games" value="${i}" ${(it.games||[]).map(Number).includes(i)?"checked":""}>${esc(g.n)}</label>`).join("")}</div></div>
+  <div class="field"><label for="fDesc">⑨ 사장님 한마디 (자유롭게)</label><textarea id="fDesc" placeholder="예) 조용하고 발열 적습니다. 키보드·마우스 같이 드립니다.">${esc(it.desc)}</textarea></div>
   <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="submit" id="saveBtn" style="font-size:1.1rem;padding:14px 26px">${it.id?"고친 내용 저장":"홈페이지에 올리기"}</button>
   ${it.id?`<button class="btn ghost" type="button" data-newitem>새로 올리기로</button>`:""}</div>
   </form>`;
@@ -1199,6 +1606,8 @@ function shopFormHtml(){
     ${f("sJoonggo","중고나라 글 주소",s.joonggo,"https://...")}
     ${f("sMap","네이버 지도 주소 (없어도 됨)",s.mapUrl,"https://naver.me/...")}
     ${f("sKakao","카카오톡 채널 상담 주소 (없어도 됨)",s.kakao,"http://pf.kakao.com/_xxxxx/chat","카카오톡 채널 관리자 화면의 '채팅 주소'를 붙여 넣으면 홈페이지에 카톡 상담 단추가 생깁니다")}
+    <div class="field"><label for="sShip">상품 화면 '배송 안내' (한 줄에 하나씩)</label><textarea id="sShip" rows="4">${esc(s.shipInfo||DEF_SHIP)}</textarea></div>
+    <div class="field"><label for="sReturn">상품 화면 '교환·반품' (한 줄에 하나씩)</label><textarea id="sReturn" rows="5">${esc(s.returnInfo||DEF_RETURN)}</textarea></div>
     <button class="btn" type="submit" style="justify-self:start;font-size:1.1rem;padding:14px 26px">가게 정보 저장</button>
   </form>`;
 }
@@ -1248,6 +1657,8 @@ function readForm(){
   editing.grade=v("#fGrade");editing.status=(F.querySelector('input[name=status]:checked')||{}).value||"sale";
   editing.price=$("#fAsk").checked?0:Math.max(0,Math.round(Number(v("#fPrice"))||0));
   editing.desc=v("#fDesc");
+  editing.board=v("#fBoard").trim();editing.psu=v("#fPsu").trim();editing.caseName=v("#fCase").trim();editing.size=v("#fSize").trim();editing.headline=v("#fHead").trim();
+  editing.games=[...F.querySelectorAll('input[name=games]:checked')].map(x=>Number(x.value));
 }
 async function saveItem(){
   if(busy)return;readForm();
@@ -1278,16 +1689,21 @@ async function delItem(id){
 let bannerDraft;
 /* 큰 사진을 바꿀 때 가게 정보 칸에 적던 글이 지워지지 않게 */
 let shopFormKeep=null;
-function keepShopForm(){const F=$("#shopForm");shopFormKeep=F?[...F.querySelectorAll("input[type=text]")].map(i=>[i.id,i.value]):null;}
+function keepShopForm(){const F=$("#shopForm");shopFormKeep=F?[...F.querySelectorAll("input[type=text],textarea")].map(i=>[i.id,i.value]):null;}
 function restoreShopForm(){if(!shopFormKeep)return;shopFormKeep.forEach(([id,v])=>{const el=$("#"+id);if(el)el.value=v;});shopFormKeep=null;}
 async function saveShop(){
   const g=id=>($("#"+id).value||"").trim();
-  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),kakao:g("sKakao"),promise:g("sPromise"),banner:bannerDraft!==undefined?(bannerDraft?bannerDraft.id:""):(shop.banner||"")};
+  const next={name:g("sName")||DEFAULT_SHOP.name,phone:g("sPhone"),addr:g("sAddr"),hours:g("sHours"),owner:g("sOwner"),bizNo:g("sBiz"),wPc:g("sWPc")||"1개월",wLaptop:g("sWLaptop")||"1개월",wMonitor:g("sWMonitor")||"1개월",retDays:g("sRet").replace(/[^0-9]/g,"")||"7",daangn:g("sDaangn"),joonggo:g("sJoonggo"),mapUrl:g("sMap"),kakao:g("sKakao"),promise:g("sPromise"),shipInfo:g("sShip"),returnInfo:g("sReturn"),banner:bannerDraft!==undefined?(bannerDraft?bannerDraft.id:""):(shop.banner||"")};
   if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
   try{await db.doc("shop/info").set(next);shop={...DEFAULT_SHOP,...next};bannerDraft=undefined;renderShop();toast("가게 정보를 저장했어요.");}catch(e){toast("저장하지 못했어요. 다시 눌러 주세요.");}
 }
 
 /* ---------- 이벤트 ---------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-pdthumb],[data-jump]");if(!t)return;
+  if(t.dataset.jump){e.preventDefault();const el=document.getElementById(t.dataset.jump);if(el)scrollTo({top:el.getBoundingClientRect().top+scrollY-50,behavior:"smooth"});return;}
+  const m=$("#pdMain img");if(m)m.src=t.dataset.pdthumb;document.querySelectorAll("[data-pdthumb]").forEach(b=>b.setAttribute("aria-current",b===t));
+});
 document.addEventListener("click",e=>{
   const t=e.target.closest("button,[data-close-bg]");if(!t)return;
   if(t.matches("[data-close-bg]")&&e.target!==t)return;
@@ -1301,7 +1717,7 @@ document.addEventListener("click",e=>{
   if(t.dataset.game!==undefined){location.hash="#/list/all?game="+t.dataset.game;return;}
   if(t.id==="clearFilt"){location.hash="#/list/"+filt.kind;return;}
   if(t.dataset.kind){location.hash="#/list/"+t.dataset.kind;return;}
-  if(t.dataset.item){openItem(t.dataset.item);return;}
+  if(t.dataset.item){if(t.closest("#bot"))closeBot();if(t.closest("#modalRoot"))closeModal();location.hash="#/item/"+encodeURIComponent(t.dataset.item);return;}
   if(t.dataset.thumb){const m=$("#gMain img");if(m)m.src=photoUrl(t.dataset.thumb);document.querySelectorAll("[data-thumb]").forEach(b=>b.setAttribute("aria-current",b===t));return;}
   if(t.id==="copyPhone"){navigator.clipboard.writeText(shop.phone).then(()=>toast("번호를 복사했어요.")).catch(()=>{const r=document.createRange();r.selectNodeContents($("#phoneText"));const s=getSelection();s.removeAllRanges();s.addRange(r);toast("번호를 선택했어요. 길게 눌러 복사하세요.");});return;}
   if(t.id==="adminOpen"){openAdmin();return;}
