@@ -621,6 +621,14 @@ section.contact{padding:52px 0}
   .pd-center tr th{border-bottom:0}
 }
 
+
+/* 상품 화면 윗부분 고치기 */
+.topedit{border:1px solid var(--line2);border-radius:12px;padding:14px 16px 18px;display:grid;gap:14px;margin:0}
+.topedit legend{font-weight:800;padding:0 6px}
+.rowsed{display:grid;gap:8px}
+.rowed{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) auto;gap:6px;align-items:center}
+@media (max-width:560px){.rowed{grid-template-columns:minmax(0,1fr) auto;background:#f3f5f9;border-radius:10px;padding:8px}.rowed input[name$=V]{grid-column:1;grid-row:2}.rowed button{grid-row:1/3;grid-column:2}}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -1222,6 +1230,15 @@ function itemHeadline(it){
   return it.brand||KIND[it.kind]||"상품";
 }
 function specBar(it){return [it.cpu,it.ram,it.ssd,it.gpu&&!/내장/.test(it.gpu)?it.gpu:"",it.win11&&hasSpecs(it)?"윈도우11":""].filter(Boolean).map(esc).join(" / ");}
+const GRADE_TXT={S:"새것과 거의 같음",A:"깨끗함, 아주 작은 흔적 정도",B:"쓰던 흔적·생활기스 있음",C:"흠집 많음, 대신 값이 쌈"};
+const DEF_PRICE_NOTE="가격은 전화·문자로 알려 드려요";
+const DEF_ASK_NOTE='"홈페이지에서 이 상품 보고 연락드려요" 라고 말씀해 주시면 바로 알아들어요.';
+function defChips(it){return [it.grade?it.grade+"급":"",it.win11&&hasSpecs(it)?"윈도우11 정품":"",it.gift?"키보드·마우스 증정":"","택배 가능"].filter(Boolean);}
+function defRows(it){return [["받는 방법","택배 · 가게에서 직접 받기"],["무상 수리",`${warrantyFor(it)} (받고 ${shop.retDays||"7"}일 안에 고장 나면 교환·환불)`],["겉모양",`${it.grade||"A"}급 · ${GRADE_TXT[it.grade]||GRADE_TXT.A}`]];}
+function defOpts(it){if(!hasSpecs(it))return [];return [["CPU · 그래픽",[it.cpu,it.gpu].filter(Boolean).join(", ")],["저장장치 · 메모리",[it.ssd,it.ram].filter(Boolean).join(", ")]].filter(r=>r[1]);}
+function itChips(it){return Array.isArray(it.chips)?it.chips:defChips(it);}
+function itRows(it){return Array.isArray(it.infoRows)?it.infoRows:defRows(it);}
+function itOpts(it){return Array.isArray(it.optBoxes)?it.optBoxes:defOpts(it);}
 let curItemId=null;
 function renderItemPage(id){
   curItemId=id;
@@ -1233,7 +1250,7 @@ function renderItemPage(id){
   if(!pics.length&&it.sampleImg)pics.push(esc(it.sampleImg));
   const tel=String(shop.phone).replace(/[^0-9+]/g,"");
   const GRADE={S:"새것과 거의 같음",A:"깨끗함, 아주 작은 흔적 정도",B:"쓰던 흔적·생활기스 있음",C:"흠집 많음, 대신 값이 쌈"};
-  const chips=[it.grade?it.grade+"급":"",it.win11&&hasSpecs(it)?"윈도우11 정품":"",it.gift?"키보드·마우스 증정":"","택배 가능"].filter(Boolean);
+  const chips=itChips(it),rowsTop=itRows(it).filter(r=>r[0]||r[1]),opts=itOpts(it).filter(r=>r[0]||r[1]);
   const opt=(label,val)=>val?`<div class="opt"><span>${label}</span><b>${esc(val)}</b></div>`:"";
 
   const games=itemGames(it);
@@ -1250,20 +1267,16 @@ function renderItemPage(id){
       <div class="pd-info">
         <span class="pd-brand">${esc(shop.name)}</span>
         <h1>${esc(String(it.title||"").replace(/^\[중고\]\s*/,""))}</h1>
-        <div class="pd-chips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div>
-        <div class="pd-price">${it.price>0?`<b>${esc(priceText(it))}</b>`:`<b class="ask">가격은 전화·문자로 알려 드려요</b>`}</div>
-        <dl class="pd-kv">
-          <dt>받는 방법</dt><dd>택배 · 가게에서 직접 받기</dd>
-          <dt>무상 수리</dt><dd>${esc(warrantyFor(it))} <span class="note">(받고 ${esc(shop.retDays||"7")}일 안에 고장 나면 교환·환불)</span></dd>
-          <dt>겉모양</dt><dd>${esc(it.grade||"A")}급 <span class="note">${esc(GRADE[it.grade]||GRADE.A)}</span></dd>
-        </dl>
-        ${hasSpecs(it)?`<div class="pd-opts">${opt("CPU · 그래픽",[it.cpu,it.gpu].filter(Boolean).join(", "))}${opt("저장장치 · 메모리",[it.ssd,it.ram].filter(Boolean).join(", "))}</div>`:""}
+        ${chips.length?`<div class="pd-chips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div>`:""}
+        <div class="pd-price">${it.price>0?`<b>${esc(priceText(it))}</b>`:`<b class="ask">${esc(it.priceNote||DEF_PRICE_NOTE)}</b>`}</div>
+        ${rowsTop.length?`<dl class="pd-kv">${rowsTop.map(([l,v])=>`<dt>${esc(l)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`:""}
+        ${opts.length?`<div class="pd-opts">${opts.map(([l,v])=>`<div class="opt"><span>${esc(l)}</span><b>${esc(v)}</b></div>`).join("")}</div>`:""}
         <div class="pd-acts">
           <a class="btn" href="tel:${esc(tel)}">전화 문의 ${esc(shop.phone)}</a>
           <a class="btn ghost" href="sms:${esc(tel)}">문자 보내기</a>
           ${shop.kakao?`<a class="btn kakaobtn" href="${esc(safeUrl(shop.kakao))}" target="_blank" rel="noopener">카카오톡 상담</a>`:""}
         </div>
-        <p class="note">"홈페이지에서 이 상품 보고 연락드려요" 라고 말씀해 주시면 바로 알아들어요.</p>
+        ${(it.askNote??DEF_ASK_NOTE)?`<p class="note">${esc(it.askNote??DEF_ASK_NOTE)}</p>`:""}
       </div>
     </div>
   </div></section>
@@ -1505,6 +1518,19 @@ function formHtml(){
     <div class="choices"><label><input type="checkbox" id="fAsk" ${!(it.price>0)?"checked":""}>가격은 전화로 (가격 문의)</label></div>
     <input type="number" id="fPrice" inputmode="numeric" min="0" step="1000" value="${it.price>0?it.price:""}" placeholder="숫자만, 예) 350000" ${!(it.price>0)?"disabled":""}></div>
   <div class="field"><span class="lbl">⑧ 판매 상태</span><div class="choices">${Object.entries(STATUS).map(([k,l])=>`<label><input type="radio" name="status" value="${k}" ${it.status===k?"checked":""}>${l}</label>`).join("")}</div></div>
+  <fieldset class="topedit"><legend>상품 화면 윗부분 (사진 옆에 나오는 글)</legend>
+    <p class="hint">위에 적은 사양으로 미리 채워 두었어요. 고치거나, 줄을 더하거나 뺄 수 있습니다. 칸을 비우면 그 줄은 안 보입니다.</p>
+    <div class="field"><label for="fChips">작은 표시 (쉼표로 나눠 적기)</label><input type="text" id="fChips" value="${esc(itChips(it).join(", "))}" placeholder="예) A급, 윈도우11 정품, 키보드·마우스 증정, 택배 가능"></div>
+    <div class="field"><label for="fPriceNote">가격 자리에 보일 글 (가격을 안 적었을 때)</label><input type="text" id="fPriceNote" value="${esc(it.priceNote||DEF_PRICE_NOTE)}"></div>
+    <div class="field"><span class="lbl">정보 줄 (왼쪽 이름 · 오른쪽 내용)</span>
+      <div class="rowsed">${itRows(it).map(([l,v],i)=>`<div class="rowed"><input type="text" name="rowL" value="${esc(l)}" aria-label="정보 줄 ${i+1} 이름" placeholder="예) 받는 방법"><input type="text" name="rowV" value="${esc(v)}" aria-label="정보 줄 ${i+1} 내용" placeholder="예) 택배 · 직접 받기"><button type="button" class="btn small ghost" data-delrow="rows:${i}">빼기</button></div>`).join("")}</div>
+      <button type="button" class="btn small ghost" data-addrow="rows" style="justify-self:start">＋ 정보 줄 더하기</button></div>
+    <div class="field"><span class="lbl">파란 테두리 사양 칸 (위 작은 글 · 아래 굵은 글)</span>
+      <div class="rowsed">${itOpts(it).map(([l,v],i)=>`<div class="rowed"><input type="text" name="optL" value="${esc(l)}" aria-label="사양 칸 ${i+1} 이름" placeholder="예) CPU · 그래픽"><input type="text" name="optV" value="${esc(v)}" aria-label="사양 칸 ${i+1} 내용" placeholder="예) i5-9400, 내장 그래픽"><button type="button" class="btn small ghost" data-delrow="opts:${i}">빼기</button></div>`).join("")}</div>
+      <button type="button" class="btn small ghost" data-addrow="opts" style="justify-self:start">＋ 사양 칸 더하기</button></div>
+    <div class="field"><label for="fAskNote">단추 아래 작은 글</label><input type="text" id="fAskNote" value="${esc(it.askNote??DEF_ASK_NOTE)}"></div>
+    <button type="button" class="btn small ghost" data-resettop style="justify-self:start">윗부분을 사양대로 다시 채우기</button>
+  </fieldset>
   <div class="field"><label for="fHead">상품 화면 맨 위 큰 제목 (비우면 자동)</label><input type="text" id="fHead" value="${esc(it.headline||"")}" placeholder="예) i7 가성비 게이밍PC"></div>
   <div class="field"><span class="lbl">이 컴퓨터로 되는 게임 (아무것도 안 고르면 ④ 등급에 맞춰 자동)</span><div class="choices">${GAMES.map((g,i)=>`<label><input type="checkbox" name="games" value="${i}" ${(it.games||[]).map(Number).includes(i)?"checked":""}>${esc(g.n)}</label>`).join("")}</div></div>
   <div class="field"><label for="fDesc">⑨ 사장님 한마디 (자유롭게)</label><textarea id="fDesc" placeholder="예) 조용하고 발열 적습니다. 키보드·마우스 같이 드립니다.">${esc(it.desc)}</textarea></div>
@@ -1659,6 +1685,16 @@ function readForm(){
   editing.desc=v("#fDesc");
   editing.board=v("#fBoard").trim();editing.psu=v("#fPsu").trim();editing.caseName=v("#fCase").trim();editing.size=v("#fSize").trim();editing.headline=v("#fHead").trim();
   editing.games=[...F.querySelectorAll('input[name=games]:checked')].map(x=>Number(x.value));
+  if($("#fChips")){
+    const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+    const pairs=(l,r)=>{const L=[...F.querySelectorAll(`input[name=${l}]`)],R=[...F.querySelectorAll(`input[name=${r}]`)];return L.map((x,i)=>[x.value.trim(),(R[i]||{}).value.trim()]);};
+    const chips=v("#fChips").split(/[,，]/).map(x=>x.trim()).filter(Boolean);
+    editing.chips=same(chips,defChips(editing))?undefined:chips;
+    const rows=pairs("rowL","rowV");editing.infoRows=same(rows,defRows(editing))?undefined:rows;
+    const opts=pairs("optL","optV");editing.optBoxes=same(opts,defOpts(editing))?undefined:opts;
+    const pn=v("#fPriceNote").trim();editing.priceNote=pn&&pn!==DEF_PRICE_NOTE?pn:undefined;
+    const an=v("#fAskNote").trim();editing.askNote=an===DEF_ASK_NOTE?undefined:an;
+  }
 }
 async function saveItem(){
   if(busy)return;readForm();
@@ -1667,6 +1703,7 @@ async function saveItem(){
   if(!db){toast("저장은 사장님 계정으로 열었을 때만 됩니다.");return;}
   busy=true;$("#saveBtn").disabled=true;
   const data={...editing,photos:draftPhotos.map(p=>p.id),updatedAt:new Date().toISOString()};
+  Object.keys(data).forEach(k=>data[k]===undefined&&delete data[k]);
   const id=data.id;delete data.id;
   try{
     if(id){await db.collection("items").doc(id).set(data);toast("고친 내용을 저장했어요.");adminTab="list";}
@@ -1723,6 +1760,9 @@ document.addEventListener("click",e=>{
   if(t.id==="adminOpen"){openAdmin();return;}
   if(t.dataset.tab){if(adminTab==="add")readForm();adminTab=t.dataset.tab;confirmDel=null;if(adminTab==="add"&&!editing){editing=blankItem();draftPhotos=[];}renderAdmin();return;}
   if(t.dataset.delphoto!==undefined){readForm();draftPhotos.splice(+t.dataset.delphoto,1);renderAdmin();return;}
+  if(t.dataset.addrow){readForm();const k=t.dataset.addrow==="rows"?"infoRows":"optBoxes";editing[k]=[...(k==="infoRows"?itRows(editing):itOpts(editing)),["",""]];renderAdmin();const ins=document.querySelectorAll(`input[name=${k==="infoRows"?"rowL":"optL"}]`);ins.length&&ins[ins.length-1].focus();return;}
+  if(t.dataset.delrow){readForm();const [w,i]=t.dataset.delrow.split(":");const k=w==="rows"?"infoRows":"optBoxes";const arr=[...(k==="infoRows"?itRows(editing):itOpts(editing))];arr.splice(+i,1);editing[k]=arr;renderAdmin();return;}
+  if(t.matches("[data-resettop]")){readForm();["chips","infoRows","optBoxes","priceNote","askNote"].forEach(k=>delete editing[k]);renderAdmin();toast("윗부분을 사양대로 다시 채웠어요.");return;}
   if(t.matches("[data-newitem]")){editing=blankItem();draftPhotos=[];renderAdmin();return;}
   if(t.dataset.edit){const it=items.find(x=>x.id===t.dataset.edit);if(it){editing=JSON.parse(JSON.stringify(it));draftPhotos=(it.photos||[]).map(id=>({id,url:photoUrl(id)}));adminTab="add";renderAdmin();}return;}
   if(t.dataset.setst){const [id,st]=t.dataset.setst.split(":");setStatus(id,st);return;}
